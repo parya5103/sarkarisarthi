@@ -47,7 +47,11 @@ def delete_expired_jobs():
     for file in os.listdir(JOBS_DIR):
         path = os.path.join(JOBS_DIR, file)
         with open(path) as f:
-            job = json.load(f)
+            try:
+    job = json.load(f)
+except json.JSONDecodeError:
+    continue  # Skip empty or invalid job files
+
         try:
             last_date = datetime.strptime(job["last_date"], "%Y-%m-%d").date()
             if last_date < today:
