@@ -83,51 +83,48 @@ header h1 {
 }
 
 .filters {
-    background-color: var(--filter-background);
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 8px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    box-shadow: var(--box-shadow);
-    align-items: center;
+    flex-wrap: wrap; /* Allows items to wrap to the next line on smaller screens */
+    gap: 15px; /* Spacing between filter elements */
+    margin-bottom: 20px;
+    justify-content: center; /* Center filters if space allows */
+    align-items: center; /* Vertically align items */
+    padding: 15px; /* Add some padding */
+    background-color: var(--card-bg-color); /* Match card background */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.dark-mode .filters {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
 .filters input[type="text"],
 .filters select {
-    flex: 1;
-    min-width: 200px;
-    padding: 10px;
+    padding: 10px 15px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
-    background-color: var(--card-background);
+    font-size: 1rem;
+    background-color: var(--input-bg-color);
     color: var(--text-color);
-    transition: border-color 0.3s;
-}
-
-.filters input[type="text"]:focus,
-.filters select:focus {
-    border-color: var(--link-color);
-    outline: none;
+    flex-grow: 1; /* Allow them to grow */
+    max-width: 300px; /* Max width for inputs/selects */
 }
 
 .filters button {
-    padding: 10px 15px;
-    background-color: var(--button-background);
-    color: var(--button-text);
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
 }
 
 .filters button:hover {
-    background-color: darken(var(--button-background), 10%); /* This won't work in plain CSS, need to define a darker color manually or use SASS/LESS */
-    filter: brightness(0.9); /* A simple alternative for hover effect */
+    background-color: var(--primary-hover-color);
 }
-
 
 .job-listings {
     display: grid;
