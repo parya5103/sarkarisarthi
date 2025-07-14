@@ -3,5 +3,9 @@ __pycache__/
 .env
 *.log
 .venv/
-jobs/*.json
+
+# Ignore everything in jobs/ folder
+jobs/*
+# But allow .json files and .gitkeep
+!jobs/*.json
 !jobs/.gitkeep
