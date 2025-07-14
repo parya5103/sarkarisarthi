@@ -1,95 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>SarkariSarthi Jobs</title>
-  <style>
-    body { font-family: sans-serif; background: #0d1117; color: #c9d1d9; padding: 20px; }
-    .job { background: #161b22; border: 1px solid #30363d; padding: 15px; margin: 10px 0; border-radius: 8px; }
-    .job h3 { margin: 0 0 5px; color: #58a6ff; }
-    .filters { margin-bottom: 20px; }
-    select, input[type="text"] { padding: 8px; margin-right: 10px; border-radius: 5px; border: none; }
-    a { color: #58a6ff; text-decoration: none; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Job Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
-  <h1>📋 SarkariSarthi Jobs</h1>
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-briefcase"></i>
+                <h1>Govt Job Portal</h1>
+            </div>
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
 
-  <div class="filters">
-    <input type="text" id="search" placeholder="🔍 Search job titles..." />
-    <select id="stateFilter"><option value="">All States</option></select>
-    <select id="categoryFilter"><option value="">All Categories</option></select>
-  </div>
+    <main class="container">
+        <div class="hero-section">
+            <h2>Find Your Dream Government Job</h2>
+            <p>The one-stop platform for all latest government job openings across India.</p>
+        </div>
 
-  <div id="jobs">Loading jobs...</div>
+        <div class="filters-card">
+            <div class="filter-group">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search by job title, department...">
+            </div>
+            <div class="filter-group">
+                <i class="fas fa-map-marked-alt"></i>
+                <select id="stateFilter" aria-label="Filter by State">
+                    <option value="">All States</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <i class="fas fa-tags"></i>
+                <select id="departmentFilter" aria-label="Filter by Department">
+                    <option value="">All Departments</option>
+                </select>
+            </div>
+        </div>
+        
+        <div id="results-summary" class="results-summary"></div>
 
-  <script>
-    const jobsFolder = "https://parya5103.github.io/sarkarisarthi/jobs/";
-    const jobFiles = [
-      "government-jobs.json",
-      "railway-jobs.json",
-      "ssc-chsl-recruitment-2025.json",
-      "defence-jobs.json",
-      "bank-jobs.json",
-      "teaching-jobs.json"
-      // 🔄 यहां और filenames जोड़ सकते हो
-    ];
+        <div id="job-listings-container">
+            <!-- Jobs will be loaded here by JavaScript -->
+            <div class="loader-container">
+                <div class="loader"></div>
+                <p>Loading Jobs...</p>
+            </div>
+        </div>
+    </main>
 
-    const jobContainer = document.getElementById("jobs");
-    const searchInput = document.getElementById("search");
-    const stateFilter = document.getElementById("stateFilter");
-    const categoryFilter = document.getElementById("categoryFilter");
-    let allJobs = [];
+    <footer class="main-footer">
+        <p>© 2025 Govt Job Portal. All Rights Reserved.</p>
+    </footer>
+    
+    <button id="back-to-top" class="back-to-top-btn" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-    async function loadAllJobs() {
-      allJobs = [];
-      const promises = jobFiles.map(file =>
-        fetch(jobsFolder + file)
-          .then(r => r.ok ? r.json() : [])
-          .catch(() => [])
-      );
-      const results = await Promise.all(promises);
-      results.forEach(list => allJobs.push(...list));
-      populateFilters(allJobs);
-      applyFilters();
-    }
-
-    function populateFilters(jobs) {
-      const states = [...new Set(jobs.map(j => j.state).filter(Boolean))].sort();
-      const cats = [...new Set(jobs.map(j => j.department).filter(Boolean))].sort();
-
-      states.forEach(s => stateFilter.innerHTML += `<option>${s}</option>`);
-      cats.forEach(c => categoryFilter.innerHTML += `<option>${c}</option>`);
-    }
-
-    function applyFilters() {
-      const q = searchInput.value.toLowerCase();
-      const st = stateFilter.value;
-      const cat = categoryFilter.value;
-
-      const filtered = allJobs.filter(j => {
-        const text = `${j.title} ${j.department} ${j.state}`.toLowerCase();
-        return text.includes(q) && (!st || j.state === st) && (!cat || j.department === cat);
-      });
-
-      jobContainer.innerHTML = filtered.length
-        ? filtered.map(j => `
-          <div class="job">
-            <h3>${j.title}</h3>
-            <p><strong>Dept:</strong> ${j.department || 'N/A'}</p>
-            <p><strong>State:</strong> ${j.state || 'All India'}</p>
-            <p><strong>Last Date:</strong> ${j.last_date || 'N/A'}</p>
-            ${j.pdf_link ? `<p><a href="${j.pdf_link}" target="_blank">📄 View PDF</a></p>` : ''}
-            ${j.apply_link ? `<p><a href="${j.apply_link}" target="_blank">✅ Apply Link</a></p>` : ''}
-          </div>`).join('')
-        : `<p>No jobs found matching filters.</p>`;
-    }
-
-    searchInput.addEventListener("input", applyFilters);
-    stateFilter.addEventListener("change", applyFilters);
-    categoryFilter.addEventListener("change", applyFilters);
-
-    loadAllJobs();
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
