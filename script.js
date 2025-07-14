@@ -1,80 +1,166 @@
-// Load JSON files from jobs/ folder
-const jobFiles = [
-    'government-jobs.json',
-    'defence-jobs.json',
-    'railway-jobs.json',
-    'teaching-jobs.json',
-    // Add more files as needed
-];
+document.addEventListener('DOMContentLoaded', () => {
+    const jobListingsContainer = document.getElementById('jobListings');
+    const searchJobInput = document.getElementById('searchJob');
+    const stateFilterSelect = document.getElementById('stateFilter');
+    const departmentFilterSelect = document.getElementById('departmentFilter');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const resetFiltersButton = document.getElementById('resetFilters');
 
-const jobListings = document.getElementById('job-listings');
-const searchBar = document.getElementById('search-bar');
-const stateFilter = document.getElementById('state-filter');
-const departmentFilter = document.getElementById('department-filter');
+    let allJobs = [];
+    const jobFileNames = [
+        "government-jobs.json",
+        "defence-jobs.json",
+        "railway-jobs.json",
+        "teaching-jobs.json",
+        // Add more JSON file names here as you create them
+        // Example for more: "engineering-jobs.json", "medical-jobs.json"
+    ];
+    const jobsFolderPath = './jobs/'; // Assuming 'jobs' folder is in the same directory as index.html
 
-let jobs = [];
-let states = new Set();
-let departments = new Set();
+    // --- Dark Mode Functionality ---
+    const enableDarkMode = () => {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'enabled');
+        darkModeToggle.textContent = '☀️'; // Sun icon for light mode
+    };
 
-// Load jobs from JSON files
-Promise.all(jobFiles.map(file => fetch(`jobs/${file}`).then(response => response.json())))
-    .then(data => {
-        data.forEach(json => {
-            json.forEach(job => {
-                jobs.push(job);
-                states.add(job.state);
-                departments.add(job.department);
-            });
+    const disableDarkMode = () => {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('darkMode', 'disabled');
+        darkModeToggle.textContent = '🌙'; // Moon icon for dark mode
+    };
+
+    // Check for saved dark mode preference
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        enableDarkMode();
+    } else {
+        disableDarkMode();
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+        if (document.body.classList.contains('dark-mode')) {
+            disableDarkMode();
+        } else {
+            enableDarkMode();
+        }
+    });
+
+    // --- Fetching Job Data ---
+    async function fetchJobs() {
+        jobListingsContainer.innerHTML = '<p class="loading-message">Loading jobs...</p>';
+        try {
+            const fetchPromises = jobFileNames.map(fileName =>
+                fetch(`${jobsFolderPath}${fileName}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            console.warn(`Could not load ${fileName}: ${response.statusText}`);
+                            return []; // Return empty array if file not found or error
+                        }
+                        return response.json();
+                    })
+                    .catch(error => {
+                        console.error(`Error fetching ${fileName}:`, error);
+                        return []; // Return empty array on fetch error
+                    })
+            );
+
+            const results = await Promise.all(fetchPromises);
+            allJobs = results.flat(); // Flatten the array of arrays into a single array
+            allJobs = allJobs.filter(job => job && job.title && job.department && job.state && job.last_date && job.apply_link); // Basic validation
+
+            populateFilters();
+            displayJobs(allJobs);
+
+        } catch (error) {
+            jobListingsContainer.innerHTML = '<p class="no-jobs-message">Failed to load jobs. Please try again later.</p>';
+            console.error("Error fetching all jobs:", error);
+        }
+    }
+
+    // --- Populate Filters ---
+    function populateFilters() {
+        const states = new Set();
+        const departments = new Set();
+
+        allJobs.forEach(job => {
+            if (job.state) states.add(job.state);
+            if (job.department) departments.add(job.department);
         });
-        // Populate filters
+
+        // Clear existing options except "All"
+        stateFilterSelect.innerHTML = '<option value="">All States</option>';
+        departmentFilterSelect.innerHTML = '<option value="">All Departments</option>';
+
         Array.from(states).sort().forEach(state => {
             const option = document.createElement('option');
             option.value = state;
             option.textContent = state;
-            stateFilter.appendChild(option);
+            stateFilterSelect.appendChild(option);
         });
+
         Array.from(departments).sort().forEach(department => {
             const option = document.createElement('option');
             option.value = department;
             option.textContent = department;
-            departmentFilter.appendChild(option);
+            departmentFilterSelect.appendChild(option);
         });
-        // Render job listings
-        renderJobs();
-    })
-    .catch(error => console.error('Error loading jobs:', error));
+    }
 
-// Render job listings based on filters
-function renderJobs() {
-    const filteredJobs = jobs.filter(job => {
-        const searchQuery = searchBar.value.toLowerCase();
-        const state = stateFilter.value;
-        const department = departmentFilter.value;
-        return (searchQuery === '' || job.title.toLowerCase().includes(searchQuery)) &&
-               (state === '' || job.state === state) &&
-               (department === '' || job.department === department);
-    }).sort((a, b) => new Date(b.last_date) - new Date(a.last_date));
-    jobListings.innerHTML = '';
-    filteredJobs.forEach(job => {
-        const listing = document.createElement('li');
-        listing.innerHTML = `
-            <h2>${job.title}</h2>
-            <p>Department: ${job.department}</p>
-            <p>State: ${job.state}</p>
-            <p>Last Date: ${job.last_date}</p>
-            <p><a href="${job.apply_link}">Apply Now</a></p>
-            ${job.pdf_link ? `<p><a href="${job.pdf_link}">Download PDF</a></p>` : ''}
-        `;
-        jobListings.appendChild(listing);
+    // --- Display Jobs ---
+    function displayJobs(jobsToDisplay) {
+        jobListingsContainer.innerHTML = ''; // Clear previous listings
+
+        if (jobsToDisplay.length === 0) {
+            jobListingsContainer.innerHTML = '<p class="no-jobs-message">No jobs found matching your criteria.</p>';
+            return;
+        }
+
+        jobsToDisplay.forEach(job => {
+            const jobCard = document.createElement('div');
+            jobCard.classList.add('job-card');
+
+            jobCard.innerHTML = `
+                <h3>${job.title}</h3>
+                <p><strong>Department:</strong> ${job.department}</p>
+                <p><strong>State:</strong> ${job.state}</p>
+                <p><strong>Last Date:</strong> ${job.last_date}</p>
+                <div class="job-links">
+                    <a href="${job.apply_link}" target="_blank" rel="noopener noreferrer">Apply Now</a>
+                    ${job.pdf_link ? `<a href="${job.pdf_link}" target="_blank" rel="noopener noreferrer" class="pdf-link">Download PDF</a>` : ''}
+                </div>
+            `;
+            jobListingsContainer.appendChild(jobCard);
+        });
+    }
+
+    // --- Filtering Logic ---
+    function applyFilters() {
+        const searchTerm = searchJobInput.value.toLowerCase();
+        const selectedState = stateFilterSelect.value;
+        const selectedDepartment = departmentFilterSelect.value;
+
+        const filteredJobs = allJobs.filter(job => {
+            const matchesSearch = job.title.toLowerCase().includes(searchTerm);
+            const matchesState = selectedState === "" || job.state === selectedState;
+            const matchesDepartment = selectedDepartment === "" || job.department === selectedDepartment;
+
+            return matchesSearch && matchesState && matchesDepartment;
+        });
+
+        displayJobs(filteredJobs);
+    }
+
+    // --- Event Listeners ---
+    searchJobInput.addEventListener('input', applyFilters);
+    stateFilterSelect.addEventListener('change', applyFilters);
+    departmentFilterSelect.addEventListener('change', applyFilters);
+    resetFiltersButton.addEventListener('click', () => {
+        searchJobInput.value = '';
+        stateFilterSelect.value = '';
+        departmentFilterSelect.value = '';
+        applyFilters(); // Re-apply filters to show all jobs
     });
-}
 
-// Update job listings on filter change
-searchBar.addEventListener('input', renderJobs);
-stateFilter.addEventListener('change', renderJobs);
-departmentFilter.addEventListener('change', renderJobs);
-
-// Auto-refresh every 12 hours
-setInterval(() => {
-    window.location.reload();
-}, 12 * 60 * 60 * 1000);
+    // Initial fetch and display of jobs
+    fetchJobs();
+});
