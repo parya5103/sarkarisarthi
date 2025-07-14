@@ -1,0 +1,35 @@
+name: Generate Job Manifest
+
+on:
+  push:
+    branches:
+      - main # Or 'master', depending on your default branch name
+    paths:
+      - 'jobs/*.json' # Trigger only when JSON files in the 'jobs' folder change
+      - 'generate_manifest.py' # Trigger if the script itself changes
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4 # Use v4 for better security
+
+    - name: Set up Python
+      uses: actions/setup-python@v5 # Use v5
+      with:
+        python-version: '3.x' # Use any Python 3 version
+
+    - name: Generate job_manifest.json
+      run: python generate_manifest.py
+
+    - name: Commit and Push manifest (if changed)
+      run: |
+        git config user.name 'github-actions[bot]'
+        git config user.email 'github-actions[bot]@users.noreply.github.com'
+        git add jobs/job_manifest.json
+        git diff --cached --exit-code || git commit -m "Auto-generate job_manifest.json" && git push
+      env:
+        # Use a GITHUB_TOKEN with write permissions (default token is usually sufficient for push to same repo)
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
