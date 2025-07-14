@@ -1,4 +1,156 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>SarkariSarthi</title></head><body>
-<h1>🛡️ SarkariSarthi</h1>
-<p>Search and Filter UI will go here.</p>
-</body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SarkariSarthi Jobs</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+    }
+    header {
+      background: #1f1f1f;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+    .hero {
+      background: url('banner.jpg') no-repeat center center/cover;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .hero h2 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+      gap: 10px;
+    }
+    select, input[type="text"] {
+      padding: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+    }
+    .job-list {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 15px;
+    }
+    .job-card {
+      background: #1e1e1e;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
+    .job-card h3 {
+      margin: 0 0 5px;
+      color: #4fc3f7;
+    }
+    .job-card p {
+      margin: 5px 0;
+    }
+    .job-card a {
+      color: #81d4fa;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="SarkariSarthi Logo" height="50">
+    <h1>SarkariSarthi Job Board</h1>
+  </header>
+  <div class="hero">
+    <h2>Find Your Government Dream Job</h2>
+    <p>Search, filter and apply in one click</p>
+  </div>
+  <div class="filters">
+    <input type="text" id="searchInput" placeholder="Search jobs...">
+    <select id="stateFilter">
+      <option value="">All States</option>
+      <option value="UP">Uttar Pradesh</option>
+      <option value="MP">Madhya Pradesh</option>
+      <option value="Bihar">Bihar</option>
+      <option value="Gujarat">Gujarat</option>
+    </select>
+    <select id="deptFilter">
+      <option value="">All Departments</option>
+      <option value="Police">Police</option>
+      <option value="PSC">State PSC</option>
+      <option value="Railway">Railway</option>
+      <option value="SSC">SSC</option>
+    </select>
+  </div>
+
+  <div class="job-list" id="jobList"></div>
+
+  <script>
+    const jobList = document.getElementById("jobList");
+    const searchInput = document.getElementById("searchInput");
+    const stateFilter = document.getElementById("stateFilter");
+    const deptFilter = document.getElementById("deptFilter");
+
+    let jobs = [];
+
+    async function loadJobs() {
+      try {
+        const res = await fetch("jobs/jobs.json");
+        jobs = await res.json();
+        renderJobs(jobs);
+      } catch (err) {
+        jobList.innerHTML = '<p style="color:red">Failed to load jobs. Make sure jobs.json exists in jobs/ folder.</p>';
+      }
+    }
+
+    function renderJobs(data) {
+      jobList.innerHTML = "";
+      data.forEach(job => {
+        const card = document.createElement("div");
+        card.className = "job-card";
+        card.innerHTML = `
+          <h3>${job.title}</h3>
+          <p><strong>Dept:</strong> ${job.department || 'N/A'}</p>
+          <p><strong>State:</strong> ${job.state || 'N/A'}</p>
+          <p><strong>Last Date:</strong> ${job.last_date || 'Unknown'}</p>
+          <a href="${job.link}" target="_blank">View Notification</a>
+        `;
+        jobList.appendChild(card);
+      });
+    }
+
+    function filterJobs() {
+      const search = searchInput.value.toLowerCase();
+      const state = stateFilter.value;
+      const dept = deptFilter.value;
+      const filtered = jobs.filter(job => {
+        return (
+          (!state || job.state === state) &&
+          (!dept || job.department === dept) &&
+          (!search || job.title.toLowerCase().includes(search))
+        );
+      });
+      renderJobs(filtered);
+    }
+
+    searchInput.addEventListener("input", filterJobs);
+    stateFilter.addEventListener("change", filterJobs);
+    deptFilter.addEventListener("change", filterJobs);
+
+    loadJobs();
+  </script>
+</body>
+</html>
+
