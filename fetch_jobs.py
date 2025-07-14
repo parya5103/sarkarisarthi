@@ -1,63 +1,41 @@
-import os, json, requests
-from bs4 import BeautifulSoup
+import os
+import json
 from datetime import datetime
 
 JOBS_DIR = "jobs"
-os.makedirs(JOBS_DIR, exist_ok=True)
 
-def slugify(title):
-    return title.lower().replace(" ", "-").replace("/", "-").replace(":", "").replace(",", "") + ".json"
+def fetch_dummy_jobs():
+    # Create the jobs directory if it doesn't exist
+    os.makedirs(JOBS_DIR, exist_ok=True)
 
-def fetch_upsc_jobs():
-    url = "https://upsc.gov.in/examinations/active-examinations"
-    headers = {"User-Agent": "Mozilla/5.0"}
-    try:
-        res = requests.get(url, headers=headers, timeout=10)
-        soup = BeautifulSoup(res.content, "html.parser")
-        rows = soup.select("table.views-table tr")[1:]
-    except:
-        return []
+    # Dummy job
+    job_data = {
+        "title": "UPSC NDA 2025",
+        "category": "Defence",
+        "last_date": "2025-09-01",
+        "apply_link": "https://example.com/nda2025"
+    }
 
-    jobs = []
-    for row in rows:
-        cols = row.find_all("td")
-        if len(cols) < 2: continue
-        title = cols[0].get_text(strip=True)
-        date_text = cols[1].get_text(strip=True)
-        try:
-            last_date = datetime.strptime(date_text, "%d-%m-%Y").strftime("%Y-%m-%d")
-        except:
-            last_date = datetime.today().strftime("%Y-%m-%d")
-        jobs.append({
-            "title": title,
-            "category": "UPSC",
-            "last_date": last_date,
-            "apply_link": url
-        })
-    return jobs
-
-def save_jobs(jobs):
-    for job in jobs:
-        fname = slugify(job["title"])
-        with open(os.path.join(JOBS_DIR, fname), "w") as f:
-            json.dump(job, f, indent=2)
+    # Save to file
+    file_name = f"{JOBS_DIR}/upsc-nda-2025.json"
+    with open(file_name, "w") as f:
+        json.dump(job_data, f, indent=2)
 
 def delete_expired_jobs():
     today = datetime.today().date()
-    for file in os.listdir(JOBS_DIR):
-        path = os.path.join(JOBS_DIR, file)
-        with open(path) as f:
-            try:
-    job = json.load(f)
-except json.JSONDecodeError:
-    continue  # Skip empty or invalid job files
-
+    for filename in os.listdir(JOBS_DIR):
+        filepath = os.path.join(JOBS_DIR, filename)
         try:
-            last_date = datetime.strptime(job["last_date"], "%Y-%m-%d").date()
+            with open(filepath, "r") as f:
+                job = json.load(f)
+            last_date = datetime.strptime(job.get("last_date", ""), "%Y-%m-%d").date()
             if last_date < today:
-                os.remove(path)
-        except: continue
+                os.remove(filepath)
+                print(f"Deleted expired job: {filename}")
+        except Exception as e:
+            print(f"Skipping {filename}: {e}")
 
 if __name__ == "__main__":
-    save_jobs(fetch_upsc_jobs())
+    fetch_dummy_jobs()
     delete_expired_jobs()
+    print("✅ Jobs fetched and expired ones deleted.")
