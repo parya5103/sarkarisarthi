@@ -3,67 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Government Job Portal</title>
+    <title>Sarkari Job Portal</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
-    <header class="main-header">
-        <div class="container header-content">
-            <div class="logo">
-                <i class="fas fa-briefcase"></i>
-                <h1>Govt Job Portal</h1>
-            </div>
-            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark mode">
-                <i class="fas fa-moon"></i>
-            </button>
+    <header>
+        <div class="hero-banner">
+            <img src="logo.png" alt="Logo">
+            <h1>Sarkari Job Portal</h1>
         </div>
+        <nav>
+            <input type="search" id="search-bar" placeholder="Search job title">
+            <select id="state-filter">
+                <option value="">Select State</option>
+            </select>
+            <select id="department-filter">
+                <option value="">Select Department</option>
+            </select>
+        </nav>
     </header>
-
-    <main class="container">
-        <div class="hero-section">
-            <h2>Find Your Dream Government Job</h2>
-            <p>The one-stop platform for all latest government job openings across India.</p>
-        </div>
-
-        <div class="filters-card">
-            <div class="filter-group">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Search by job title, department...">
-            </div>
-            <div class="filter-group">
-                <i class="fas fa-map-marked-alt"></i>
-                <select id="stateFilter" aria-label="Filter by State">
-                    <option value="">All States</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <i class="fas fa-tags"></i>
-                <select id="departmentFilter" aria-label="Filter by Department">
-                    <option value="">All Departments</option>
-                </select>
-            </div>
-        </div>
-        
-        <div id="results-summary" class="results-summary"></div>
-
-        <div id="job-listings-container">
-            <!-- Jobs will be loaded here by JavaScript -->
-            <div class="loader-container">
-                <div class="loader"></div>
-                <p>Loading Jobs...</p>
-            </div>
-        </div>
+    <main>
+        <ul id="job-listings"></ul>
     </main>
-
-    <footer class="main-footer">
-        <p>© 2025 Govt Job Portal. All Rights Reserved.</p>
-    </footer>
-    
-    <button id="back-to-top" class="back-to-top-btn" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
     <script src="script.js"></script>
 </body>
 </html>
