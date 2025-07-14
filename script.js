@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const jobListingsContainer = document.getElementById('jobListings');
     const searchJobInput = document.getElementById('searchJob');
-    const stateFilterSelect = document.getElementById('stateFilter'); // Still keep for structure
+    // const stateFilterSelect = document.getElementById('stateFilter'); // REMOVED: Since it's removed from HTML
     const departmentFilterSelect = document.getElementById('departmentFilter'); // Now maps to category
     const darkModeToggle = document.getElementById('darkModeToggle');
     const resetFiltersButton = document.getElementById('resetFilters');
@@ -81,9 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
             results.forEach(result => {
                 if (result.status === 'fulfilled' && Array.isArray(result.value)) {
                     // *** MODIFIED VALIDATION LOGIC HERE ***
-                    // Now, only 'title' and 'apply_link' are strictly required.
-                    // 'category' will be mapped to 'department'.
-                    // 'state' and 'last_date' will show 'N/A' or 'Not Specified' if missing/null.
                     const validJobsInFile = result.value.filter(job =>
                         job && job.title && job.apply_link
                     ).map(job => ({
@@ -100,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            console.log(`Total jobs loaded and validated: ${allJobs.length}`);
+            console.log(`Total jobs loaded and validated: ${allJobs.length}`); // THIS WILL NOW SHOW > 0
 
             populateFilters();
             displayJobs(allJobs);
@@ -117,27 +114,33 @@ document.addEventListener('DOMContentLoaded', () => {
         const departments = new Set(); // This will now collect categories
 
         allJobs.forEach(job => {
-            if (job.state && job.state !== 'N/A') states.add(job.state); // Only add if not N/A
+            // if (job.state && job.state !== 'N/A') states.add(job.state); // REMOVED: No longer populate state filter
             if (job.department && job.department !== 'N/A') departments.add(job.department); // Only add if not N/A (this is your 'category')
         });
 
         // Clear existing options except "All"
-        stateFilterSelect.innerHTML = '<option value="">All States</option>';
-        departmentFilterSelect.innerHTML = '<option value="">All Departments</option>'; // Label changed to reflect 'category'
+        // stateFilterSelect.innerHTML = '<option value="">All States</option>'; // REMOVED: No longer populate state filter
+        if (departmentFilterSelect) { // Added null check
+            departmentFilterSelect.innerHTML = '<option value="">All Categories</option>'; // Label changed to reflect 'category'
+        }
 
-        Array.from(states).sort().forEach(state => {
-            const option = document.createElement('option');
-            option.value = state;
-            option.textContent = state;
-            stateFilterSelect.appendChild(option);
-        });
 
-        Array.from(departments).sort().forEach(department => {
-            const option = document.createElement('option');
-            option.value = department;
-            option.textContent = department;
-            departmentFilterSelect.appendChild(option);
-        });
+        // REMOVED: State filter population loop
+        // Array.from(states).sort().forEach(state => {
+        //     const option = document.createElement('option');
+        //     option.value = state;
+        //     option.textContent = state;
+        //     stateFilterSelect.appendChild(option);
+        // });
+
+        if (departmentFilterSelect) { // Added null check
+            Array.from(departments).sort().forEach(department => {
+                const option = document.createElement('option');
+                option.value = department;
+                option.textContent = department;
+                departmentFilterSelect.appendChild(option);
+            });
+        }
     }
 
     // --- Display Jobs ---
@@ -161,8 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             jobCard.innerHTML = `
                 <h3>${job.title}</h3>
-                <p><strong>Department:</strong> ${job.department}</p>
-                <p><strong>State:</strong> ${job.state}</p>
+                <p><strong>Category:</strong> ${job.department}</p> <p><strong>State:</strong> ${job.state}</p>
                 <p><strong>Last Date:</strong> ${job.last_date}</p>
                 <div class="job-links">
                     <a href="${job.apply_link}" target="_blank" rel="noopener noreferrer">Apply Now</a>
@@ -176,15 +178,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Filtering Logic ---
     function applyFilters() {
         const searchTerm = searchJobInput.value.toLowerCase();
-        const selectedState = stateFilterSelect.value;
-        const selectedDepartment = departmentFilterSelect.value; // Now filtering by 'category' mapped to 'department'
+        // const selectedState = stateFilterSelect.value; // REMOVED
+        const selectedDepartment = departmentFilterSelect ? departmentFilterSelect.value : ""; // Added null check
 
         const filteredJobs = allJobs.filter(job => {
             const matchesSearch = job.title.toLowerCase().includes(searchTerm);
-            const matchesState = selectedState === "" || job.state === selectedState;
+            // const matchesState = selectedState === "" || job.state === selectedState; // REMOVED
             const matchesDepartment = selectedDepartment === "" || job.department === selectedDepartment; // Filter using 'department' field (which is your 'category')
 
-            return matchesSearch && matchesState && matchesDepartment;
+            return matchesSearch && matchesDepartment; // Removed matchesState
         });
 
         displayJobs(filteredJobs);
@@ -195,9 +197,9 @@ document.addEventListener('DOMContentLoaded', () => {
         searchJobInput.addEventListener('input', applyFilters);
     } else { console.error("Error: Search input not found."); }
 
-    if (stateFilterSelect) {
-        stateFilterSelect.addEventListener('change', applyFilters);
-    } else { console.error("Error: State filter select not found."); }
+    // if (stateFilterSelect) { // REMOVED
+    //     stateFilterSelect.addEventListener('change', applyFilters);
+    // } else { console.error("Error: State filter select not found."); }
 
     if (departmentFilterSelect) {
         departmentFilterSelect.addEventListener('change', applyFilters);
@@ -206,8 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (resetFiltersButton) {
         resetFiltersButton.addEventListener('click', () => {
             searchJobInput.value = '';
-            stateFilterSelect.value = '';
-            departmentFilterSelect.value = '';
+            // stateFilterSelect.value = ''; // REMOVED
+            if (departmentFilterSelect) { // Added null check
+                departmentFilterSelect.value = '';
+            }
             applyFilters(); // Re-apply filters to show all jobs
         });
     } else { console.error("Error: Reset filters button not found."); }
