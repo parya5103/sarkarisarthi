@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const jobListingsContainer = document.getElementById('jobListings');
     const searchJobInput = document.getElementById('searchJob');
-    const stateFilterSelect = document.getElementById('stateFilter');
-    const departmentFilterSelect = document.getElementById('departmentFilter');
+    const stateFilterSelect = document.getElementById('stateFilter'); // Still keep for structure
+    const departmentFilterSelect = document.getElementById('departmentFilter'); // Now maps to category
     const darkModeToggle = document.getElementById('darkModeToggle');
     const resetFiltersButton = document.getElementById('resetFilters');
 
@@ -80,10 +80,20 @@ document.addEventListener('DOMContentLoaded', () => {
             allJobs = [];
             results.forEach(result => {
                 if (result.status === 'fulfilled' && Array.isArray(result.value)) {
-                    // Filter out any invalid job entries from the fetched array
+                    // *** MODIFIED VALIDATION LOGIC HERE ***
+                    // Now, only 'title' and 'apply_link' are strictly required.
+                    // 'category' will be mapped to 'department'.
+                    // 'state' and 'last_date' will show 'N/A' or 'Not Specified' if missing/null.
                     const validJobsInFile = result.value.filter(job =>
-                        job && job.title && job.department && job.state && job.last_date && job.apply_link
-                    );
+                        job && job.title && job.apply_link
+                    ).map(job => ({
+                        title: job.title,
+                        department: job.category || 'N/A', // Use 'category' as 'department', default to 'N/A'
+                        state: job.state || 'N/A', // Default to 'N/A' if state is missing
+                        last_date: job.last_date || 'Not Specified', // Default if last_date is missing or null
+                        apply_link: job.apply_link,
+                        pdf_link: job.pdf_link || null // Keep pdf_link optional
+                    }));
                     allJobs.push(...validJobsInFile);
                 } else if (result.status === 'rejected') {
                     console.error("Promise rejected during job file fetch:", result.reason);
@@ -104,16 +114,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Populate Filters ---
     function populateFilters() {
         const states = new Set();
-        const departments = new Set();
+        const departments = new Set(); // This will now collect categories
 
         allJobs.forEach(job => {
-            if (job.state) states.add(job.state);
-            if (job.department) departments.add(job.department);
+            if (job.state && job.state !== 'N/A') states.add(job.state); // Only add if not N/A
+            if (job.department && job.department !== 'N/A') departments.add(job.department); // Only add if not N/A (this is your 'category')
         });
 
         // Clear existing options except "All"
         stateFilterSelect.innerHTML = '<option value="">All States</option>';
-        departmentFilterSelect.innerHTML = '<option value="">All Departments</option>';
+        departmentFilterSelect.innerHTML = '<option value="">All Departments</option>'; // Label changed to reflect 'category'
 
         Array.from(states).sort().forEach(state => {
             const option = document.createElement('option');
@@ -143,9 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const jobCard = document.createElement('div');
             jobCard.classList.add('job-card');
 
-            // Basic check for essential properties before rendering
-            if (!job.title || !job.department || !job.state || !job.last_date || !job.apply_link) {
-                console.warn("Skipping malformed job entry:", job);
+            // Basic check for essential properties before rendering (already handled in fetch, but good to double check)
+            if (!job.title || !job.apply_link) {
+                console.warn("Skipping malformed job entry during display:", job);
                 return; // Skip this job if essential data is missing
             }
 
@@ -167,12 +177,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyFilters() {
         const searchTerm = searchJobInput.value.toLowerCase();
         const selectedState = stateFilterSelect.value;
-        const selectedDepartment = departmentFilterSelect.value;
+        const selectedDepartment = departmentFilterSelect.value; // Now filtering by 'category' mapped to 'department'
 
         const filteredJobs = allJobs.filter(job => {
             const matchesSearch = job.title.toLowerCase().includes(searchTerm);
             const matchesState = selectedState === "" || job.state === selectedState;
-            const matchesDepartment = selectedDepartment === "" || job.department === selectedDepartment;
+            const matchesDepartment = selectedDepartment === "" || job.department === selectedDepartment; // Filter using 'department' field (which is your 'category')
 
             return matchesSearch && matchesState && matchesDepartment;
         });
