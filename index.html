@@ -2,130 +2,126 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SarkariSarthi - Govt Jobs</title>
+  <title>SarkariSarthi Jobs</title>
   <style>
-    body {
-      font-family: sans-serif;
-      background: #121212;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #1f1f1f;
-      padding: 1rem;
-      text-align: center;
-    }
-    .filters {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 1rem;
-    }
-    .filters select, .filters input {
-      padding: 0.5rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      border: none;
-    }
-    .job-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1rem;
-      padding: 1rem;
-    }
-    .job {
-      background: #1e1e1e;
-      border-radius: 8px;
-      padding: 1rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-    .job h3 {
-      margin: 0 0 0.5rem;
-    }
-    .job a {
-      color: #03a9f4;
-    }
+    body { font-family: sans-serif; background: #0d1117; color: #c9d1d9; padding: 20px; }
+    .job { background: #161b22; border: 1px solid #30363d; padding: 15px; margin: 10px 0; border-radius: 8px; }
+    .job h3 { margin: 0 0 5px; color: #58a6ff; }
+    .filters { margin-bottom: 20px; }
+    select, input[type="text"] { padding: 8px; margin-right: 10px; border-radius: 5px; border: none; }
+    a { color: #58a6ff; text-decoration: none; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>SarkariSarthi - Govt Jobs Portal</h1>
-  </header>
+  <h1>📋 SarkariSarthi Jobs</h1>
 
   <div class="filters">
-    <input type="text" id="searchInput" placeholder="Search by keyword...">
+    <input type="text" id="search" placeholder="🔍 Search job titles..." />
     <select id="stateFilter">
       <option value="">All States</option>
-      <option value="UP">UP</option>
-      <option value="MP">MP</option>
-      <option value="Bihar">Bihar</option>
-      <option value="Rajasthan">Rajasthan</option>
-      <option value="Gujarat">Gujarat</option>
     </select>
     <select id="categoryFilter">
       <option value="">All Categories</option>
-      <option value="Police">Police</option>
-      <option value="Railway">Railway</option>
-      <option value="Bank">Bank</option>
-      <option value="Teaching">Teaching</option>
     </select>
   </div>
 
-  <section class="job-list" id="jobList">
-    <!-- Jobs will be shown here -->
-  </section>
+  <div id="jobs">Loading jobs...</div>
 
   <script>
-    async function loadJobs() {
-      try {
-        const res = await fetch('jobs/government-jobs.json'); // Adjust as needed
-        const jobs = await res.json();
-        window.allJobs = jobs;
-        filterJobs();
-      } catch (err) {
-        document.getElementById("jobList").innerHTML = '<p style="color:red;">Failed to load jobs. Make sure jobs.json exists in jobs/ folder.</p>';
-        console.error("Fetch error:", err);
+    const repoPath = "https://parya5103.github.io/sarkarisarthi/jobs/";
+
+    const jobContainer = document.getElementById("jobs");
+    const searchInput = document.getElementById("search");
+    const stateFilter = document.getElementById("stateFilter");
+    const categoryFilter = document.getElementById("categoryFilter");
+
+    let allJobs = [];
+
+    // ✅ Dynamically list all known JSON files (static list or via auto update script)
+    const jobFiles = [
+      "government-jobs.json", "defence-jobs.json", "railway-jobs.json",
+      "psc-jobs.json", "bank-jobs.json", "teaching-jobs.json",
+      "state-govt-jobs.json", "medical-jobs.json", "ssc-chsl-recruitment-2025.json",
+      "upsc-recruitment-test-(rt)-for-personal-assistant.json",
+      "bihar-prd-technical-assistant-recruitment-2025.json"
+      // ➕ Add more .json filenames here or auto-generate this list via script
+    ];
+
+    async function loadAllJobs() {
+      allJobs = [];
+
+      const promises = jobFiles.map(file =>
+        fetch(repoPath + file)
+          .then(res => res.ok ? res.json() : [])
+          .catch(() => [])
+      );
+
+      const allResults = await Promise.all(promises);
+      allResults.forEach(jobs => allJobs.push(...jobs));
+      renderJobs(allJobs);
+      populateFilters(allJobs);
+    }
+
+    function renderJobs(jobs) {
+      if (!jobs.length) {
+        jobContainer.innerHTML = "<p>😔 No jobs found.</p>";
+        return;
       }
-    }
 
-    function filterJobs() {
-      const search = document.getElementById('searchInput').value.toLowerCase();
-      const state = document.getElementById('stateFilter').value;
-      const category = document.getElementById('categoryFilter').value;
-
-      const filtered = window.allJobs.filter(job => {
-        const matchText = `${job.title} ${job.department} ${job.location}`.toLowerCase();
-        return (
-          (!search || matchText.includes(search)) &&
-          (!state || job.location?.includes(state)) &&
-          (!category || job.department?.includes(category))
-        );
-      });
-
-      const container = document.getElementById('jobList');
-      container.innerHTML = '';
-      if (!filtered.length) return container.innerHTML = '<p>No jobs found.</p>';
-
-      filtered.forEach(job => {
-        container.innerHTML += `
-          <div class="job">
-            <h3>${job.title}</h3>
-            <p><strong>Department:</strong> ${job.department || 'N/A'}</p>
-            <p><strong>Location:</strong> ${job.location || 'N/A'}</p>
-            <p><strong>Last Date:</strong> ${job.last_date || 'N/A'}</p>
-            ${job.pdf_link ? `<p><a href="${job.pdf_link}" target="_blank">Download PDF</a></p>` : ''}
-          </div>`;
+      jobContainer.innerHTML = "";
+      jobs.forEach(job => {
+        const div = document.createElement("div");
+        div.className = "job";
+        div.innerHTML = `
+          <h3>${job.title || "No Title"}</h3>
+          <p><strong>Department:</strong> ${job.department || "N/A"}</p>
+          <p><strong>Location:</strong> ${job.state || job.location || "All India"}</p>
+          ${job.pdf ? `<p><a href="${job.pdf}" target="_blank">📄 View Notification</a></p>` : ""}
+          ${job.link ? `<p><a href="${job.link}" target="_blank">✅ Apply Now</a></p>` : ""}
+        `;
+        jobContainer.appendChild(div);
       });
     }
 
-    document.getElementById('searchInput').addEventListener('input', filterJobs);
-    document.getElementById('stateFilter').addEventListener('change', filterJobs);
-    document.getElementById('categoryFilter').addEventListener('change', filterJobs);
+    function populateFilters(jobs) {
+      const states = [...new Set(jobs.map(j => j.state).filter(Boolean))].sort();
+      const categories = [...new Set(jobs.map(j => j.department).filter(Boolean))].sort();
 
-    loadJobs();
+      states.forEach(state => {
+        const option = document.createElement("option");
+        option.value = state;
+        option.textContent = state;
+        stateFilter.appendChild(option);
+      });
+
+      categories.forEach(cat => {
+        const option = document.createElement("option");
+        option.value = cat;
+        option.textContent = cat;
+        categoryFilter.appendChild(option);
+      });
+    }
+
+    function applyFilters() {
+      const query = searchInput.value.toLowerCase();
+      const state = stateFilter.value;
+      const dept = categoryFilter.value;
+
+      const filtered = allJobs.filter(job => {
+        const matchTitle = job.title?.toLowerCase().includes(query);
+        const matchState = state ? job.state === state : true;
+        const matchDept = dept ? job.department === dept : true;
+        return matchTitle && matchState && matchDept;
+      });
+
+      renderJobs(filtered);
+    }
+
+    searchInput.addEventListener("input", applyFilters);
+    stateFilter.addEventListener("change", applyFilters);
+    categoryFilter.addEventListener("change", applyFilters);
+
+    loadAllJobs();
   </script>
 </body>
 </html>
