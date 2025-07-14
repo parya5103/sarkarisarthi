@@ -6,6 +6,9 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 
 JOBS_DIR = "jobs"
+HEADERS = {"User-Agent": "Mozilla/5.0"}
+TIMEOUT = 20
+VERIFY_SSL = False
 
 logging.basicConfig(
     level=logging.INFO,
@@ -26,54 +29,14 @@ def slugify(title):
         + ".json"
     )
 
-def fetch_upsc_jobs():
-    url = "https://upsc.gov.in/examinations/active-examinations"
-    headers = {"User-Agent": "Mozilla/5.0"}
-    jobs = []
+def is_valid_last_date(last_date):
+    if not last_date or not isinstance(last_date, str):
+        return False
     try:
-        res = requests.get(url, headers=headers, timeout=20, verify=False)
-        res.raise_for_status()
-        soup = BeautifulSoup(res.content, "html.parser")
-        rows = soup.select("table.views-table tr")[1:]
-        for row in rows:
-            cols = row.find_all("td")
-            if len(cols) < 2:
-                continue
-            title = cols[0].get_text(strip=True)
-            date_text = cols[1].get_text(strip=True)
-            try:
-                last_date = datetime.strptime(date_text, "%d-%m-%Y").strftime("%Y-%m-%d")
-            except Exception:
-                last_date = None
-            jobs.append({
-                "title": title,
-                "category": "UPSC",
-                "last_date": last_date,
-                "apply_link": url
-            })
-        logging.info(f"[UPSC] Total jobs found: {len(jobs)}")
-    except Exception as e:
-        logging.error(f"Error fetching UPSC jobs: {e}")
-    return jobs
-
-# Dummy placeholder for other sources
-def fetch_dummy_jobs(source_name, url):
-    headers = {"User-Agent": "Mozilla/5.0"}
-    jobs = []
-    try:
-        res = requests.get(url, headers=headers, timeout=20, verify=False)
-        res.raise_for_status()
-        soup = BeautifulSoup(res.content, "html.parser")
-        jobs.append({
-            "title": f"Sample {source_name} Job",
-            "category": source_name.upper(),
-            "last_date": "2025-12-31",
-            "apply_link": url
-        })
-        logging.info(f"[{source_name.upper()}] Fetched 1 test job")
-    except Exception as e:
-        logging.error(f"Error fetching {source_name.upper()} jobs: {e}")
-    return jobs
+        datetime.strptime(last_date, "%Y-%m-%d")
+        return True
+    except:
+        return False
 
 def save_jobs(jobs):
     ensure_jobs_dir()
@@ -85,17 +48,7 @@ def save_jobs(jobs):
         except Exception as e:
             logging.error(f"Error saving job '{job['title']}' to {fname}: {e}")
 
-def is_valid_last_date(last_date):
-    if not last_date or not isinstance(last_date, str):
-        return False
-    try:
-        datetime.strptime(last_date, "%Y-%m-%d")
-        return True
-    except Exception:
-        return False
-
 def delete_expired_jobs():
-    ensure_jobs_dir()
     today = datetime.today().date()
     for file in os.listdir(JOBS_DIR):
         path = os.path.join(JOBS_DIR, file)
@@ -104,32 +57,113 @@ def delete_expired_jobs():
         try:
             with open(path, encoding="utf-8") as f:
                 job = json.load(f)
-        except Exception:
-            logging.error(f"Skipping invalid JSON file: {file}")
-            continue
-        last_date_str = job.get("last_date")
-        if not is_valid_last_date(last_date_str):
-            logging.warning(f"Skipping job '{job.get('title', 'unknown')}' in file '{file}' due to invalid last_date: {last_date_str}")
-            continue
-        try:
-            last_date = datetime.strptime(last_date_str, "%Y-%m-%d").date()
-            if last_date < today:
-                os.remove(path)
-                logging.info(f"Deleted expired job file: {file}")
+            last_date = job.get("last_date")
+            if is_valid_last_date(last_date):
+                dt = datetime.strptime(last_date, "%Y-%m-%d").date()
+                if dt < today:
+                    os.remove(path)
+                    logging.info(f"Deleted expired job file: {file}")
         except Exception as e:
-            logging.error(f"Error parsing last_date in file '{file}': {e}")
+            logging.warning(f"Error processing file {file}: {e}")
+
+### --- SCRAPER FUNCTIONS --- ###
+
+def fetch_upsc():
+    url = "https://upsc.gov.in/examinations/active-examinations"
+    jobs = []
+    try:
+        res = requests.get(url, headers=HEADERS, timeout=TIMEOUT, verify=VERIFY_SSL)
+        res.raise_for_status()
+        soup = BeautifulSoup(res.content, "html.parser")
+        rows = soup.select("table.views-table tr")[1:]
+        for row in rows:
+            cols = row.find_all("td")
+            title = cols[0].get_text(strip=True)
+            date = cols[1].get_text(strip=True)
+            try:
+                last_date = datetime.strptime(date, "%d-%m-%Y").strftime("%Y-%m-%d")
+            except:
+                last_date = None
+            jobs.append({"title": title, "category": "UPSC", "last_date": last_date, "apply_link": url})
+    except Exception as e:
+        logging.error(f"UPSC error: {e}")
+    return jobs
+
+def fetch_ibps():
+    url = "https://www.ibps.in/"
+    jobs = []
+    try:
+        res = requests.get(url, headers=HEADERS, timeout=TIMEOUT, verify=VERIFY_SSL)
+        res.raise_for_status()
+        soup = BeautifulSoup(res.content, "html.parser")
+        for li in soup.select(".widget_recent_entries li"):
+            title = li.get_text(strip=True)
+            link = li.find("a")['href'] if li.find("a") else url
+            jobs.append({"title": title, "category": "IBPS", "last_date": None, "apply_link": link})
+    except Exception as e:
+        logging.error(f"IBPS error: {e}")
+    return jobs
+
+def fetch_mppsc():
+    url = "https://mppsc.mp.gov.in/"
+    jobs = []
+    try:
+        res = requests.get(url, headers=HEADERS, timeout=TIMEOUT, verify=VERIFY_SSL)
+        res.raise_for_status()
+        soup = BeautifulSoup(res.content, "html.parser")
+        for a in soup.select("#ctl00_ContentPlaceHolder1_dlLatestAdvertisements a"):
+            title = a.get_text(strip=True)
+            link = a.get("href")
+            if link and not link.startswith("http"):
+                link = url + link
+            jobs.append({"title": title, "category": "MPPSC", "last_date": None, "apply_link": link})
+    except Exception as e:
+        logging.error(f"MPPSC error: {e}")
+    return jobs
+
+def fetch_uppsc():
+    url = "https://uppsc.up.nic.in/"
+    jobs = []
+    try:
+        res = requests.get(url, headers=HEADERS, timeout=TIMEOUT, verify=VERIFY_SSL)
+        res.raise_for_status()
+        soup = BeautifulSoup(res.content, "html.parser")
+        for a in soup.select("#ctl00_ContentPlaceHolder1_GridView1 a"):
+            title = a.get_text(strip=True)
+            link = url + a.get("href") if a.get("href") else url
+            jobs.append({"title": title, "category": "UPPSC", "last_date": None, "apply_link": link})
+    except Exception as e:
+        logging.error(f"UPPSC error: {e}")
+    return jobs
+
+def fetch_bpsc():
+    url = "https://www.bpsc.bih.nic.in/"
+    jobs = []
+    try:
+        res = requests.get(url, headers=HEADERS, timeout=TIMEOUT, verify=VERIFY_SSL)
+        res.raise_for_status()
+        soup = BeautifulSoup(res.content, "html.parser")
+        for a in soup.select("a"):
+            title = a.get_text(strip=True)
+            href = a.get("href")
+            if href and (".pdf" in href or "Notice" in title):
+                full_link = url + href if not href.startswith("http") else href
+                jobs.append({"title": title, "category": "BPSC", "last_date": None, "apply_link": full_link})
+    except Exception as e:
+        logging.error(f"BPSC error: {e}")
+    return jobs
+
+# Add similar methods: fetch_rrb(), fetch_ssc(), fetch_gujarat(), fetch_rajasthan()
 
 if __name__ == "__main__":
     all_jobs = []
-    all_jobs += fetch_upsc_jobs()
-    all_jobs += fetch_dummy_jobs("IBPS", "https://www.ibps.in/")
-    all_jobs += fetch_dummy_jobs("BPSC", "https://www.bpsc.bih.nic.in/")
-    all_jobs += fetch_dummy_jobs("MPPSC", "https://mppsc.mp.gov.in/")
-    all_jobs += fetch_dummy_jobs("SSC", "https://ssc.nic.in/")
-    all_jobs += fetch_dummy_jobs("RRB", "https://indianrailways.gov.in/")
-    all_jobs += fetch_dummy_jobs("UPPSC", "https://uppsc.up.nic.in/")
-    all_jobs += fetch_dummy_jobs("GUJARAT", "https://gpsc.gujarat.gov.in/")
-    all_jobs += fetch_dummy_jobs("RAJASTHAN", "https://rpsc.rajasthan.gov.in/")
+    all_jobs.extend(fetch_upsc())
+    all_jobs.extend(fetch_ibps())
+    all_jobs.extend(fetch_mppsc())
+    all_jobs.extend(fetch_uppsc())
+    all_jobs.extend(fetch_bpsc())
+    # Add calls to fetch_ssc(), fetch_rrb(), fetch_rajasthan(), fetch_gujarat() later
 
     save_jobs(all_jobs)
     delete_expired_jobs()
+    logging.info(f"Total jobs fetched and saved: {len(all_jobs)}")
