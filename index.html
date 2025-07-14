@@ -5,37 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sarkari Sarthi - Government Job Portal</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%234CAF50' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15H9v-6h2v6zm4 0h-2V7h2v10z'%3E%3C/path%3E%3C/svg%3E" type="image/svg+xml">
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>Sarkari Sarthi</h1>
-            <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
-        </div>
+        <h1>Sarkari Sarthi</h1>
+        <button id="darkModeToggle">🌙</button>
     </header>
 
-    <main class="container">
+    <main>
         <div class="filters">
-            <input type="text" id="searchJob" placeholder="Search by Job Title...">
-            <select id="stateFilter">
-                <option value="">All States</option>
-            </select>
+            <input type="text" id="searchJob" placeholder="Search by job title...">
             <select id="departmentFilter">
-                <option value="">All Departments</option>
-            </select>
+                <option value="">All Categories</option> </select>
             <button id="resetFilters">Reset Filters</button>
         </div>
 
-        <div id="jobListings" class="job-listings">
-            <p class="loading-message">Loading jobs...</p>
-        </div>
+        <section id="jobListings" class="job-listings">
+            </section>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2025 Sarkari Sarthi. All rights reserved.</p>
-        </div>
+        <p>&copy; 2025 Sarkari Sarthi. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
