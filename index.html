@@ -1,0 +1,195 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SarkariSarthi - Free Indian Government Job Portal</title>
+    <meta name="description" content="SarkariSarthi: Latest Indian government jobs from SSC, UPSC, Railways, Banking, and more. Updated every 6 hours.">
+    <meta name="keywords" content="sarkari naukri, government jobs, SSC, UPSC, Railways, Banking, Defence, Police, job portal">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="SarkariSarthi - Latest Government Jobs in India">
+    <meta property="og:description" content="Find the latest government job openings across India. Updated every 6 hours with SSC, UPSC, Railways, Banking, and more.">
+    <meta property="og:image" content="/assets/logo.png">
+    <meta property="og:url" content="https://yourusername.github.io/sarkarisarthi/">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css">
+    <link rel="sitemap" href="/sitemap.xml">
+    <link rel="alternate" type="application/rss+xml" title="SarkariSarthi Job Feed" href="/feed.xml">
+    <style>
+        body { background-color: #f9f9f9; font-family: 'Arial', sans-serif; }
+        header { text-align: center; padding: 2rem; background: linear-gradient(135deg, #007bff, #00d4ff); color: white; }
+        .banner img { max-width: 200px; margin: 1rem auto; display: block; border-radius: 10px; }
+        .features, .job-list, .subscription { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+        .job-card { border: 1px solid #ddd; padding: 1.5rem; margin-bottom: 1rem; border-radius: 8px; transition: transform 0.2s; }
+        .job-card:hover { transform: translateY(-5px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .job-card a { display: inline-block; padding: 0.5rem 1rem; background-color: #007bff; color: white; border-radius: 5px; text-decoration: none; }
+        .filters { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .ad-placeholder { background-color: #eee; padding: 1rem; text-align: center; margin: 1rem 0; border-radius: 5px; }
+        footer { text-align: center; padding: 1.5rem; background-color: #333; color: white; }
+        footer a { color: #00d4ff; text-decoration: none; }
+        @media (max-width: 768px) { .filters { flex-direction: column; } }
+        .error-message { text-align: center; color: #d9534f; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <img src="/assets/logo.png" alt="SarkariSarthi Logo">
+            <h1>SarkariSarthi</h1>
+            <p>Your trusted source for Indian government jobs</p>
+        </div>
+    </header>
+    <section class="features">
+        <h2>Why Choose SarkariSarthi?</h2>
+        <ul>
+            <li>🕒 Fresh job listings updated every 6 hours</li>
+            <li>📱 Mobile-optimized for seamless browsing</li>
+            <li>🔍 Filter by category or search by keyword</li>
+            <li>🔔 Subscribe for instant job alerts</li>
+            <li>🆓 100% free with no hidden costs</li>
+        </ul>
+    </section>
+    <section class="filters">
+        <select id="category-filter">
+            <option value="all">All Categories</option>
+            <option value="Bank">Bank</option>
+            <option value="SSC">SSC</option>
+            <option value="Defence">Defence</option>
+            <option value="Police">Police</option>
+            <option value="Railways">Railways</option>
+        </select>
+        <input type="text" id="search-bar" placeholder="Search jobs (e.g., SSC CGL, UPSC)...">
+    </section>
+    <section class="job-list">
+        <h2>Available Jobs (<span id="job-counter">0</span> active jobs)</h2>
+        <!-- AdSense Placeholder -->
+        <div class="ad-placeholder">AdSense Ad Here</div>
+        <div id="job-container"></div>
+    </section>
+    <section class="subscription">
+        <h2>Subscribe for Job Alerts</h2>
+        <form>
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+    <footer>
+        <p>© 2025 SarkariSarthi | <a href="/privacy.html">Privacy Policy</a> | <a href="/terms.html">Terms of Service</a></p>
+    </footer>
+    <script>
+        // Lazy load jobs
+        async function loadJobs() {
+            try {
+                const response = await fetch('/jobs/index.json');
+                if (!response.ok) throw new Error('Failed to load jobs');
+                const jobs = await response.json();
+                const jobContainer = document.getElementById('job-container');
+                const jobCounter = document.getElementById('job-counter');
+                jobCounter.textContent = jobs.length;
+                if (jobs.length === 0) {
+                    jobContainer.innerHTML = '<p class="error-message">No active jobs available. Check back soon!</p>';
+                    return;
+                }
+                jobs.forEach(job => {
+                    const jobCard = document.createElement('div');
+                    jobCard.className = 'job-card';
+                    jobCard.innerHTML = `
+                        <h3>${job.title}</h3>
+                        <p><strong>Category:</strong> ${job.category}</p>
+                        <p><strong>Last Date:</strong> ${job.last_date}</p>
+                        <p>${job.description}</p>
+                        <a href="${job.link}" target="_blank">Apply Now</a>
+                    `;
+                    jobContainer.appendChild(jobCard);
+                });
+            } catch (error) {
+                document.getElementById('job-container').innerHTML = '<p class="error-message">Error loading jobs. Please try again later.</p>';
+            }
+        }
+
+        // Filter and search
+        async function filterJobs() {
+            try {
+                const category = document.getElementById('category-filter').value;
+                const search = document.getElementById('search-bar').value.toLowerCase();
+                const response = await fetch('/jobs/index.json');
+                if (!response.ok) throw new Error('Failed to load jobs');
+                const jobs = await response.json();
+                const jobContainer = document.getElementById('job-container');
+                jobContainer.innerHTML = '';
+                const filteredJobs = jobs.filter(job => 
+                    (category === 'all' || job.category === category) &&
+                    (job.title.toLowerCase().includes(search) || job.description.toLowerCase().includes(search))
+                );
+                document.getElementById('job-counter').textContent = filteredJobs.length;
+                if (filteredJobs.length === 0) {
+                    jobContainer.innerHTML = '<p class="error-message">No matching jobs found.</p>';
+                    return;
+                }
+                filteredJobs.forEach(job => {
+                    const jobCard = document.createElement('div');
+                    jobCard.className = 'job-card';
+                    jobCard.innerHTML = `
+                        <h3>${job.title}</h3>
+                        <p><strong>Category:</strong> ${job.category}</p>
+                        <p><strong>Last Date:</strong> ${job.last_date}</p>
+                        <p>${job.description}</p>
+                        <a href="${job.link}" target="_blank">Apply Now</a>
+                    `;
+                    jobContainer.appendChild(jobCard);
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (error) {
+                document.getElementById('job-container').innerHTML = '<p class="error-message">Error filtering jobs. Please try again.</p>';
+            }
+        }
+
+        // Event listeners
+        document.getElementById('category-filter').addEventListener('change', filterJobs);
+        document.getElementById('search-bar').addEventListener('input', filterJobs);
+        loadJobs();
+
+        // Mock Google Analytics
+        console.log('Google Analytics initialized');
+    </script>
+</body>
+</html>
