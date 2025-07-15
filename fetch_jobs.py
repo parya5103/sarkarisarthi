@@ -17,10 +17,10 @@ PRIVATE_SOURCES = [
     "https://rojgarresult.com/",
     "https://www.employmentnews.gov.in/",
     "https://www.latestgovtjobs.in/",
-    "https://www.indiagovtjobs.in/"
-    "https://www.kirannewsagency.com/"
-    "https://www.mysarkarinaukri.com/"
-    "https://sarkariprep.in/"
+    "https://www.indiagovtjobs.in/",
+    "https://www.kirannewsagency.com/",
+    "https://www.mysarkarinaukri.com/",
+    "https://sarkariprep.in/",
     "https://linkingsky.com/"
 ]
 
