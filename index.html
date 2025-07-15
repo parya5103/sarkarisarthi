@@ -1,33 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarkari Sarthi - Government Job Portal</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sarkari Sarthi - सरकारी नौकरी अपडेट</title>
+  <meta name="description" content="Find latest Sarkari Naukri updates in Hindi and English. Central & State government jobs.">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
+  <header>
+    <div class="container header-flex">
+      <div>
         <h1>Sarkari Sarthi</h1>
-        <button id="darkModeToggle">🌙</button>
-    </header>
+        <p class="tagline">🚀 आपकी सरकारी नौकरी की सच्ची सवारी!</p>
+      </div>
+      <div class="header-controls">
+        <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
+        <select id="languageToggle" title="Language">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी</option>
+        </select>
+      </div>
+    </div>
+  </header>
 
-    <main>
-        <div class="filters">
-            <input type="text" id="searchJob" placeholder="Search by job title...">
-            <select id="departmentFilter">
-                <option value="">All Categories</option> </select>
-            <button id="resetFilters">Reset Filters</button>
-        </div>
+  <main class="container">
+    <section id="trendingSection">
+      <h2>🔍 Trending Keywords</h2>
+      <ul id="trendingKeywords"></ul>
+    </section>
 
-        <section id="jobListings" class="job-listings">
-            </section>
-    </main>
+    <div class="filters">
+      <input type="text" id="searchJob" placeholder="Search by job title..." />
+      <select id="departmentFilter"><option value="">All Categories</option></select>
+      <button id="resetFilters">Reset</button>
+    </div>
 
-    <footer>
-        <p>&copy; 2025 Sarkari Sarthi. All rights reserved.</p>
-    </footer>
+    <section id="jobListings" class="job-listings"></section>
 
-    <script src="script.js"></script>
+    <div id="pagination" class="pagination-controls"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sarkari Sarthi | Powered with 💙 by India</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
