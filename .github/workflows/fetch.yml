@@ -19,7 +19,7 @@ jobs:
         python-version: '3.11'
 
     - name: Install dependencies
-      run: pip install beautifulsoup4 requests
+      run: pip install beautifulsoup4 requests python-dateutil
 
     - name: Run job scraper
       run: python fetch_jobs.py
