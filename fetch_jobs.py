@@ -21,6 +21,7 @@ PRIVATE_SOURCES = [
     "https://www.kirannewsagency.com/"
     "https://www.mysarkarinaukri.com/"
     "https://sarkariprep.in/"
+    "https://linkingsky.com/"
 ]
 
 logging.basicConfig(
