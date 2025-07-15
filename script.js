@@ -87,24 +87,3 @@ function applyFilters() {
     card.style.display = match ? "block" : "none";
   });
 }
-document.getElementById("langToggleHero").addEventListener("change", function () {
-  const lang = this.value;
-
-  const translations = {
-    hi: {
-      title: "Sarkari Sarthi",
-      tagline: "आपकी सरकारी नौकरी की सच्ची साथी!",
-      cta: "🔍 सरकारी नौकरी देखें",
-    },
-    en: {
-      title: "Sarkari Sarthi",
-      tagline: "Your true partner for Government Jobs!",
-      cta: "🔍 View Government Jobs",
-    },
-  };
-
-  const t = translations[lang];
-  document.getElementById("heroTitle").innerText = t.title;
-  document.getElementById("heroTagline").innerText = t.tagline;
-  document.getElementById("heroCTA").innerText = t.cta;
-});
