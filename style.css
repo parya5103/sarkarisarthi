@@ -121,3 +121,65 @@ footer {
   text-align: center;
   margin: 1rem 0;
 }
+/* Hero Banner + Logo */
+.hero {
+  background: linear-gradient(135deg, #004aad, #0077ff);
+  color: #fff;
+  padding: 80px 20px 100px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border-bottom: 5px solid #ffc107;
+}
+
+.hero-container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.logo {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.hero-title {
+  font-size: 2.8rem;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.hero-tagline {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.hero-cta {
+  background-color: #fff;
+  color: #004aad;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.hero-cta:hover {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.lang-selector {
+  margin: 10px auto 20px;
+  color: #fff;
+}
+
+.lang-selector select {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.95rem;
+}
