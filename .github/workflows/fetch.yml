@@ -26,14 +26,39 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Upgrade pip
-      run: python -m pip install --upgrade pip
-
     - name: Cache pip
       uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Create .env file
+      run: |
+        echo "TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}" >> .env
+        echo "TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}" >> .env
+
+    - name: Run fetch_jobs.py
+      run: python fetch_jobs.py
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add jobs/ job_manifest.json || true
+        if ! git diff --cached --quiet; then
+          git commit -m "[bot] Update jobs data $(date '+%Y-%m-%d %H:%M:%S')"
+          git push
+        else
+          echo "No changes to commit."
+        fi
+
         restore-keys: |
           ${{ runner.os }}-pip-
 
