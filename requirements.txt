@@ -7,3 +7,4 @@ pdfplumber==0.10.3
 # Optional for advanced AI/NLP features:
 transformers==4.41.2
 torch==2.3.0
+python-dotenv==1.0.1
