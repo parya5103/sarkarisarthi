@@ -1,3 +1,7 @@
+from dotenv import load_dotenv
+load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 import os
 import json
 import logging
@@ -38,7 +42,13 @@ HEADERS = {
 }
 REQUEST_TIMEOUT = 15  # seconds
 DEEP_CRAWL = True     # Toggle deep crawling for official links
-TELEGRAM_BOT_TOKEN = "8124593711:AAFeVuf_x7ok_8PJx97e92SaDpcdTwafYlg"
+# Set your Telegram Bot Token as an environment variable before running this script:
+#   export TELEGRAM_BOT_TOKEN='your-telegram-bot-token' (Linux/macOS)
+#   set TELEGRAM_BOT_TOKEN=your-telegram-bot-token (Windows)
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+if not TELEGRAM_BOT_TOKEN:
+    logging.error("TELEGRAM_BOT_TOKEN environment variable not set! Telegram notifications will not work.")
+
 TELEGRAM_CHAT_ID = "-1002642236931"
 
 # =======================
