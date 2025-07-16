@@ -3,11 +3,19 @@ name: Fetch Jobs and Commit
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'  # Run every hour
+    - cron: '30 23 * * *' # 5:00 AM IST
+  push:
+    paths:
+      - fetch_jobs.py
+      - requirements.txt
+      - .github/workflows/fetch.yml
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.10, 3.11, 3.12]
 
     steps:
     - name: Checkout repo
@@ -16,16 +24,24 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.11'
+        python-version: ${{ matrix.python-version }}
+
+    - name: Upgrade pip
+      run: python -m pip install --upgrade pip
+
+    - name: Cache pip
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
 
     - name: Install dependencies
-      run: pip install beautifulsoup4 requests python-dateutil
-
-    - name: Run job scraper
-      run: python fetch_jobs.py
-
-    - name: Show scraped jobs
-      run: ls -la jobs/
+      run: |
+        pip install -r requirements.txt
+        pip install torch transformers
+        if [ -f tests/test_basic.py ]; then pytest tests/; else echo "No tests yet"; fi
 
     - name: Commit scraped jobs
       run: |
