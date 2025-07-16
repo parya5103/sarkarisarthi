@@ -409,7 +409,7 @@ function injectJobPostingLD(jobs) {
       "skills": job.skills ? job.skills.join(', ') : ''
     };
     const script = document.createElement('script');
-    script.type = 'application/ld+json';
+    if (script) script.type = 'application/ld+json';
     script.className = 'jobposting-jsonld';
     script.textContent = JSON.stringify(ld);
     document.body.appendChild(script);
@@ -498,7 +498,7 @@ const loadJobFile = url => {
 };
 
 /**** JOB RENDERING ****/
-const renderJobs = jobs => {
+// Duplicate declaration removed. Using the main 'function renderJobs(jobs) { ... }' above.
   const container = document.getElementById(JOBS_CONTAINER_ID);
   const skeleton = document.getElementById("jobs-skeleton");
   const counter = document.getElementById("job-counter");
