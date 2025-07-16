@@ -493,12 +493,9 @@ const loadJobFile = url => {
     })
     .catch(err => {
       // Optionally display per-job error
-      return null;
-    });
-};
 
 /**** JOB RENDERING ****/
-// Duplicate declaration removed. Using the main 'function renderJobs(jobs) { ... }' above.
+function renderJobs(jobs) {
   const container = document.getElementById(JOBS_CONTAINER_ID);
   const skeleton = document.getElementById("jobs-skeleton");
   const counter = document.getElementById("job-counter");
@@ -557,7 +554,7 @@ const loadJobFile = url => {
     });
   });
   setupJobCardInteractivity();
-};
+}
 
 // Modal logic for job details and PDF preview
 function setupJobCardInteractivity() {
