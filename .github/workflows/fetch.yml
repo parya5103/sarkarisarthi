@@ -51,16 +51,14 @@ jobs:
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git add jobs/ job_manifest.json || true
+        git add jobs/
+        [ -f job_manifest.json ] && git add job_manifest.json || true
         if ! git diff --cached --quiet; then
           git commit -m "[bot] Update jobs data $(date '+%Y-%m-%d %H:%M:%S')"
           git push
         else
           echo "No changes to commit."
         fi
-
-        restore-keys: |
-          ${{ runner.os }}-pip-
 
     - name: Install dependencies
       run: |
