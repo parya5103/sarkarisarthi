@@ -9,3 +9,5 @@ jobs/*
 # But allow .json files and .gitkeep
 !jobs/*.json
 !jobs/.gitkeep
+node_modules/
+.coverage

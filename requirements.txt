@@ -1,10 +1,19 @@
+# Dependencies actually imported by the daily workflow
+# (fetch_jobs.py chain + telegram_notifier.py + whatsapp_notifier.py).
+# Heavy unused packages (torch, transformers, selenium, pandas, flask,
+# ...) were removed: they never ran but slowed every deploy by ~20 min.
+
+# Core scraping & parsing
 requests==2.31.0
-beautifulsoup4==4.12.3
-python-dateutil==2.9.0.post0
-PyMuPDF==1.23.21
+beautifulsoup4==4.12.2
+lxml==4.9.3
+
+# PDF parsing (official notification PDFs)
+PyMuPDF==1.23.8
 pdfplumber==0.10.3
 
-# Optional for advanced AI/NLP features:
-transformers==4.41.2
-torch==2.3.0
-python-dotenv==1.0.1
+# Telegram notifications
+python-telegram-bot==20.7
+
+# Testing
+pytest==7.4.3

@@ -1,0 +1,21 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "**Smart AI-Powered Indian Sarkari Job Portal**",
+  "main": "admin.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest",
+    "dev": "serve .",
+    "build": "mkdir -p public && cp *.html *.css *.js *.png *.jpg public/",
+    "vercel-build": "mkdir -p public && cp *.html *.css *.js *.png *.jpg public/",
+    "start": "serve ."
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "serve": "^14.2.0"
+  }
+}

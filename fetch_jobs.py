@@ -1,502 +1,342 @@
-from dotenv import load_dotenv
-load_dotenv()
-from dotenv import load_dotenv
-load_dotenv()
-import os
-import json
+#!/usr/bin/env python3
+"""
+SarkariSarthi 2.0 - Job Fetcher (Fixed Version for GitHub Actions)
+Job scraper for Indian government and public-sector jobs
+
+Phase 1 (data quality):
+- duplicate candidates are MERGED into existing records (missing
+  fields filled, source attribution kept, deadline extensions apply)
+  instead of being silently dropped;
+- the manifest is backed up before every mutation (jobs/backup/);
+- expiry is based ONLY on a verified last_date (no arbitrary age rule);
+- per-source metrics are recorded and a readable daily source report
+  is written to logs/source_report.{json,md};
+- --dry-run runs the whole pipeline and reports what WOULD change
+  without touching the manifest, job files or generated pages.
+"""
+
+import argparse
 import logging
-import requests
-from bs4 import BeautifulSoup
-from datetime import datetime, date
-from dateutil import parser as dateparser
-import hashlib
-import re
+import os
+import sys
 
-from transformers import pipeline
-summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+from datetime import datetime
 
-# =======================
-# CONFIGURATION SECTION
-# =======================
-JOBS_DIR = "jobs"
-JOB_MANIFEST = "job_manifest.json"
-ENABLE_PDF_PARSING = True  # Toggle PDF parsing
-PRIVATE_SOURCES = [
-    "https://www.freejobalert.com/",
-    "https://www.sarkarinaukridaily.in/",
-    "https://www.sarkarinaukri.com/",
-    "https://www.fresherslive.com/govt-jobs",
-    "https://www.jobsarkari.com/",
-    "https://www.naukrigulf.com/government-jobs",
-    "https://rojgarresult.com/",
-    "https://www.employmentnews.gov.in/",
-    "https://www.latestgovtjobs.in/",
-    "https://www.indiagovtjobs.in/",
-    "https://www.kirannewsagency.com/",
-    "https://www.mysarkarinaukri.com/",
-    "https://sarkariprep.in/",
-    "https://linkingsky.com/"
-]
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (compatible; SarkariSarthiBot/1.0; +https://sarkarisarthi.in/bot)"
-}
-REQUEST_TIMEOUT = 15  # seconds
-DEEP_CRAWL = True     # Toggle deep crawling for official links
-# Set your Telegram Bot Token as an environment variable before running this script:
-#   export TELEGRAM_BOT_TOKEN='your-telegram-bot-token' (Linux/macOS)
-#   set TELEGRAM_BOT_TOKEN=your-telegram-bot-token (Windows)
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
-if not TELEGRAM_BOT_TOKEN:
-    logging.error("TELEGRAM_BOT_TOKEN environment variable not set! Telegram notifications will not work.")
+import concurrent.futures
 
-TELEGRAM_CHAT_ID = "-1002642236931"
-
-# =======================
-# LOGGING SETUP
-# =======================
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
+# Import from refactored modules
+from storage import (
+    JOB_DIR, MANIFEST_FILE, load_manifest, save_manifest,
+    save_jobs_to_files, refresh_job_statuses, update_seo_keywords,
+    is_valid_job_id, backup_manifest, count_statuses
+)
+from scraper import JOB_PORTALS, fetch_page_content, scrape_generic_job_site, _scrape_single_portal, scrape_all_job_portals
+from job_schema import normalize_job, is_duplicate_job, advertisement_key, title_date_key, merge_job
+from official_sources import fetch_employment_news_jobs, SOURCE_NAME as OFFICIAL_SOURCE_NAME
+from detail_pages import write_detail_pages
+from source_metrics import SourceMetrics
+from parser import (
+    download_pdf, extract_text_from_pdf, summarize_job_description,
+    extract_important_dates_and_links, auto_detect_job_category,
+    extract_trending_skills, process_job_content
 )
 
-# =======================
-# UTILITY FUNCTIONS
-# =======================
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
-def ensure_jobs_dir():
-    """Ensure the jobs directory exists."""
-    if not os.path.exists(JOBS_DIR):
-        os.makedirs(JOBS_DIR)
-        logging.info("🗂️ Created jobs directory.")
+# --- Main Execution ---
 
-def slugify(text):
-    """Create a safe filename from job title."""
-    return (
-        text.lower()
-        .replace(" ", "-")
-        .replace("/", "-")
-        .replace(":", "")
-        .replace(",", "")
-        .replace("?", "")
-        .replace(".", "")
-        .strip("-")
-    )[:60] + ".json"
+def _publish_detail_pages():
+    """Regenerate static job detail pages + sitemap from the manifest.
 
-def job_hash(title, link):
-    """Create a hash for deduplication."""
-    return hashlib.sha256((title + link).encode("utf-8")).hexdigest()
-
-def extract_last_date(text):
-    """
-    Extract the last date from text using regex and dateutil.
-    Looks for phrases like 'Last Date', 'Apply before', etc.
-    """
-    # Common patterns and phrases
-    patterns = [
-        r"(?:last\s*date|apply\s*before|closing\s*date|last\s*day|deadline)[^\n:]*[:\-]?\s*([\d]{1,2}[\/\-][\d]{1,2}[\/\-][\d]{2,4})",
-        r"([\d]{1,2}[\/\-][\d]{1,2}[\/\-][\d]{2,4})",
-        r"(?:last\s*date|apply\s*before|closing\s*date|last\s*day|deadline)[^\n:]*[:\-]?\s*([A-Za-z]{3,9}\s+\d{1,2},?\s+\d{4})",
-        r"([A-Za-z]{3,9}\s+\d{1,2},?\s+\d{4})"
-    ]
-    for pattern in patterns:
-        for match in re.findall(pattern, text, re.IGNORECASE):
-            try:
-                dt = dateparser.parse(match, dayfirst=True, fuzzy=True)
-                if dt and dt.date() >= date.today():
-                    return str(dt.date())
-            except Exception:
-                continue
-    return "Not Specified"
-
-def is_pdf_link(href):
-    """Check if a link is a PDF."""
-    return href.lower().endswith('.pdf')
-
-def download_pdf(url, dest):
-    """Download PDF from URL to destination path."""
-    try:
-        resp = requests.get(url, headers=HEADERS, timeout=REQUEST_TIMEOUT, stream=True, verify=False)
-        resp.raise_for_status()
-        with open(dest, 'wb') as f:
-            for chunk in resp.iter_content(1024):
-                f.write(chunk)
-        return True
-    except Exception as e:
-        logging.warning(f"Failed to download PDF {url}: {e}")
-        return False
-
-def extract_pdf_text(pdf_path):
-    """Extract text from PDF using PyMuPDF or pdfplumber."""
-    try:
-        import fitz  # PyMuPDF
-        doc = fitz.open(pdf_path)
-        text = "\n".join(page.get_text() for page in doc)
-        doc.close()
-        return text
-    except Exception as e:
-        try:
-            import pdfplumber
-            with pdfplumber.open(pdf_path) as pdf:
-                text = "\n".join(page.extract_text() or '' for page in pdf.pages)
-            return text
-        except Exception as ex:
-            logging.warning(f"PDF parsing failed ({pdf_path}): {e}, {ex}")
-            return None
-
-def categorize(title: str) -> str:
-    """Categorize job based on keywords in the title."""
-    title_l = title.lower()
-    if any(k in title_l for k in ["police", "constable"]):
-        return "Police"
-    if any(k in title_l for k in ["bank", "ibps", "sbi"]):
-        return "Banking"
-    if any(k in title_l for k in ["railway", "rrb"]):
-        return "Railway"
-    if any(k in title_l for k in ["teacher", "school", "education"]):
-        return "Education"
-    return "General"
-
-# --- Advanced PDF parsing using Hugging Face transformer (Donut/LayoutLM) ---
-def parse_pdf_for_job_info(text, pdf_path=None):
-    """
-    Extract job info using a transformer-based model (Donut/LayoutLM) if possible.
-    Fallback to regex if model or inference fails.
+    Non-fatal on purpose: a template failure must not block the data
+    pipeline, but it is logged loudly in the workflow run.
     """
     try:
-        # Attempt to use Donut (OCR+NLP) if available
-        from transformers import DonutProcessor, VisionEncoderDecoderModel
-        from PIL import Image
-        import torch
-        import fitz
-        # Extract images from PDF (first page)
-        if pdf_path:
-            doc = fitz.open(pdf_path)
-            pix = doc[0].get_pixmap()
-            img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
-            doc.close()
-            processor = DonutProcessor.from_pretrained("naver-clova-ix/donut-base-finetuned-docvqa")
-            model = VisionEncoderDecoderModel.from_pretrained("naver-clova-ix/donut-base-finetuned-docvqa")
-            device = "cuda" if torch.cuda.is_available() else "cpu"
-            model.to(device)
-            task_prompt = "<s_docvqa><s_question>Extract job title, department, apply link, last date<sep/>"
-            inputs = processor(img, task_prompt, return_tensors="pt").to(device)
-            outputs = model.generate(**inputs, max_length=512)
-            result = processor.batch_decode(outputs, skip_special_tokens=True)[0]
-            # Try to extract fields from result string (very basic, can be improved)
-            job_title, department, apply_link, last_date = "", "", "", "Not Specified"
-            for line in result.split("\n"):
-                if "title" in line.lower():
-                    job_title = line.split(":",1)[-1].strip()[:80]
-                if "department" in line.lower():
-                    department = line.split(":",1)[-1].strip()
-                if "apply" in line.lower() and "http" in line:
-                    match = re.search(r'(https?://\S+)', line)
-                    if match:
-                        apply_link = match.group(1)
-                if "last date" in line.lower():
-                    date_match = extract_last_date(line)
-                    if date_match != "Not Specified":
-                        last_date = date_match
-            # If any field missing, fallback to regex
-            if not job_title or not last_date:
-                raise ValueError("Model extraction incomplete, fallback to regex")
-            return {
-                "title": job_title,
-                "last_date": last_date,
-                "department": department,
-                "apply_link": apply_link
-            }
+        manifest = load_manifest()
+        write_detail_pages(manifest.get('jobs', []))
     except Exception as e:
-        logging.warning(f"⚠️ Donut/LayoutLM model failed or unavailable: {e}. Falling back to regex.")
-    # --- Fallback: Regex-based extraction ---
-    job_title = ""
-    last_date = "Not Specified"
-    department = ""
-    apply_link = ""
-    lines = text.splitlines()
-    for line in lines:
-        if not job_title and any(w in line.lower() for w in ["recruitment", "job", "vacancy", "post"]):
-            job_title = line.strip()[:80]
-        if not last_date or last_date == "Not Specified":
-            date_match = extract_last_date(line)
-            if date_match != "Not Specified":
-                last_date = date_match
-        if not department and any(w in line.lower() for w in ["department", "ministry", "state", "organization"]):
-            department = line.strip()
-        if not apply_link and "http" in line:
-            match = re.search(r'(https?://\S+)', line)
-            if match:
-                apply_link = match.group(1)
+        logger.error(f"❌ Failed to regenerate job detail pages: {e}")
+
+
+def _index_existing_jobs(jobs):
+    """Lookup indexes + duplicate key sets for the stored records."""
+    by_url, by_adv, by_td = {}, {}, {}
+    urls, adv_keys, td_keys = set(), set(), set()
+    for idx, job in enumerate(jobs):
+        url = job.get('url')
+        if url:
+            urls.add(url)
+            by_url.setdefault(url, idx)
+        adv = advertisement_key(job)
+        if adv:
+            adv_keys.add(adv)
+            by_adv.setdefault(adv, idx)
+        td = title_date_key(job)
+        if td:
+            td_keys.add(td)
+            by_td.setdefault(td, idx)
+    adv_keys.discard(None)
+    td_keys.discard(None)
     return {
-        "title": job_title,
-        "last_date": last_date,
-        "department": department,
-        "apply_link": apply_link
+        'urls': urls, 'adv_keys': adv_keys, 'td_keys': td_keys,
+        'by_url': by_url, 'by_adv': by_adv, 'by_td': by_td,
     }
 
-def find_official_link(soup, fallback_link):
-    """
-    Prefer official .gov.in or .nic.in links.
-    Returns (official_link, is_gov).
-    """
-    for tag in soup.find_all("a", href=True):
-        href = tag["href"]
-        if href.startswith("http") and (".gov.in" in href or ".nic.in" in href):
-            return href, True
-    return fallback_link, False
 
-# =======================
-# MAIN SCRAPER LOGIC
-# =======================
+def main(dry_run=False):
+    """Main function to orchestrate job fetching process"""
+    print("=" * 60)
+    print("🚀 SarkariSarthi 2.0 Job Fetcher Started (for GitHub Actions)")
+    if dry_run:
+        print("🧪 DRY RUN: no files will be modified")
+    print("=" * 60)
 
-from portals import PORTALS
+    os.makedirs(JOB_DIR, exist_ok=True)
+    os.makedirs('logs', exist_ok=True)
+    logger.info(f"📁 Jobs data directory ready: {os.path.abspath(JOB_DIR)}")
 
-def fetch_govt_portal_jobs():
-    """
-    Scrape jobs from official central and state government portals listed in portals.py.
-    Each portal can have its own scraping logic based on its structure.
-    Returns a list of job dicts.
-    """
-    jobs = []
-    for portal in PORTALS:
-        try:
-            resp = requests.get(portal['url'], headers=HEADERS, timeout=REQUEST_TIMEOUT)
-            resp.raise_for_status()
-            soup = BeautifulSoup(resp.text, 'html.parser')
-            # --- Each portal may need custom parsing logic below ---
-            # For demonstration, just create a stub entry:
-            jobs.append({
-                'title': f"{portal['name']} - See official site for latest jobs",
-                'apply_link': portal['url'],
-                'category': 'Govt',
-                'source': portal['name'],
-                'last_date': 'Not Specified',
-                'description': f"Visit {portal['url']} for the latest official notifications.",
-                'summary': f"Official portal for {portal['name']} government jobs.",
-                'skills': [],
-                'faq': [],
-                'is_official': True
-            })
-        except Exception as e:
-            logging.warning(f"Failed to fetch {portal['name']}: {e}")
-    return jobs
+    metrics = SourceMetrics()
+    now = datetime.now().isoformat()
 
-def fetch_private_portal_jobs():
-    """Scrape jobs from private portals with deduplication and deep crawl."""
-    jobs = []
-    seen = set()
-    for site in PRIVATE_SOURCES:
-        try:
-            logging.info(f"🔍 Fetching {site}")
-            res = requests.get(site, headers=HEADERS, timeout=REQUEST_TIMEOUT, verify=False)
-            res.raise_for_status()
-            soup = BeautifulSoup(res.text, "html.parser")
-            links = soup.find_all("a", href=True)
+    manifest = load_manifest()
+    manifest_jobs = manifest.get('jobs', [])
+    existing = _index_existing_jobs(manifest_jobs)
+    existing_job_urls = existing['urls']
+    existing_adv_keys = existing['adv_keys']
+    existing_td_keys = existing['td_keys']
+    logger.info(f"📋 Existing jobs in manifest: {len(manifest_jobs)}")
 
-            for link in links:
-                title = link.get_text(strip=True)
-                href = link.get("href")
+    all_scraped_jobs = scrape_all_job_portals(metrics=metrics)
 
-                if not title or not href:
-                    continue
-                # Only consider job-like links
-                if not any(word in title.lower() for word in ["job", "vacancy", "recruitment", "post", "opening"]):
-                    continue
+    # Official source: Employment News rows arrive already complete with
+    # verified listing data. They must NOT be re-fetched through
+    # process_job_content, so they are kept in a separate list.
+    official_jobs = fetch_employment_news_jobs()
+    metrics.record(
+        OFFICIAL_SOURCE_NAME,
+        status='ok' if official_jobs else 'no-jobs',
+        permission='allowed',
+        discovered=len(official_jobs),
+        notes='official adapter; robots-checked, honest user-agent',
+    )
+    all_scraped_jobs.extend(official_jobs)
 
-                # Normalize and deduplicate
-                full_link = href if href.startswith("http") else site.rstrip("/") + "/" + href.lstrip("/")
-                job_id = job_hash(title[:80], full_link)
-                if job_id in seen_hashes:
-                    continue
-                seen_hashes.add(job_id)
+    metrics.note_pipeline_totals(raw_candidates=len(all_scraped_jobs))
 
-                # Limit job title length
-                job_title = title.strip()[:80]
-
-                # Deep crawl for details
-                last_date = "Not Specified"
-                official_link = full_link
-                is_gov = False
-                pdf_info = None
-                pdf_url = None
-                if DEEP_CRAWL:
-                    try:
-                        detail = requests.get(full_link, headers=HEADERS, timeout=REQUEST_TIMEOUT, verify=False)
-                        detail.raise_for_status()
-                        page = BeautifulSoup(detail.text, "html.parser")
-                        text = page.get_text(separator="\n")
-                        last_date = extract_last_date(text)
-                        official_link, is_gov = find_official_link(page, full_link)
-                        # PDF detection and parsing
-                        if ENABLE_PDF_PARSING:
-                            for tag in page.find_all("a", href=True):
-                                href = tag["href"]
-                                if is_pdf_link(href):
-                                    pdf_url = href if href.startswith("http") else site.rstrip("/") + "/" + href.lstrip("/")
-                                    pdf_name = os.path.join(JOBS_DIR, "_tmp.pdf")
-                                    if download_pdf(pdf_url, pdf_name):
-                                        pdf_text = extract_pdf_text(pdf_name)
-                                        if pdf_text:
-                                            pdf_info = parse_pdf_for_job_info(pdf_text)
-                                        os.remove(pdf_name)
-                                    break
-                    except Exception as e:
-                        logging.warning(f"❌ Deep crawl failed on {full_link}: {e}")
-
-                job = {
-                    "title": pdf_info["title"] if pdf_info and pdf_info["title"] else job_title,
-                    "category": categorize(job_title),
-                    "state": "N/A",
-                    "last_date": pdf_info["last_date"] if pdf_info and pdf_info["last_date"] else last_date,
-                    "apply_link": pdf_info["apply_link"] if pdf_info and pdf_info["apply_link"] else official_link,
-                    "is_gov": is_gov,
-                    "pdf_url": pdf_url,
-                    "pdf_parsed": bool(pdf_info)
-                }
-                if 'description' in locals():
-                    job['description'] = description
-                if summarizer and job.get('description'):
-                    try:
-                        summary = summarizer(job['description'], max_length=60, min_length=15, do_sample=False)[0]['summary_text']
-                        job['summary'] = summary.strip()
-                    except Exception as e:
-                        logging.warning(f"Summarization failed: {e}")
-                        job['summary'] = job.get('description', '')[:180]
-
-                # --- AI Skill Extraction ---
-                if job.get('description'):
-                    job['skills'] = extract_skills(job['description'])
-
-                # --- AI FAQ Generation ---
-                if job.get('description'):
-                    job['faqs'] = generate_faqs(job['description'])
-
-                # --- Hindi Summary Generation ---
-                if translator and job.get('summary'):
-                    try:
-                        summary_hi = translator(job['summary'])[0]['translation_text']
-                        job['summary_hi'] = summary_hi.strip()
-                    except Exception as e:
-                        logging.warning(f"Hindi summary translation failed: {e}")
-                        job['summary_hi'] = ''
-
-                jobs.append(job)
-                logging.info(f" Scraped: {job['title']} ({' GOV' if is_gov else ' NON-GOV'}){' [PDF]' if pdf_info else ''}")
-
-        except Exception as e:
-            logging.warning(f" Failed to fetch from {site}: {e}")
-
-    return jobs
-
-def save_jobs(jobs):
-    """Save jobs to files and generate job_manifest.json."""
-    ensure_jobs_dir()
-    manifest = []
-    for job in jobs:
-        fname = slugify(job["title"])
-        try:
-            with open(os.path.join(JOBS_DIR, fname), "w", encoding="utf-8") as f:
-                json.dump(job, f, indent=2, ensure_ascii=False)
-            manifest.append(fname)
-            logging.info(f"🗂️ Saved: {fname}")
-        except Exception as e:
-            logging.error(f"❌ Could not save job '{job['title']}': {e}")
-
-    # Write manifest
-    try:
-        with open(os.path.join(JOBS_DIR, JOB_MANIFEST), "w", encoding="utf-8") as f:
-            json.dump(manifest, f, indent=2, ensure_ascii=False)
-        logging.info(f"🗂️ Updated {JOB_MANIFEST} with {len(manifest)} jobs.")
-    except Exception as e:
-        logging.error(f"❌ Could not write job manifest: {e}")
-
-def delete_expired_jobs():
-    """Delete jobs whose last_date has passed."""
-    ensure_jobs_dir()
-    today = date.today()
-    deleted = 0
-    for file in os.listdir(JOBS_DIR):
-        if not file.endswith(".json") or file == JOB_MANIFEST:
-            continue
-        path = os.path.join(JOBS_DIR, file)
-        try:
-            with open(path, encoding="utf-8") as f:
-                job = json.load(f)
-            last_date_str = job.get("last_date")
-            if last_date_str and last_date_str != "Not Specified":
-                try:
-                    last_date = dateparser.parse(last_date_str, dayfirst=True).date()
-                    if last_date < today:
-                        os.remove(path)
-                        deleted += 1
-                        logging.info(f"🗑️ Deleted expired job: {file}")
-                except Exception as e:
-                    logging.warning(f"❌ Invalid date in {file}: {last_date_str} ({e})")
-        except Exception as e:
-            logging.warning(f"❌ Error checking expiry for {file}: {e}")
-    if deleted:
-        logging.info(f"🧹 Deleted {deleted} expired jobs.")
-
-def escape_markdown(text):
-    # Escape Telegram Markdown special characters
-    if not text:
-        return ''
-    for ch in ('_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!'):
-        text = text.replace(ch, f'\\{ch}')
-    return text
-
-def send_telegram_notification(jobs):
-    """Send top 5 new jobs to Telegram group using Markdown. Includes title, deadline, summary, tags, and apply link."""
-    if not jobs:
-        logging.info("No jobs to notify on Telegram.")
+    if not all_scraped_jobs:
+        logger.warning("⚠️ WARNING: No jobs were scraped from any portal!")
+        logger.warning("This might be due to: Network issues, website blocking, or structural changes.")
+        metrics.note_pipeline_totals(new_jobs=0, duplicates=0, merged=0)
+        if not dry_run:
+            refresh_job_statuses()
+            update_seo_keywords()
+            _publish_detail_pages()
+        metrics.write_report()
+        print("\n" + "=" * 60)
+        print("📈 FINAL SUMMARY (No new jobs scraped)")
+        print("=" * 60)
+        final_manifest = load_manifest()
+        print(f"📊 Total active jobs in system: {final_manifest.get('active_jobs', 0)}")
+        print(f"🕒 Last updated: {final_manifest.get('last_updated', 'Unknown')}")
+        print("=" * 60)
+        if not dry_run:
+            # Honest failure (master plan Phase 7): zero jobs scraped from
+            # every portal means the pipeline is broken. Fail the run
+            # instead of silently pretending the site is up to date.
+            sys.exit(1)
         return
-    top_jobs = jobs[:5]
-    for job in top_jobs:
-        title = escape_markdown(job.get('title', 'New Job'))
-        deadline = job.get('last_date') or job.get('deadline') or ''
-        summary = escape_markdown(job.get('summary') or job.get('description', '')[:180])
-        tags = job.get('tags') or job.get('skills') or []
-        tags_str = ''
-        if tags and isinstance(tags, list):
-            tags_str = ' | '.join([escape_markdown(str(t)) for t in tags])
-        link = job.get('apply_link') or job.get('url') or ''
-        message = f"*{title}*"
-        if deadline:
-            message += f"\n🗓️ Deadline: {escape_markdown(deadline)}"
-        if summary:
-            message += f"\n{summary}"
-        if tags_str:
-            message += f"\n🏷️ {tags_str}"
-        if link:
-            message += f"\n[Apply Here]({link})"
-        payload = {
-            "chat_id": TELEGRAM_CHAT_ID,
-            "text": message,
-            "parse_mode": "MarkdownV2"
-        }
-        try:
-            resp = requests.post(f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage", json=payload, timeout=10)
-            if resp.status_code == 200:
-                logging.info(f"Telegram notification sent for: {title}")
-            else:
-                logging.warning(f"Failed to send Telegram notification: {resp.text}")
-        except Exception as e:
-            logging.error(f"Telegram notification error: {e}")
 
-# =======================
-# MAIN EXECUTION BLOCK
-# =======================
+    logger.info(f"\n🔍 Processing {len(all_scraped_jobs)} raw scraped jobs...")
+
+    duplicate_count = 0
+    merged_count = 0
+    rejected_unsafe = 0
+    merge_details = []
+    jobs_to_process = []
+    official_to_add = []
+
+    for job_candidate in all_scraped_jobs:
+        dup_reason = is_duplicate_job(job_candidate, existing_job_urls, existing_adv_keys, existing_td_keys)
+        if dup_reason:
+            duplicate_count += 1
+            logger.info(f"Duplicate ({dup_reason}): {job_candidate.get('title', '')[:60]}")
+
+            # Merge instead of dropping: fill only missing fields of the
+            # stored record, keep source attribution, apply deadline
+            # extensions (corrigendum rule).
+            idx = None
+            if dup_reason == 'same-url':
+                idx = existing['by_url'].get(job_candidate.get('url'))
+            elif dup_reason == 'same-advertisement':
+                idx = existing['by_adv'].get(advertisement_key(job_candidate))
+            elif dup_reason == 'same-title-date':
+                idx = existing['by_td'].get(title_date_key(job_candidate))
+            if idx is not None:
+                merged_job, filled = merge_job(manifest_jobs[idx], job_candidate, now=now)
+                if filled:
+                    manifest_jobs[idx] = merged_job
+                    merged_count += 1
+                    merge_details.append({
+                        'id': merged_job.get('id'),
+                        'title': merged_job.get('title'),
+                        'reason': dup_reason,
+                        'fields_filled': filled,
+                        'deadline_extended': bool(merged_job.get('deadline_extended')),
+                    })
+                    logger.info(f"  ↪ Merged {filled} missing field(s) into existing record")
+            existing_job_urls.add(job_candidate.get('url'))
+            continue
+        # Security: drop any record whose ID would be unsafe as a
+        # filesystem path component (jobs/<id>.json).
+        if not is_valid_job_id(job_candidate.get('id')):
+            logger.warning(f"⛔ Dropping scraped job with unsafe ID: {job_candidate.get('id')!r}")
+            rejected_unsafe += 1
+            continue
+        if job_candidate.get('source') == OFFICIAL_SOURCE_NAME:
+            # Official listing rows are already complete records.
+            official_to_add.append(job_candidate)
+        else:
+            jobs_to_process.append(job_candidate)
+        existing_job_urls.add(job_candidate['url'])
+        adv_key = advertisement_key(job_candidate)
+        if adv_key:
+            existing_adv_keys.add(adv_key)
+        td_key = title_date_key(job_candidate)
+        if td_key:
+            existing_td_keys.add(td_key)
+
+    # Official records are normalized immediately (no per-job fetch).
+    new_jobs_to_add = [normalize_job(j) for j in official_to_add]
+    for j in official_to_add:
+        metrics.record(j.get('source') or OFFICIAL_SOURCE_NAME, accepted=1)
+
+    if jobs_to_process:
+        logger.info(f"🔄 Concurrently processing {len(jobs_to_process)} unique jobs...")
+        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+            future_to_job = {executor.submit(process_job_content, job): job for job in jobs_to_process}
+
+            for future in concurrent.futures.as_completed(future_to_job):
+                job = future_to_job[future]
+                try:
+                    processed_job = future.result()
+                    new_jobs_to_add.append(normalize_job(processed_job))
+                    metrics.record(processed_job.get('source'), accepted=1)
+                except Exception as exc:
+                    metrics.record(job.get('source'), parser_errors=1)
+                    logger.error(f"❌ Job processing generated an exception for {job['url']}: {exc}")
+
+    logger.info(f"📊 Processing Summary:")
+    logger.info(f"  New unique jobs to save: {len(new_jobs_to_add)}")
+    logger.info(f"  Duplicates matched: {duplicate_count}")
+    logger.info(f"  Merged into existing records: {merged_count}")
+
+    manifest_dirty = merged_count > 0
+    metrics.note_pipeline_totals(
+        new_jobs=len(new_jobs_to_add),
+        duplicates=duplicate_count,
+        merged=merged_count,
+        rejected_unsafe_ids=rejected_unsafe,
+    )
+
+    if dry_run:
+        dry_report = {
+            'run_at': now,
+            'would_add': [
+                {'id': j.get('id'), 'title': j.get('title'), 'source': j.get('source')}
+                for j in new_jobs_to_add
+            ],
+            'would_merge': merge_details,
+            'duplicates_skipped': duplicate_count,
+            'rejected_unsafe_ids': rejected_unsafe,
+            'current_counters': count_statuses(manifest_jobs),
+        }
+        report = metrics.write_report()
+        report['dry_run'] = dry_report
+        try:
+            import json
+            with open(os.path.join('logs', 'dry_run_report.json'), 'w', encoding='utf-8') as f:
+                json.dump(report, f, indent=2, ensure_ascii=False)
+        except OSError as e:
+            logger.error(f"Failed to write dry-run report: {e}")
+        print("\n" + "=" * 60)
+        print("🧪 DRY RUN SUMMARY (no files were modified)")
+        print("=" * 60)
+        print(f"Would add: {len(new_jobs_to_add)} jobs")
+        print(f"Would merge: {merged_count} duplicates into existing records")
+        print(f"Duplicates matched: {duplicate_count}")
+        print(f"Rejected unsafe IDs: {rejected_unsafe}")
+        print(f"Full report: logs/dry_run_report.json")
+        print("=" * 60)
+        return
+
+    # Backup BEFORE any mutation (bulk changes must be reversible).
+    if new_jobs_to_add or manifest_dirty:
+        backup_manifest()
+
+    if new_jobs_to_add:
+        saved_count = save_jobs_to_files(new_jobs_to_add)
+        manifest['jobs'].extend(new_jobs_to_add)
+        manifest['last_updated'] = now
+        counters = count_statuses(manifest['jobs'])
+        manifest['total_jobs'] = counters['total_jobs']
+        manifest['active_jobs'] = counters['active_jobs']
+        manifest['expired_jobs'] = counters['expired_jobs']
+        save_manifest(manifest)
+
+        logger.info(f"\n✅ Successfully added {saved_count} new jobs to the system!")
+    elif manifest_dirty:
+        # Merges changed existing records: persist them too.
+        manifest['last_updated'] = now
+        save_manifest(manifest)
+        logger.info("\n♻️ No new jobs, but merged duplicate information into existing records.")
+    else:
+        logger.info("\n📋 No new unique jobs to add (all were duplicates or none found).")
+
+    status_result = refresh_job_statuses()
+    metrics.note_pipeline_totals(
+        expired_now=status_result.get('expired', 0),
+        archived_expired=status_result.get('archived', 0),
+    )
+    update_seo_keywords()
+    _publish_detail_pages()
+    metrics.write_report()
+
+    final_manifest = load_manifest()
+    print("\n" + "=" * 60)
+    print("📈 FINAL SYSTEM SUMMARY")
+    print("=" * 60)
+    print(f"✅ SarkariSarthi 2.0 Job Fetcher completed successfully!")
+    print(f"📊 Total active jobs currently in system: {final_manifest.get('active_jobs', 0)}")
+    print(f"📁 Jobs directory: {os.path.abspath(JOB_DIR)}")
+    print(f"📋 Manifest file: {os.path.abspath(MANIFEST_FILE)}")
+    print(f"🕒 Last updated: {final_manifest.get('last_updated', 'Unknown')}")
+    print("=" * 60)
+
+def test_single_site():
+    """Test function for debugging a single site."""
+    test_url = "https://www.freejobalert.com"
+    logger.info(f"🧪 Testing single site: {test_url}")
+
+    os.makedirs(JOB_DIR, exist_ok=True)
+    jobs = scrape_generic_job_site(test_url, "freejobalert_test")
+
+    if jobs:
+        logger.info(f"✅ Test successful! Found {len(jobs)} jobs (first 5 shown):")
+        for i, job in enumerate(jobs[:5], 1):
+            logger.info(f"  {i}. Title: {job['title'][:60]}... URL: {job['url']}")
+
+        processed_test_jobs = [process_job_content(job) for job in jobs[:5]]
+        save_jobs_to_files(processed_test_jobs)
+        return True
+    else:
+        logger.warning("❌ Test failed - no jobs found from the test site.")
+        return False
 
 if __name__ == "__main__":
-    logging.info("🔄 Starting job scraping...")
-    ensure_jobs_dir()
-    # Scrape official government portals
-    gov_jobs = fetch_govt_portal_jobs()
-    # Scrape private aggregator portals
-    private_jobs = fetch_private_portal_jobs()
-    # Combine and deduplicate jobs (by title+link hash)
-    all_jobs = {job_hash(j['title'], j.get('apply_link','')): j for j in gov_jobs + private_jobs}
-    jobs = list(all_jobs.values())
-    save_jobs(jobs)
-    delete_expired_jobs()
-    logging.info(f"✅ {len(jobs)} jobs scraped, saved, and cleaned.")
+    parser = argparse.ArgumentParser(description="SarkariSarthi job fetcher")
+    parser.add_argument('--dry-run', action='store_true',
+                        help='Report what would change without modifying any file')
+    args = parser.parse_args()
+    main(dry_run=args.dry_run)
