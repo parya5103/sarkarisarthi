@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.env
+*.log
+.venv/
+
+# Ignore everything in jobs/ folder
+jobs/*
+# But allow .json files and .gitkeep
+!jobs/*.json
+!jobs/.gitkeep
+node_modules/
+.coverage
