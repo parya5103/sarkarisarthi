@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-04T17:23:34.440979",
+  "last_updated": "2026-11-05T03:36:28.964368",
   "total_jobs": 24,
   "active_jobs": 12,
   "expired_jobs": 12,
@@ -46,9 +46,15 @@
       "official_website": null,
       "description_summary": null,
       "original_source_url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-e720d528a5699f9ac7d3cf27f799ce9c",
-      "last_verified": "2026-11-04T17:23:53.296350",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "active",
-      "verification_status": "official_verified"
+      "verification_status": "official_verified",
+      "source_refs": [
+        {
+          "source": "employmentnews.gov.in",
+          "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-e720d528a5699f9ac7d3cf27f799ce9c"
+        }
+      ]
     },
     {
       "id": "en_214e74070f15cf22b137f10a8019fbe1",
@@ -92,9 +98,15 @@
       "official_website": null,
       "description_summary": null,
       "original_source_url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-214e74070f15cf22b137f10a8019fbe1",
-      "last_verified": "2026-11-04T17:23:53.296350",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "active",
-      "verification_status": "official_verified"
+      "verification_status": "official_verified",
+      "source_refs": [
+        {
+          "source": "employmentnews.gov.in",
+          "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-214e74070f15cf22b137f10a8019fbe1"
+        }
+      ]
     },
     {
       "id": "75144c1ed508b58fd3edf925386919b6",
@@ -135,9 +147,15 @@
       "description_summary": null,
       "published_date": null,
       "original_source_url": "https://allgovernmentjobs.in/iit-gandhinagar-notification-2026-apply-online-for-project-associate-ii-posts/45096",
-      "last_verified": "2026-11-04T17:23:40.094438",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/iit-gandhinagar-notification-2026-apply-online-for-project-associate-ii-posts/45096"
+        }
+      ]
     },
     {
       "id": "c2ecb4eed01d98f248338f221a4c14e9",
@@ -180,9 +198,15 @@
       "description_summary": null,
       "published_date": null,
       "original_source_url": "https://allgovernmentjobs.in/icmr-nirrch-notification-2026-walk-in-interview-for-various-staff-nurse-posts/45097",
-      "last_verified": "2026-11-04T17:23:40.094389",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/icmr-nirrch-notification-2026-walk-in-interview-for-various-staff-nurse-posts/45097"
+        }
+      ]
     },
     {
       "id": "e121a3a4a6263852a6f093999b9601cc",
@@ -223,9 +247,15 @@
       "description_summary": null,
       "published_date": null,
       "original_source_url": "https://allgovernmentjobs.in/ils-notification-2026-apply-online-for-17-junior-research-fellow-posts/44764",
-      "last_verified": "2026-11-04T17:23:40.094549",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/ils-notification-2026-apply-online-for-17-junior-research-fellow-posts/44764"
+        }
+      ]
     },
     {
       "id": "f8c554b083eba55a1da24b19a16a69d5",
@@ -266,9 +296,15 @@
       "description_summary": null,
       "published_date": null,
       "original_source_url": "https://allgovernmentjobs.in/angrau-notification-2026-walk-in-interview-for-various-teaching-associate-posts/45094",
-      "last_verified": "2026-11-04T17:23:40.094518",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/angrau-notification-2026-walk-in-interview-for-various-teaching-associate-posts/45094"
+        }
+      ]
     },
     {
       "id": "6c2167d7759fab998916f7083fc546ab",
@@ -309,9 +345,15 @@
       "description_summary": null,
       "published_date": null,
       "original_source_url": "https://allgovernmentjobs.in/iit-bhilai-notification-2026-apply-online-for-various-project-engineer-posts/45095",
-      "last_verified": "2026-11-04T17:23:40.094471",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/iit-bhilai-notification-2026-apply-online-for-various-project-engineer-posts/45095"
+        }
+      ]
     },
     {
       "id": "34bba3cc5ab96c1174596c0294ef5b85",
@@ -352,9 +394,15 @@
       "description_summary": null,
       "published_date": null,
       "original_source_url": "https://allgovernmentjobs.in/nhm-thiruvananthapuram-notification-2026-apply-online-for-02-public-relations-officer-posts/45091",
-      "last_verified": "2026-11-04T17:23:40.094607",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/nhm-thiruvananthapuram-notification-2026-apply-online-for-02-public-relations-officer-posts/45091"
+        }
+      ]
     },
     {
       "id": "cc093db6fa75d681ec53eb2c2b1706d4",
@@ -395,9 +443,15 @@
       "description_summary": null,
       "published_date": null,
       "original_source_url": "https://allgovernmentjobs.in/aiims-delhi-recruitment-2026-apply-offline-for-05-project-research-scientist-project-technical-support-and-project-nurse-posts/45092",
-      "last_verified": "2026-11-04T17:23:40.100642",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/aiims-delhi-recruitment-2026-apply-offline-for-05-project-research-scientist-project-technical-support-and-project-nurse-posts/45092"
+        }
+      ]
     },
     {
       "id": "b1ad3fb3ecc5671116a91b68091b0ccd",
@@ -438,9 +492,15 @@
       "description_summary": null,
       "published_date": null,
       "original_source_url": "https://allgovernmentjobs.in/csir-imtech-notification-2026-apply-online-for-various-project-associate-i-posts/45093",
-      "last_verified": "2026-11-04T17:23:40.094579",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/csir-imtech-notification-2026-apply-online-for-various-project-associate-i-posts/45093"
+        }
+      ]
     },
     {
       "id": "c112051c3d94b7b4421fa7dbf1b87c7c",
@@ -481,9 +541,15 @@
       "description_summary": null,
       "published_date": null,
       "original_source_url": "https://allgovernmentjobs.in/echs-missamari-notification-2026-apply-offline-for-02-medical-officer-and-nursing-assistant-posts/45090",
-      "last_verified": "2026-11-04T17:23:40.094635",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/echs-missamari-notification-2026-apply-offline-for-02-medical-officer-and-nursing-assistant-posts/45090"
+        }
+      ]
     },
     {
       "id": "400c7de3a8e0fc1e2c61f2e34f2d9a18",
@@ -525,9 +591,15 @@
       "description_summary": null,
       "published_date": null,
       "original_source_url": "https://allgovernmentjobs.in/nit-silchar-notification-2026-apply-for-various-project-associate-posts/45089",
-      "last_verified": "2026-11-04T17:23:40.094663",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/nit-silchar-notification-2026-apply-for-various-project-associate-posts/45089"
+        }
+      ]
     },
     {
       "id": "en_264d36e68bccce8acf9b42d6ba5c02be",
@@ -571,9 +643,15 @@
       "official_website": null,
       "description_summary": null,
       "original_source_url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-264d36e68bccce8acf9b42d6ba5c02be",
-      "last_verified": "2026-11-04T17:23:53.296350",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "source_refs": [
+        {
+          "source": "employmentnews.gov.in",
+          "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-264d36e68bccce8acf9b42d6ba5c02be"
+        }
+      ]
     },
     {
       "id": "en_98a03bb95fe6fe8d36c42b7939990e70",
@@ -617,9 +695,15 @@
       "official_website": null,
       "description_summary": null,
       "original_source_url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-98a03bb95fe6fe8d36c42b7939990e70",
-      "last_verified": "2026-11-04T17:23:53.296350",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "source_refs": [
+        {
+          "source": "employmentnews.gov.in",
+          "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-98a03bb95fe6fe8d36c42b7939990e70"
+        }
+      ]
     },
     {
       "id": "en_2e208af30415739e7324015cad693232",
@@ -663,9 +747,15 @@
       "official_website": null,
       "description_summary": null,
       "original_source_url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-2e208af30415739e7324015cad693232",
-      "last_verified": "2026-11-04T17:23:53.296350",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "source_refs": [
+        {
+          "source": "employmentnews.gov.in",
+          "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-2e208af30415739e7324015cad693232"
+        }
+      ]
     },
     {
       "id": "en_bbc831e52d65b2d44d2312dcd3132513",
@@ -709,9 +799,15 @@
       "official_website": null,
       "description_summary": null,
       "original_source_url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-bbc831e52d65b2d44d2312dcd3132513",
-      "last_verified": "2026-11-04T17:23:53.296350",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "source_refs": [
+        {
+          "source": "employmentnews.gov.in",
+          "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-bbc831e52d65b2d44d2312dcd3132513"
+        }
+      ]
     },
     {
       "id": "en_209b39efe0087a64e918c6ebea47ea66",
@@ -755,9 +851,15 @@
       "official_website": null,
       "description_summary": null,
       "original_source_url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-209b39efe0087a64e918c6ebea47ea66",
-      "last_verified": "2026-11-04T17:23:53.296350",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "source_refs": [
+        {
+          "source": "employmentnews.gov.in",
+          "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-209b39efe0087a64e918c6ebea47ea66"
+        }
+      ]
     },
     {
       "id": "en_a4e66c10b7679cc10053aedecae7d919",
@@ -801,9 +903,15 @@
       "official_website": null,
       "description_summary": null,
       "original_source_url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-a4e66c10b7679cc10053aedecae7d919",
-      "last_verified": "2026-11-04T17:23:53.296350",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "source_refs": [
+        {
+          "source": "employmentnews.gov.in",
+          "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-a4e66c10b7679cc10053aedecae7d919"
+        }
+      ]
     },
     {
       "id": "en_d09137ee1e50437d18cdc150bdaa15b1",
@@ -847,9 +955,15 @@
       "official_website": null,
       "description_summary": null,
       "original_source_url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-d09137ee1e50437d18cdc150bdaa15b1",
-      "last_verified": "2026-11-04T17:23:53.296350",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "source_refs": [
+        {
+          "source": "employmentnews.gov.in",
+          "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-d09137ee1e50437d18cdc150bdaa15b1"
+        }
+      ]
     },
     {
       "id": "en_25ff5b613af1301d9f3aaa797c4b3f24",
@@ -893,9 +1007,15 @@
       "official_website": null,
       "description_summary": null,
       "original_source_url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-25ff5b613af1301d9f3aaa797c4b3f24",
-      "last_verified": "2026-11-04T17:23:53.296350",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "source_refs": [
+        {
+          "source": "employmentnews.gov.in",
+          "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-25ff5b613af1301d9f3aaa797c4b3f24"
+        }
+      ]
     },
     {
       "id": "en_c83bdba350a53e4273d8aef1248a55ac",
@@ -939,9 +1059,15 @@
       "official_website": null,
       "description_summary": null,
       "original_source_url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-c83bdba350a53e4273d8aef1248a55ac",
-      "last_verified": "2026-11-04T17:23:53.296350",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "source_refs": [
+        {
+          "source": "employmentnews.gov.in",
+          "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-c83bdba350a53e4273d8aef1248a55ac"
+        }
+      ]
     },
     {
       "id": "en_94d36acc5067aea5e1123e3064d1f915",
@@ -985,9 +1111,15 @@
       "official_website": null,
       "description_summary": null,
       "original_source_url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-94d36acc5067aea5e1123e3064d1f915",
-      "last_verified": "2026-11-04T17:23:53.296350",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "source_refs": [
+        {
+          "source": "employmentnews.gov.in",
+          "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-94d36acc5067aea5e1123e3064d1f915"
+        }
+      ]
     },
     {
       "id": "en_d47a229757c22f56386508abf2694856",
@@ -1031,9 +1163,15 @@
       "official_website": null,
       "description_summary": null,
       "original_source_url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-d47a229757c22f56386508abf2694856",
-      "last_verified": "2026-11-04T17:23:53.296350",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "source_refs": [
+        {
+          "source": "employmentnews.gov.in",
+          "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-d47a229757c22f56386508abf2694856"
+        }
+      ]
     },
     {
       "id": "en_1b247f689b99487eadf48ea012547ce1",
@@ -1077,9 +1215,15 @@
       "official_website": null,
       "description_summary": null,
       "original_source_url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-1b247f689b99487eadf48ea012547ce1",
-      "last_verified": "2026-11-04T17:23:53.296350",
+      "last_verified": "2026-11-05T03:36:28.964368",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "source_refs": [
+        {
+          "source": "employmentnews.gov.in",
+          "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-1b247f689b99487eadf48ea012547ce1"
+        }
+      ]
     }
   ]
 }
