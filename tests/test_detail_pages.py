@@ -58,7 +58,7 @@ class TestJobPostingJsonld:
         assert job_posting_jsonld(job, detail_url(job['id'])) is None
 
     def test_missing_required_job_posting_facts_suppress_rich_result(self):
-        for missing in ('published_date', 'date_posted_verified', 'job_title', 'description_complete', 'organization', 'location', 'country', 'official_notification_url'):
+        for missing in ('verification_status', 'published_date', 'date_posted_verified', 'job_title', 'description_complete', 'organization', 'location', 'country', 'official_notification_url'):
             job = sample_job(**{missing: None})
             assert job_posting_jsonld(job, detail_url(job['id'])) is None
 
