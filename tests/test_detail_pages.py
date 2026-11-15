@@ -294,5 +294,5 @@ class TestVerificationChip:
         assert 'job-verification' not in page
 
     def test_missing_status_gets_no_chip(self):
-        page = render_detail_page(sample_job(), [])
+        page = render_detail_page(sample_job(verification_status=None), [])
         assert 'job-verification' not in page
