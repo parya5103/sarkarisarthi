@@ -69,57 +69,87 @@ def _iso_date(value):
 
 
 def job_posting_jsonld(job, page_url):
-    """JobPosting structured data, verified fields only.
+    """Build Google JobPosting JSON-LD only from complete, explicitly verified facts.
 
-    None for closed (expired/cancelled) vacancies: they are no longer
-    open for application and must not produce rich results.
+    A scraped headline or excerpt is not necessarily the employer's job title
+    or full description. The separate verification flags are required so
+    partial aggregator data never becomes misleading Google Jobs markup.
     """
     status = str(job.get('status') or '').lower()
     if status in CLOSED_STATUSES:
         return None
+
     dates = job.get('important_dates') or {}
     last_iso = _iso_date(dates.get('last_date') or job.get('last_date'))
     published_iso = _iso_date(job.get('published_date'))
     organization = str(job.get('organization') or '').strip()
+    job_title = str(job.get('job_title') or '').strip()
+    description = str(job.get('description') or '').strip()
     location = str(job.get('location') or '').strip()
     country = str(job.get('country') or '').strip()
-    employment_type = str(job.get('employment_type') or '').lower()
-    remote = 'remote' in employment_type
+    work_mode = str(job.get('work_mode') or '').strip().lower()
+    remote = work_mode == 'fully_remote'
 
-    # Google JobPosting rich results require an original posting date,
-    # a real hiring organization and either a physical work location
-    # or a clearly identified fully-remote arrangement. Do not emit
-    # partial markup for scraped records with unknown required facts.
-    if not published_iso or not organization or not country:
+    # Required facts must be explicit and verified from the employer's
+    # notification: original posting date, job-only title, complete
+    # description, hiring organisation, country and apply/notification path.
+    if (not published_iso or job.get('date_posted_verified') is not True
+            or not job_title or job.get('description_complete') is not True
+            or not organization or not country
+            or not (job.get('official_application_url') or job.get('official_notification_url'))):
         return None
-    if not remote and not location:
+    if not remote and (not location or location.lower() in {
+        'all india', 'india', 'pan india', 'nationwide'
+    }):
+        return None
+    if len(description) < 100 or description.lower() == job_title.lower():
+        return None
+    if description.rstrip().endswith(('...', '…')):
         return None
 
-    description = str(job.get('description') or '').strip()
-    title = str(job.get('title') or '').strip()
-    if (not title or len(description) < 100 or description.lower() == title.lower()
-            or description.rstrip().endswith(('...', '…'))):
+    description_html = ''.join(
+        '<p>' + html.escape(part.strip()) + '</p>'
+        for part in description.splitlines() if part.strip()
+    )
+    if not description_html:
         return None
 
     data = {
         '@context': 'https://schema.org',
         '@type': 'JobPosting',
-        'title': title,
-        'description': description,
+        'title': job_title,
+        'description': description_html,
         'datePosted': published_iso,
         'url': page_url,
-        'identifier': {'@type': 'PropertyValue', 'value': job.get('id')},
         'hiringOrganization': {
             '@type': 'Organization',
             'name': organization,
         },
     }
+
+    advertisement_no = str(job.get('advertisement_no') or '').strip()
+    if advertisement_no:
+        data['identifier'] = {
+            '@type': 'PropertyValue',
+            'name': organization,
+            'value': advertisement_no,
+        }
+
     if remote:
         data['jobLocationType'] = 'TELECOMMUTE'
         data['applicantLocationRequirements'] = {
             '@type': 'Country',
             'name': country,
         }
+        if location:
+            address = {
+                '@type': 'PostalAddress',
+                'addressLocality': location,
+                'addressCountry': country,
+            }
+            if job.get('state'):
+                address['addressRegion'] = job['state']
+            data['jobLocation'] = {'@type': 'Place', 'address': address}
     else:
         address = {
             '@type': 'PostalAddress',
@@ -128,16 +158,19 @@ def job_posting_jsonld(job, page_url):
         }
         if job.get('state'):
             address['addressRegion'] = job['state']
-        data['jobLocation'] = {
-            '@type': 'Place',
-            'address': address,
-        }
+        data['jobLocation'] = {'@type': 'Place', 'address': address}
+
     if last_iso:
         data['validThrough'] = last_iso + 'T23:59:59'
-    if job.get('official_application_url'):
-        data['directApply'] = True
-    if job.get('employment_type'):
-        data['employmentType'] = job['employment_type']
+
+    allowed_employment_types = {
+        'FULL_TIME', 'PART_TIME', 'CONTRACTOR', 'TEMPORARY',
+        'INTERN', 'VOLUNTEER', 'PER_DIEM', 'OTHER',
+    }
+    employment_type = str(job.get('employment_type') or '').strip().upper()
+    employment_type = employment_type.replace('-', '_').replace(' ', '_')
+    if employment_type in allowed_employment_types:
+        data['employmentType'] = employment_type
     return data
 
 
@@ -196,6 +229,8 @@ def render_detail_page(job, related):
     if job.get('department'):
         rows.append(_info_row('Department', job['department']))
     rows.append(_info_row('Category', job.get('category') or 'General'))
+    if job.get('job_title'):
+        rows.append(_info_row('Job Title', job['job_title']))
     if job.get('vacancies'):
         rows.append(_info_row('Vacancies', job['vacancies']))
     if job.get('qualification'):
