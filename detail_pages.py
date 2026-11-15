@@ -106,6 +106,10 @@ def job_posting_jsonld(job, page_url):
         return None
     if description.rstrip().endswith(('...', '…')):
         return None
+    if remote and not any(phrase in description.lower() for phrase in (
+        'fully remote', '100% remote', 'work from home', 'work-from-home', 'remote work'
+    )):
+        return None
 
     description_html = ''.join(
         '<p>' + html.escape(part.strip()) + '</p>'
