@@ -48,7 +48,7 @@ DATE_FORMATS = ('%d-%m-%Y', '%d/%m/%Y', '%Y-%m-%d', '%d %b %Y', '%d %B %Y')
 OFFICIAL_DOMAIN_SUFFIXES = ('.gov.in', '.nic.in')
 
 OPTIONAL_TEXT_FIELDS = (
-    'organization', 'department', 'recruitment_board', 'location',
+    'organization', 'department', 'recruitment_board', 'location', 'country',
     'state', 'district', 'vacancies', 'advertisement_no',
     'qualification', 'minimum_qualification', 'age_limit',
     'age_min', 'age_max', 'age_relaxation', 'salary', 'pay_scale',
