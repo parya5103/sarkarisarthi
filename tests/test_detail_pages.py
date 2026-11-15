@@ -59,8 +59,7 @@ class TestJobPostingJsonld:
         ld = job_posting_jsonld(job, detail_url(job['id']))
         assert ld['jobLocationType'] == 'TELECOMMUTE'
         assert ld['applicantLocationRequirements']['name'] == 'India'
-        assert ld['jobLocation']['address']['addressCountry'] == 'India'
-        assert 'streetAddress' not in ld['jobLocation']['address']
+        assert 'jobLocation' not in ld
 
     def test_no_valid_through_without_last_date(self):
         job = sample_job(important_dates={'found_date': '02-11-2026'})
@@ -75,7 +74,7 @@ class TestJobPostingJsonld:
     def test_no_invented_salary_or_location(self):
         ld = job_posting_jsonld(sample_job(), detail_url('en_sample1'))
         assert 'baseSalary' not in ld
-        assert 'jobLocation' not in ld
+        assert 'streetAddress' not in ld['jobLocation']['address']
 
     def test_none_when_title_or_description_missing(self):
         assert job_posting_jsonld({'id': 'x'}, 'u') is None
