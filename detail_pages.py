@@ -265,7 +265,7 @@ def render_detail_page(job, related):
 <header class="header">
 <nav class="navbar"><div class="nav-container">
 <div class="nav-logo"><a href="/sarkari-sarthi/" style="text-decoration:none;color:inherit;">
-<img src="/sarkari-sarthi/ai-powered-icon.png" alt="SarkariSarthi logo" class="logo-icon">
+<img src="/sarkari-sarthi/ai-powered-icon.png" alt="Sarkari Sarthi logo" class="logo-icon">
 <span class="logo-text">Sarkari Sarthi</span></a></div>
 </div></nav>
 </header>
