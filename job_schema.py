@@ -47,8 +47,10 @@ DATE_FORMATS = ('%d-%m-%Y', '%d/%m/%Y', '%Y-%m-%d', '%d %b %Y', '%d %B %Y')
 # Indian government domains: data from these sources is official.
 OFFICIAL_DOMAIN_SUFFIXES = ('.gov.in', '.nic.in')
 
+OPTIONAL_BOOL_FIELDS = ('description_complete', 'date_posted_verified')
+
 OPTIONAL_TEXT_FIELDS = (
-    'organization', 'department', 'recruitment_board', 'location', 'country',
+    'organization', 'department', 'recruitment_board', 'job_title', 'work_mode', 'location', 'country',
     'state', 'district', 'vacancies', 'advertisement_no',
     'qualification', 'minimum_qualification', 'age_limit',
     'age_min', 'age_max', 'age_relaxation', 'salary', 'pay_scale',
@@ -58,7 +60,7 @@ OPTIONAL_TEXT_FIELDS = (
 )
 
 # Fields a merged-in duplicate candidate may fill when missing.
-MERGEABLE_FIELDS = OPTIONAL_TEXT_FIELDS + ('description',)
+MERGEABLE_FIELDS = OPTIONAL_TEXT_FIELDS + OPTIONAL_BOOL_FIELDS + ('description',)
 
 
 def parse_date(value):
@@ -225,6 +227,9 @@ def normalize_job(job, now=None):
     normalized['important_dates'] = dates
 
     for field in OPTIONAL_TEXT_FIELDS:
+        if normalized.get(field) in (None, ''):
+            normalized[field] = None
+    for field in OPTIONAL_BOOL_FIELDS:
         if normalized.get(field) in (None, ''):
             normalized[field] = None
 
