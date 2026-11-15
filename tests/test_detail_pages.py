@@ -10,11 +10,18 @@ from detail_pages import (
 def sample_job(job_id='en_sample1', **overrides):
     job = {
         'id': job_id,
-        'title': 'TGT Computer Science - Sainik School Nagrota',
+        'title': 'Sainik School Nagrota Recruitment 2026 - Apply Online',
+        'job_title': 'Trained Graduate Teacher - Computer Science',
         'organization': 'SAINIK SCHOOL NAGROTA',
         'location': 'Nagrota',
         'state': 'Himachal Pradesh',
         'country': 'India',
+        'work_mode': 'onsite',
+        'description_complete': True,
+        'date_posted_verified': True,
+        'official_notification_url': 'https://example.gov.in/notice.pdf',
+        'advertisement_no': 'SSN-2026-01',
+        'employment_type': 'FULL_TIME',
         'url': 'https://example.gov.in/job/1',
         'source': 'employmentnews.gov.in',
         'description': 'Sainik School Nagrota invites eligible candidates to apply for a teaching position. The notification describes the role, required qualifications, selection process and application instructions. Candidates should review the official notification and confirm all details before applying.',
@@ -35,7 +42,11 @@ class TestJobPostingJsonld:
         job = sample_job()
         ld = job_posting_jsonld(job, detail_url(job['id']))
         assert ld['@type'] == 'JobPosting'
-        assert ld['title'] == job['title']
+        assert ld['title'] == job['job_title']
+        assert '<p>' in ld['description'] and '</p>' in ld['description']
+        assert ld['identifier']['value'] == 'SSN-2026-01'
+        assert ld['employmentType'] == 'FULL_TIME'
+        assert 'directApply' not in ld
         assert ld['validThrough'].startswith('2026-11-21T23:59')
         assert ld['hiringOrganization']['name'] == 'SAINIK SCHOOL NAGROTA'
         assert ld['datePosted'] == '2026-11-02'
@@ -46,7 +57,7 @@ class TestJobPostingJsonld:
         assert job_posting_jsonld(job, detail_url(job['id'])) is None
 
     def test_missing_required_job_posting_facts_suppress_rich_result(self):
-        for missing in ('published_date', 'organization', 'location', 'country'):
+        for missing in ('published_date', 'date_posted_verified', 'job_title', 'description_complete', 'organization', 'location', 'country', 'official_notification_url'):
             job = sample_job(**{missing: None})
             assert job_posting_jsonld(job, detail_url(job['id'])) is None
 
@@ -58,12 +69,25 @@ class TestJobPostingJsonld:
         assert 'streetAddress' not in ld['jobLocation']['address']
 
     def test_remote_job_uses_remote_location_requirements(self):
-        job = sample_job(employment_type='Remote')
+        job = sample_job(work_mode='fully_remote', employment_type='FULL_TIME')
         job['location'] = None
         ld = job_posting_jsonld(job, detail_url(job['id']))
         assert ld['jobLocationType'] == 'TELECOMMUTE'
         assert ld['applicantLocationRequirements']['name'] == 'India'
         assert 'jobLocation' not in ld
+
+    def test_schema_uses_explicit_job_title_and_full_description(self):
+        job = sample_job(title='Long recruitment announcement title', job_title='Assistant Teacher')
+        ld = job_posting_jsonld(job, detail_url(job['id']))
+        assert ld['title'] == 'Assistant Teacher'
+        assert 'Long recruitment announcement title' not in ld['title']
+        assert ld['description'].startswith('<p>')
+
+    def test_unverified_or_unknown_employment_type_is_not_marked_up(self):
+        job = sample_job(employment_type='Permanent')
+        ld = job_posting_jsonld(job, detail_url(job['id']))
+        assert 'employmentType' not in ld
+        assert 'directApply' not in ld
 
     def test_no_valid_through_without_last_date(self):
         job = sample_job(important_dates={'found_date': '02-11-2026'})
