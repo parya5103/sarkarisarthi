@@ -42,7 +42,7 @@ class TestJobPostingJsonld:
 
 
     def test_truncated_summary_suppresses_job_posting_rich_result(self):
-        job = sample_job(description='This is a long-looking but incomplete summary that ends mid-sentence...')
+        job = sample_job(description='A detailed recruitment summary with role responsibilities, required qualifications, selection process and application instructions for candidates who meet the published criteria...')
         assert job_posting_jsonld(job, detail_url(job['id'])) is None
 
     def test_missing_required_job_posting_facts_suppress_rich_result(self):
