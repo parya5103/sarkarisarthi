@@ -17,7 +17,7 @@ def sample_job(job_id='en_sample1', **overrides):
         'country': 'India',
         'url': 'https://example.gov.in/job/1',
         'source': 'employmentnews.gov.in',
-        'description': 'Official listing for a teaching post.',
+        'description': 'Sainik School Nagrota invites eligible candidates to apply for a teaching position. The notification describes the role, required qualifications, selection process and application instructions. Candidates should review the official notification and confirm all details before applying.',
         'important_dates': {'last_date': '21-11-2026', 'found_date': '02-11-2026'},
         'published_date': '02-11-2026',
         'category': 'Teaching',
@@ -59,7 +59,8 @@ class TestJobPostingJsonld:
         ld = job_posting_jsonld(job, detail_url(job['id']))
         assert ld['jobLocationType'] == 'TELECOMMUTE'
         assert ld['applicantLocationRequirements']['name'] == 'India'
-        assert 'jobLocation' not in ld
+        assert ld['jobLocation']['address']['addressCountry'] == 'India'
+        assert 'streetAddress' not in ld['jobLocation']['address']
 
     def test_no_valid_through_without_last_date(self):
         job = sample_job(important_dates={'found_date': '02-11-2026'})
@@ -69,7 +70,7 @@ class TestJobPostingJsonld:
     def test_no_organization_without_verified_org(self):
         job = sample_job(organization=None)
         ld = job_posting_jsonld(job, detail_url(job['id']))
-        assert 'hiringOrganization' not in ld
+        assert ld is None
 
     def test_no_invented_salary_or_location(self):
         ld = job_posting_jsonld(sample_job(), detail_url('en_sample1'))
@@ -95,7 +96,7 @@ class TestRenderDetailPage:
         assert '&lt;script&gt;' in page
 
     def test_jsonld_script_injection_escaped(self):
-        job = sample_job(title='X Job', description='Y </script><script>alert(1)</script>')
+        job = sample_job(title='X Job', description='Y </script><script>alert(1)</script> This notification describes the role, required qualifications, selection process and application instructions for eligible candidates.')
         page = render_detail_page(job, [])
         assert '</script><script>' not in page
         assert 'u003c' in page
