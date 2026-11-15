@@ -114,6 +114,15 @@ class TestJobPostingJsonld:
 
 
 class TestRenderDetailPage:
+    def test_job_detail_search_title_is_concise_and_full_heading_is_preserved(self):
+        job = sample_job(title='DHFWS Rampurhat Notification 2026 - Apply Online for Various Community Health Assistant Posts')
+        page = render_detail_page(job, [])
+        title = page.split('<title>', 1)[1].split('</title>', 1)[0]
+        assert len(title) <= 60
+        assert 'Trained Graduate Teacher - Computer Science' in page
+        assert '<meta property="og:title"' in page
+        assert '<meta name="twitter:title"' in page
+
     def test_contains_canonical_and_breadcrumb(self):
         job = sample_job()
         page = render_detail_page(job, [])
