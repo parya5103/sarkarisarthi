@@ -32,6 +32,7 @@ def sample_job(job_id='en_sample1', **overrides):
         'scraped_at': '2026-11-03T10:00:00',
         'last_verified': '2026-11-03T10:00:00',
         'status': 'active',
+        'verification_status': 'official_verified',
     }
     job.update(overrides)
     return job
@@ -184,6 +185,13 @@ class TestClosedJobHandling:
             assert 'Sarkari Sarthi' in page
             assert 'SarkariSarthi 2.0' not in page
 
+    def test_unverified_job_pages_are_noindex_until_officially_backed(self):
+        for verification_status in ('secondary_source_only', 'official_link_pending', 'needs_review'):
+            page = render_detail_page(
+                sample_job(verification_status=verification_status), []
+            )
+            assert '<meta name="robots" content="noindex,follow">' in page
+
     def test_active_job_pages_remain_indexable_by_default(self):
         page = render_detail_page(sample_job(status='active'), [])
         assert 'name="robots" content="noindex' not in page
@@ -197,6 +205,18 @@ class TestClosedJobHandling:
     def test_cancelled_banner_on_detail_page(self):
         page = render_detail_page(sample_job(status='cancelled'), [])
         assert 'marked cancelled' in page
+
+    def test_sitemap_excludes_unverified_job_pages(self, tmp_path):
+        verified = sample_job('en_verified1')
+        unverified = sample_job(
+            'en_unverified1',
+            verification_status='secondary_source_only',
+        )
+        write_detail_pages([verified, unverified], out_root=str(tmp_path))
+        sitemap = (tmp_path / SITEMAP_FILE).read_text(encoding='utf-8')
+        assert detail_url('en_verified1') in sitemap
+        assert detail_url('en_unverified1') not in sitemap
+        assert (tmp_path / 'job' / 'en_unverified1' / 'index.html').exists()
 
     def test_sitemap_excludes_closed_jobs(self, tmp_path):
         active = sample_job('en_open1')
