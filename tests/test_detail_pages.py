@@ -41,6 +41,10 @@ class TestJobPostingJsonld:
         assert ld['datePosted'] == '2026-11-02'
 
 
+    def test_truncated_summary_suppresses_job_posting_rich_result(self):
+        job = sample_job(description='This is a long-looking but incomplete summary that ends mid-sentence...')
+        assert job_posting_jsonld(job, detail_url(job['id'])) is None
+
     def test_missing_required_job_posting_facts_suppress_rich_result(self):
         for missing in ('published_date', 'organization', 'location', 'country'):
             job = sample_job(**{missing: None})
