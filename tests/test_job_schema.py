@@ -483,3 +483,13 @@ class TestStorageStatusRefresh:
         storage.backup_manifest(now=date(2026, 11, 3))
         backups = list((job_dir / 'backup').glob('manifest_backup_*.json'))
         assert len(backups) == 1
+
+
+
+class TestStructuredDataEligibilityFields:
+    def test_missing_rich_result_verification_flags_remain_unknown(self):
+        normalized = normalize_job(base_job())
+        assert normalized['job_title'] is None
+        assert normalized['work_mode'] is None
+        assert normalized['description_complete'] is None
+        assert normalized['date_posted_verified'] is None
