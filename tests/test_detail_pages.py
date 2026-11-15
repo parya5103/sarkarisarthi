@@ -12,6 +12,9 @@ def sample_job(job_id='en_sample1', **overrides):
         'id': job_id,
         'title': 'TGT Computer Science - Sainik School Nagrota',
         'organization': 'SAINIK SCHOOL NAGROTA',
+        'location': 'Nagrota',
+        'state': 'Himachal Pradesh',
+        'country': 'India',
         'url': 'https://example.gov.in/job/1',
         'source': 'employmentnews.gov.in',
         'description': 'Official listing for a teaching post.',
@@ -36,6 +39,27 @@ class TestJobPostingJsonld:
         assert ld['validThrough'].startswith('2026-11-21T23:59')
         assert ld['hiringOrganization']['name'] == 'SAINIK SCHOOL NAGROTA'
         assert ld['datePosted'] == '2026-11-02'
+
+
+    def test_missing_required_job_posting_facts_suppress_rich_result(self):
+        for missing in ('published_date', 'organization', 'location', 'country'):
+            job = sample_job(**{missing: None})
+            assert job_posting_jsonld(job, detail_url(job['id'])) is None
+
+    def test_physical_location_is_structured_without_invented_address_parts(self):
+        ld = job_posting_jsonld(sample_job(), detail_url('en_sample1'))
+        assert ld['jobLocation']['address']['addressLocality'] == 'Nagrota'
+        assert ld['jobLocation']['address']['addressRegion'] == 'Himachal Pradesh'
+        assert ld['jobLocation']['address']['addressCountry'] == 'India'
+        assert 'streetAddress' not in ld['jobLocation']['address']
+
+    def test_remote_job_uses_remote_location_requirements(self):
+        job = sample_job(employment_type='Remote')
+        job['location'] = None
+        ld = job_posting_jsonld(job, detail_url(job['id']))
+        assert ld['jobLocationType'] == 'TELECOMMUTE'
+        assert ld['applicantLocationRequirements']['name'] == 'India'
+        assert 'jobLocation' not in ld
 
     def test_no_valid_through_without_last_date(self):
         job = sample_job(important_dates={'found_date': '02-11-2026'})
