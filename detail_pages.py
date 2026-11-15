@@ -191,8 +191,9 @@ def render_detail_page(job, related):
     title = _esc(job.get('title') or 'Government Job Notification')
     org = job.get('organization')
     status = str(job.get('status') or 'active').lower()
-    robots_meta = ('<meta name="robots" content="noindex,follow">'
-                   if status in CLOSED_STATUSES else '')
+    verification_status = str(job.get('verification_status') or '').lower()
+    indexable = status not in CLOSED_STATUSES and verification_status == 'official_verified'
+    robots_meta = '' if indexable else '<meta name="robots" content="noindex,follow">'
 
     meta_source = (job.get('description') or job.get('title') or 'Government job notification.')
     meta_desc = _esc(meta_source[:157] + '...' if len(meta_source) > 160 else meta_source)
