@@ -69,7 +69,7 @@ class TestJobPostingJsonld:
         assert 'streetAddress' not in ld['jobLocation']['address']
 
     def test_remote_job_uses_remote_location_requirements(self):
-        job = sample_job(work_mode='fully_remote', employment_type='FULL_TIME')
+        job = sample_job(work_mode='fully_remote', employment_type='FULL_TIME', description='This is a fully remote role. Sainik School Nagrota invites eligible candidates to apply for a teaching position. The notification describes the role, required qualifications, selection process and application instructions. Candidates should review the official notification and confirm all details before applying.')
         job['location'] = None
         ld = job_posting_jsonld(job, detail_url(job['id']))
         assert ld['jobLocationType'] == 'TELECOMMUTE'
@@ -88,6 +88,10 @@ class TestJobPostingJsonld:
         ld = job_posting_jsonld(job, detail_url(job['id']))
         assert 'employmentType' not in ld
         assert 'directApply' not in ld
+
+    def test_remote_job_requires_explicit_remote_description(self):
+        job = sample_job(work_mode='fully_remote', employment_type='FULL_TIME')
+        assert job_posting_jsonld(job, detail_url(job['id'])) is None
 
     def test_no_valid_through_without_last_date(self):
         job = sample_job(important_dates={'found_date': '02-11-2026'})
