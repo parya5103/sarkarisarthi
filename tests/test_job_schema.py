@@ -176,7 +176,7 @@ class TestNormalizeJob:
     def test_schema_fields_added_without_data_loss(self):
         job = base_job()
         out = normalize_job(job)
-        for field in ('organization', 'department', 'location', 'vacancies',
+        for field in ('organization', 'department', 'location', 'country', 'vacancies',
                       'advertisement_no', 'qualification', 'age_limit',
                       'official_notification_url', 'official_application_url',
                       'published_date', 'last_verified', 'status',
@@ -194,6 +194,7 @@ class TestNormalizeJob:
         assert out['organization'] is None
         assert out['qualification'] is None
         assert out['state'] is None
+        assert out['country'] is None
         assert out['salary'] is None
         assert out['important_dates'].get('last_date') is None
         assert NOT_SPECIFIED_TEXT == 'Not specified in official notification'
