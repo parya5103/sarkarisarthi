@@ -154,6 +154,8 @@ def render_detail_page(job, related):
     title = _esc(job.get('title') or 'Government Job Notification')
     org = job.get('organization')
     status = str(job.get('status') or 'active').lower()
+    robots_meta = ('<meta name="robots" content="noindex,follow">'
+                   if status in CLOSED_STATUSES else '')
 
     meta_source = (job.get('description') or job.get('title') or 'Government job notification.')
     meta_desc = _esc(meta_source[:157] + '...' if len(meta_source) > 160 else meta_source)
@@ -251,8 +253,8 @@ def render_detail_page(job, related):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>''' + title + ''' - SarkariSarthi</title>
-<meta name="description" content="''' + meta_desc + '''">
+<title>''' + title + ''' | Sarkari Sarthi</title>
+<meta name="description" content="''' + meta_desc + '''">''' + robots_meta + '''
 <link rel="canonical" href="''' + page_url + '''">
 <link rel="stylesheet" href="/sarkari-sarthi/style.css">
 <link rel="stylesheet" href="/sarkari-sarthi/assets/css/ads.css">
@@ -264,7 +266,7 @@ def render_detail_page(job, related):
 <nav class="navbar"><div class="nav-container">
 <div class="nav-logo"><a href="/sarkari-sarthi/" style="text-decoration:none;color:inherit;">
 <img src="/sarkari-sarthi/ai-powered-icon.png" alt="SarkariSarthi logo" class="logo-icon">
-<span class="logo-text">SarkariSarthi 2.0</span></a></div>
+<span class="logo-text">Sarkari Sarthi</span></a></div>
 </div></nav>
 </header>
 <main class="container detail-page">
