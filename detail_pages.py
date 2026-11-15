@@ -397,6 +397,7 @@ def write_detail_pages(jobs, out_root='.'):
             if rel['id'] != job['id']
             and rel.get('category') == job.get('category')
             and str(rel.get('status') or 'active').lower() not in CLOSED_STATUSES
+            and str(rel.get('verification_status') or '').lower() == 'official_verified'
         ][:MAX_RELATED]
         try:
             page = render_detail_page(job, related)
@@ -431,7 +432,8 @@ def _write_sitemap(jobs, out_root='.'):
     for job in jobs:
         # Expired and cancelled vacancies are not open jobs: exclude
         # them from the active-job sitemap.
-        if str(job.get('status') or 'active').lower() in CLOSED_STATUSES:
+        if (str(job.get('status') or 'active').lower() in CLOSED_STATUSES
+                or str(job.get('verification_status') or '').lower() != 'official_verified'):
             continue
         verified = job.get('last_verified') or ''
         lines.append(url_entry(detail_url(job['id']), verified))
