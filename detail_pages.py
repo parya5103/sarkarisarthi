@@ -97,7 +97,8 @@ def job_posting_jsonld(job, page_url):
 
     description = str(job.get('description') or '').strip()
     title = str(job.get('title') or '').strip()
-    if not title or len(description) < 100 or description.lower() == title.lower():
+    if (not title or len(description) < 100 or description.lower() == title.lower()
+            or description.rstrip().endswith(('...', '…'))):
         return None
 
     data = {
