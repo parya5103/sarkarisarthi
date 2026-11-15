@@ -63,6 +63,15 @@ def _esc(value):
     return html.escape(str(value), quote=True)
 
 
+def _seo_title(job):
+    """Create a concise search title while keeping the full notification title on-page."""
+    raw = job.get('job_title') or job.get('title') or 'Government Job'
+    base = ' '.join(str(raw).split())
+    if len(base) > 42:
+        base = base[:42].rsplit(' ', 1)[0] or base[:42]
+    return base + ' | Sarkari Sarthi'
+
+
 def _iso_date(value):
     parsed = parse_date(value)
     return parsed.strftime('%Y-%m-%d') if parsed else None
@@ -191,6 +200,7 @@ def render_detail_page(job, related):
     page_url = detail_url(job_id)
     dates = job.get('important_dates') or {}
     title = _esc(job.get('title') or 'Government Job Notification')
+    seo_title = _esc(_seo_title(job))
     org = job.get('organization')
     status = str(job.get('status') or 'active').lower()
     verification_status = str(job.get('verification_status') or '').lower()
@@ -295,8 +305,15 @@ def render_detail_page(job, related):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>''' + title + ''' | Sarkari Sarthi</title>
-<meta name="description" content="''' + meta_desc + '''">''' + robots_meta + '''
+<title>''' + seo_title + '''</title>
+<meta name="description" content="''' + meta_desc + '''">
+<meta property="og:title" content="''' + seo_title + '''">
+<meta property="og:description" content="''' + meta_desc + '''">
+<meta property="og:type" content="article">
+<meta property="og:url" content="''' + page_url + '''">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="''' + seo_title + '''">
+<meta name="twitter:description" content="''' + meta_desc + '''">''' + robots_meta + '''
 <link rel="canonical" href="''' + page_url + '''">
 <link rel="stylesheet" href="/sarkari-sarthi/style.css">
 <link rel="stylesheet" href="/sarkari-sarthi/assets/css/ads.css">
