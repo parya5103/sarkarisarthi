@@ -77,30 +77,66 @@ def job_posting_jsonld(job, page_url):
     status = str(job.get('status') or '').lower()
     if status in CLOSED_STATUSES:
         return None
+    dates = job.get('important_dates') or {}
+    last_iso = _iso_date(dates.get('last_date') or job.get('last_date'))
+    published_iso = _iso_date(job.get('published_date'))
+    organization = str(job.get('organization') or '').strip()
+    location = str(job.get('location') or '').strip()
+    country = str(job.get('country') or '').strip()
+    employment_type = str(job.get('employment_type') or '').lower()
+    remote = 'remote' in employment_type
+
+    # Google JobPosting rich results require an original posting date,
+    # a real hiring organization and either a physical work location
+    # or a clearly identified fully-remote arrangement. Do not emit
+    # partial markup for scraped records with unknown required facts.
+    if not published_iso or not organization or not country:
+        return None
+    if not remote and not location:
+        return None
+
+    description = str(job.get('description') or '').strip()
+    title = str(job.get('title') or '').strip()
+    if not title or len(description) < 100 or description.lower() == title.lower():
+        return None
+
     data = {
         '@context': 'https://schema.org',
         '@type': 'JobPosting',
-        'title': job.get('title') or '',
-        'description': job.get('description') or '',
+        'title': title,
+        'description': description,
+        'datePosted': published_iso,
         'url': page_url,
         'identifier': {'@type': 'PropertyValue', 'value': job.get('id')},
+        'hiringOrganization': {
+            '@type': 'Organization',
+            'name': organization,
+        },
     }
-    if not data['title'] or not data['description']:
-        return None
-    dates = job.get('important_dates') or {}
-    last_iso = _iso_date(dates.get('last_date') or job.get('last_date'))
+    if remote:
+        data['jobLocationType'] = 'TELECOMMUTE'
+        data['applicantLocationRequirements'] = {
+            '@type': 'Country',
+            'name': country,
+        }
+    else:
+        address = {
+            '@type': 'PostalAddress',
+            'addressLocality': location,
+            'addressCountry': country,
+        }
+        if job.get('state'):
+            address['addressRegion'] = job['state']
+        data['jobLocation'] = {
+            '@type': 'Place',
+            'address': address,
+        }
     if last_iso:
         data['validThrough'] = last_iso + 'T23:59:59'
-    published_iso = _iso_date(job.get('published_date'))
-    if published_iso:
-        data['datePosted'] = published_iso
-    if job.get('organization'):
-        data['hiringOrganization'] = {
-            '@type': 'Organization',
-            'name': job['organization'],
-        }
     if job.get('official_application_url'):
         data['directApply'] = True
+    if job.get('employment_type'):
+        data['employmentType'] = job['employment_type']
     return data
 
 
