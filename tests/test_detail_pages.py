@@ -149,6 +149,18 @@ class TestClosedJobHandling:
         assert ld is not None
         assert ld['@type'] == 'JobPosting'
 
+    def test_closed_job_pages_are_noindex_and_keep_reference_content(self):
+        for status in ('expired', 'cancelled'):
+            page = render_detail_page(sample_job(status=status), [])
+            assert '<meta name="robots" content="noindex,follow">' in page
+            assert 'Sarkari Sarthi' in page
+            assert 'SarkariSarthi 2.0' not in page
+
+    def test_active_job_pages_remain_indexable_by_default(self):
+        page = render_detail_page(sample_job(status='active'), [])
+        assert 'name="robots" content="noindex' not in page
+        assert '<title>' in page and ' | Sarkari Sarthi</title>' in page
+
     def test_expired_banner_on_detail_page(self):
         page = render_detail_page(sample_job(status='expired'), [])
         assert 'no longer open for' in page
