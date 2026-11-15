@@ -88,12 +88,14 @@ def job_posting_jsonld(job, page_url):
     location = str(job.get('location') or '').strip()
     country = str(job.get('country') or '').strip()
     work_mode = str(job.get('work_mode') or '').strip().lower()
+    verification_status = str(job.get('verification_status') or '').lower()
     remote = work_mode == 'fully_remote'
 
     # Required facts must be explicit and verified from the employer's
     # notification: original posting date, job-only title, complete
     # description, hiring organisation, country and apply/notification path.
-    if (not published_iso or job.get('date_posted_verified') is not True
+    if (verification_status != 'official_verified'
+            or not published_iso or job.get('date_posted_verified') is not True
             or not job_title or job.get('description_complete') is not True
             or not organization or not country
             or not (job.get('official_application_url') or job.get('official_notification_url'))):
