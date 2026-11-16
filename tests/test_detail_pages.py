@@ -53,6 +53,11 @@ class TestJobPostingJsonld:
         assert ld['datePosted'] == '2026-11-02'
 
 
+    def test_non_official_application_url_cannot_enable_job_posting(self):
+        job = sample_job(official_notification_url=None,
+                         official_application_url='https://exampleportal.in/apply')
+        assert job_posting_jsonld(job, detail_url(job['id'])) is None
+
     def test_truncated_summary_suppresses_job_posting_rich_result(self):
         job = sample_job(description='A detailed recruitment summary with role responsibilities, required qualifications, selection process and application instructions for candidates who meet the published criteria...')
         assert job_posting_jsonld(job, detail_url(job['id'])) is None
