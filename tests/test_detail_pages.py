@@ -208,3 +208,13 @@ class TestVerificationChip:
     def test_missing_status_gets_no_chip(self):
         page = render_detail_page(sample_job(), [])
         assert 'job-verification' not in page
+
+
+class TestHomepageSeoMetadata:
+    def test_homepage_has_product_name_and_descriptive_search_snippet(self):
+        with open(os.path.join(os.path.dirname(__file__), '..', 'index.html'), encoding='utf-8') as handle:
+            page = handle.read()
+        assert '<title>Sarkari Sarthi: Latest Government Jobs &amp; Results in India</title>' in page
+        assert 'name="description"' in page
+        assert 'Check eligibility, important dates and source links before applying.' in page
+        assert '"name": "Sarkari Sarthi"' in page
