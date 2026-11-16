@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-11-16T02:55:44.483509",
-  "total_jobs": 112,
-  "active_jobs": 97,
+  "last_updated": "2026-11-16T06:49:16.213440",
+  "total_jobs": 122,
+  "active_jobs": 107,
   "expired_jobs": 15,
   "jobs": [
     {
@@ -54,7 +54,12 @@
           "source": "employmentnews.gov.in",
           "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-e720d528a5699f9ac7d3cf27f799ce9c"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "en_214e74070f15cf22b137f10a8019fbe1",
@@ -106,7 +111,12 @@
           "source": "employmentnews.gov.in",
           "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-214e74070f15cf22b137f10a8019fbe1"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "75144c1ed508b58fd3edf925386919b6",
@@ -155,7 +165,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/iit-gandhinagar-notification-2026-apply-online-for-project-associate-ii-posts/45096"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "c2ecb4eed01d98f248338f221a4c14e9",
@@ -206,7 +221,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/icmr-nirrch-notification-2026-walk-in-interview-for-various-staff-nurse-posts/45097"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "e121a3a4a6263852a6f093999b9601cc",
@@ -255,7 +275,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/ils-notification-2026-apply-online-for-17-junior-research-fellow-posts/44764"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "f8c554b083eba55a1da24b19a16a69d5",
@@ -304,7 +329,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/angrau-notification-2026-walk-in-interview-for-various-teaching-associate-posts/45094"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "6c2167d7759fab998916f7083fc546ab",
@@ -353,7 +383,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/iit-bhilai-notification-2026-apply-online-for-various-project-engineer-posts/45095"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "34bba3cc5ab96c1174596c0294ef5b85",
@@ -402,7 +437,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/nhm-thiruvananthapuram-notification-2026-apply-online-for-02-public-relations-officer-posts/45091"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "cc093db6fa75d681ec53eb2c2b1706d4",
@@ -451,7 +491,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/aiims-delhi-recruitment-2026-apply-offline-for-05-project-research-scientist-project-technical-support-and-project-nurse-posts/45092"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "b1ad3fb3ecc5671116a91b68091b0ccd",
@@ -500,7 +545,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/csir-imtech-notification-2026-apply-online-for-various-project-associate-i-posts/45093"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "c112051c3d94b7b4421fa7dbf1b87c7c",
@@ -549,7 +599,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/echs-missamari-notification-2026-apply-offline-for-02-medical-officer-and-nursing-assistant-posts/45090"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "400c7de3a8e0fc1e2c61f2e34f2d9a18",
@@ -599,7 +654,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/nit-silchar-notification-2026-apply-for-various-project-associate-posts/45089"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "26140cde361fd6fbf130436225f52135",
@@ -642,7 +702,12 @@
       "original_source_url": "https://allgovernmentjobs.in/bsf-notification-2026-apply-offline-for-34-sub-inspector-posts/45111",
       "last_verified": "2026-11-06T03:30:42.041824",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "91e26b93ab14d326f8ce0539df472e3b",
@@ -685,7 +750,12 @@
       "original_source_url": "https://allgovernmentjobs.in/pmmmh-notification-2026-walk-in-interview-for-08-senior-resident-posts/45116",
       "last_verified": "2026-11-06T03:30:42.041782",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "9f7028e92b01c1b361e6b4aa04caf892",
@@ -730,7 +800,12 @@
       "original_source_url": "https://allgovernmentjobs.in/actrec-notification-2026-walk-in-interview-for-various-scientist-assistant-posts/45113",
       "last_verified": "2026-11-06T03:30:42.041811",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "887469d8df305bf9dcce81608145b874",
@@ -773,7 +848,12 @@
       "original_source_url": "https://allgovernmentjobs.in/aiims-bhopal-notification-2026-apply-online-for-04-project-research-scientist-and-project-technical-support-posts/45114",
       "last_verified": "2026-11-06T03:30:42.041797",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "fb54569978713feadd88c8696b2fd628",
@@ -816,7 +896,12 @@
       "original_source_url": "https://allgovernmentjobs.in/bits-pilani-recruitment-2026-apply-for-junior-research-fellow-posts/45119",
       "last_verified": "2026-11-06T03:30:42.045925",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "99bde6077c4cb6dc3ecb92b5cbe2c230",
@@ -860,7 +945,12 @@
       "original_source_url": "https://allgovernmentjobs.in/cpcl-recruitment-2026-apply-online-for-41-executive-posts/45112",
       "last_verified": "2026-11-06T03:30:42.045970",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "b4453c2c41c84b4db9cea7216d3a26c4",
@@ -903,7 +993,12 @@
       "original_source_url": "https://allgovernmentjobs.in/pgimer-recruitment-2026-apply-offline-for-project-research-scientist-ii-posts/45117",
       "last_verified": "2026-11-06T03:30:42.045943",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "fa58a2c66dff3606c75677f8e98ad39c",
@@ -946,7 +1041,12 @@
       "original_source_url": "https://allgovernmentjobs.in/vjti-recruitment-2026-apply-online-for-04-junior-research-fellow-and-senior-research-fellow-posts/45115",
       "last_verified": "2026-11-06T03:30:42.045957",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "da6285ecabfdedb76edc31e234f14d71",
@@ -990,7 +1090,12 @@
       "original_source_url": "https://allgovernmentjobs.in/nicl-notification-2026-apply-online-for-200-graduate-apprentice-posts/45140",
       "last_verified": "2026-11-07T02:59:27.272845",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "82433c541b72c3e318f16d9cf7c52bf8",
@@ -1033,7 +1138,12 @@
       "original_source_url": "https://allgovernmentjobs.in/angrau-notification-2026-walk-in-interview-for-various-teaching-assistant-posts/45141",
       "last_verified": "2026-11-07T02:59:27.272808",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "dd193a592c57d9175aff890071d672ca",
@@ -1076,7 +1186,12 @@
       "original_source_url": "https://allgovernmentjobs.in/nfsu-notification-2026-walk-in-interview-for-research-associate-posts/45137",
       "last_verified": "2026-11-07T02:59:27.272874",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "4b3da5242f471b4db2d79bf65211685d",
@@ -1119,7 +1234,12 @@
       "original_source_url": "https://allgovernmentjobs.in/iit-patna-notification-2026-apply-for-junior-research-fellow-posts/45136",
       "last_verified": "2026-11-07T02:59:27.272902",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "4ecdd9bbbf289c1efe9df43646b8a776",
@@ -1163,7 +1283,12 @@
       "original_source_url": "https://allgovernmentjobs.in/nit-jamshedpur-notification-2026-apply-for-various-project-research-scientist-i-posts/45135",
       "last_verified": "2026-11-07T02:59:27.272929",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "dd21c48ed499f97571309d7c5818e88a",
@@ -1206,7 +1331,12 @@
       "original_source_url": "https://allgovernmentjobs.in/cmd-kerala-notification-2026-apply-online-for-project-manager-posts/45134",
       "last_verified": "2026-11-07T02:59:27.272956",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "fec58e95e724a9760c70e5ed7927ac45",
@@ -1249,7 +1379,12 @@
       "original_source_url": "https://allgovernmentjobs.in/bits-pilani-recruitment-2026-apply-online-for-junior-research-fellow-posts/45139",
       "last_verified": "2026-11-07T02:59:27.277850",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "c26e8d408ce2db8afa8cf320731d1e00",
@@ -1292,7 +1427,12 @@
       "original_source_url": "https://allgovernmentjobs.in/dcpu-araria-notification-2026-apply-offline-for-various-nurse-posts/45132",
       "last_verified": "2026-11-07T02:59:27.272984",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "015b2923f594c8a9496e6c7d796e10aa",
@@ -1335,7 +1475,12 @@
       "original_source_url": "https://allgovernmentjobs.in/iit-guwahati-recruitment-2026-apply-online-for-research-associate-i-posts/45138",
       "last_verified": "2026-11-07T02:59:27.277883",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "dd7656ff93e0005f9b21310753838290",
@@ -1378,7 +1523,12 @@
       "original_source_url": "https://allgovernmentjobs.in/ntpc-recruitment-2026-apply-online-for-various-specialist-posts/45133",
       "last_verified": "2026-11-07T02:59:27.277910",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "98f48c422cac7d2dee5391dbf6127fbe",
@@ -1429,7 +1579,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/pau-notification-2026-apply-offline-for-02-junior-field-lab-helper-posts/45151"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "c6e9aea63cec8fa4d3db9fd8116ba975",
@@ -1478,7 +1633,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/inms-notification-2026-apply-for-various-research-associate-i-posts/45148"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "0a7449a9777e321d490df087fd6c702f",
@@ -1528,7 +1688,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/nhsrc-notification-2026-apply-online-for-technical-officer-posts/45153"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "4de10be763576e8a9249a97c1b0b7568",
@@ -1579,7 +1744,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/dlsa-notification-2026-apply-offline-for-various-driver-posts/45150"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "de070662b3b41de297b7afb73a66a1fc",
@@ -1628,7 +1798,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/barc-notification-2026-walk-in-interview-for-various-scientific-assistant-posts/45149"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "b2a1ee535d761df4bcbc9305df0f8e1f",
@@ -1677,7 +1852,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/aiims-kalyani-recruitment-2026-apply-for-various-multi-tasking-staff-posts/45152"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "cd99719ab5bfdb999bddbcf141a26a68",
@@ -1726,7 +1906,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/iit-hyderabad-notification-2026-apply-online-for-project-research-scientist-iii-posts/45147"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "ada757ad4ca689c3fa2a2426ec17dd2c",
@@ -1776,7 +1961,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/hll-recruitment-2026-apply-online-for-various-associate-manager-operations-manager-posts/45146"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "f183ca437bb3c9cffca15a430036a83f",
@@ -1826,7 +2016,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/jssh-notification-2026-apply-offline-for-70-senior-resident-posts/45144"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "f35dfcc2f33cf0c6344f5d4175e4db6e",
@@ -1878,7 +2073,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/smc-recruitment-2026-walk-in-interview-for-08-barber-posts/45145"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "f6e03967c86672d94f509d9d9fb88741",
@@ -1921,7 +2121,12 @@
       "original_source_url": "https://allgovernmentjobs.in/dhs-meghalaya-notification-2026-walk-in-interview-for-02-medical-physicist-and-radiation-safety-officer-posts/45167",
       "last_verified": "2026-11-10T04:43:34.921279",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "097058343c73fb8df81932b463747974",
@@ -1964,7 +2169,12 @@
       "original_source_url": "https://allgovernmentjobs.in/aiims-delhi-notification-2026-apply-online-for-various-project-technical-support-iii-posts/45164",
       "last_verified": "2026-11-10T04:43:34.921347",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "9f90cec05712733ab59390c2c827866b",
@@ -2007,7 +2217,12 @@
       "original_source_url": "https://allgovernmentjobs.in/cmd-kerala-notification-2026-apply-online-for-project-engineer-posts/45160",
       "last_verified": "2026-11-10T04:43:34.921400",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "fefdd4d32430604d366ac21b4e4e64b3",
@@ -2050,7 +2265,12 @@
       "original_source_url": "https://allgovernmentjobs.in/dlsa-kannur-notification-2026-apply-offline-for-various-para-legal-officer-posts/45162",
       "last_verified": "2026-11-10T04:43:34.921374",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "fdc053d1c9714048f2993607e33b3af7",
@@ -2094,7 +2314,12 @@
       "original_source_url": "https://allgovernmentjobs.in/bsah-notification-2026-apply-online-for-06-junior-resident-posts/45165",
       "last_verified": "2026-11-10T04:43:34.921317",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "47b412e49f91c2561e3a882f918dc743",
@@ -2137,7 +2362,12 @@
       "original_source_url": "https://allgovernmentjobs.in/isro-sdsc-shar-notification-2026-apply-online-for-400-apprenticeship-posts/45159",
       "last_verified": "2026-11-10T04:43:34.921444",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "74b61b41d0749fd49c02744021bfe658",
@@ -2181,7 +2411,12 @@
       "original_source_url": "https://allgovernmentjobs.in/nhsrc-notification-2026-apply-online-for-various-senior-consultant-posts/45158",
       "last_verified": "2026-11-10T04:43:34.921474",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "6736c3cc2472cff3b5cce8ba71a8367b",
@@ -2224,7 +2459,12 @@
       "original_source_url": "https://allgovernmentjobs.in/tmc-recruitment-2026-walk-in-interview-for-various-clinical-research-coordinator-posts/45163",
       "last_verified": "2026-11-10T04:43:34.926322",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "5acfe22ac3768e5f579e9593f9c62c20",
@@ -2268,7 +2508,12 @@
       "original_source_url": "https://allgovernmentjobs.in/imu-recruitment-2026-apply-online-for-junior-research-fellow-posts/45161",
       "last_verified": "2026-11-10T04:43:34.926349",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "87f3a31febe66845756b7f910ea879b3",
@@ -2311,7 +2556,12 @@
       "original_source_url": "https://allgovernmentjobs.in/nam-kerala-recruitment-2026-apply-online-for-various-multi-purpose-health-worker-posts/45166",
       "last_verified": "2026-11-10T04:43:34.926289",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "b901f08a5a5ef4d7900ec0c02c00aa48",
@@ -2354,7 +2604,12 @@
       "original_source_url": "https://allgovernmentjobs.in/iit-patna-notification-2026-apply-for-various-junior-research-fellow-posts/45183",
       "last_verified": "2026-11-11T02:54:37.536348",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "c86ae885271532b8e60d588b67fec8b5",
@@ -2397,7 +2652,12 @@
       "original_source_url": "https://allgovernmentjobs.in/dlsa-nuapada-notification-2026-apply-offline-for-various-para-legal-volunteer-posts/45186",
       "last_verified": "2026-11-11T02:54:37.536299",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "2c6565a230b00521a85a5d7c21f6659f",
@@ -2440,7 +2700,12 @@
       "original_source_url": "https://allgovernmentjobs.in/iit-kharagpur-notification-2026-apply-online-for-02-project-associate-i-posts/45182",
       "last_verified": "2026-11-11T02:54:37.536366",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "5664ef15f1f6e0647fb7955990615773",
@@ -2483,7 +2748,12 @@
       "original_source_url": "https://allgovernmentjobs.in/tmc-notification-2026-walk-in-interview-for-research-assistant-posts/45179",
       "last_verified": "2026-11-11T02:54:37.536383",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "67b2b4588ac5c5b26ab99dec0100261b",
@@ -2526,7 +2796,12 @@
       "original_source_url": "https://allgovernmentjobs.in/jncasr-notification-2026-apply-for-research-associate-posts/45184",
       "last_verified": "2026-11-11T02:54:37.536328",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "744e2dd9c6826a922b579cc2bf5eab07",
@@ -2569,7 +2844,12 @@
       "original_source_url": "https://allgovernmentjobs.in/nii-recruitment-2026-apply-for-various-project-assistant-posts/45185",
       "last_verified": "2026-11-11T02:54:37.540126",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "704452e2e570e87ea15409dc8c451a97",
@@ -2612,7 +2892,12 @@
       "original_source_url": "https://allgovernmentjobs.in/aiims-delhi-recruitment-2026-apply-offline-for-06-project-research-scientist-i-project-nurse-iii-and-project-technical-support-iii-posts/45181",
       "last_verified": "2026-11-11T02:54:37.540151",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "183c325d80d6d78ce6fcb2fe1c6400cf",
@@ -2655,7 +2940,12 @@
       "original_source_url": "https://allgovernmentjobs.in/aiims-bibinagar-recruitment-2026-walk-in-interview-for-various-research-associate-grade-iii-posts/45178",
       "last_verified": "2026-11-11T02:54:37.540189",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "a5d4980bddcb2377edb6228a177880f2",
@@ -2698,7 +2988,12 @@
       "original_source_url": "https://allgovernmentjobs.in/nimhans-notification-2026-walk-in-interview-for-various-project-research-scientist-ii-posts/45199",
       "last_verified": "2026-11-12T03:58:55.128145",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "ac9f0b938a23d22502e6e095fd2f1a31",
@@ -2741,7 +3036,12 @@
       "original_source_url": "https://allgovernmentjobs.in/maids-notification-2026-apply-for-various-consultant-posts/45203",
       "last_verified": "2026-11-12T03:58:55.128089",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "39f5fba428681fa4fd83146944b361fd",
@@ -2786,7 +3086,12 @@
       "original_source_url": "https://allgovernmentjobs.in/jipmer-notification-2026-walk-in-interview-for-various-project-technician-iii-nurse-posts/45202",
       "last_verified": "2026-11-12T03:58:55.128118",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "5bf2ca749524a255835dec0c36ec2422",
@@ -2829,7 +3134,12 @@
       "original_source_url": "https://allgovernmentjobs.in/aiims-jodhpur-notification-2026-apply-for-various-project-nurse-iii-posts/45204",
       "last_verified": "2026-11-12T03:58:55.128051",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "7832867513043e9d76299f09ea44bf85",
@@ -2872,7 +3182,12 @@
       "original_source_url": "https://allgovernmentjobs.in/iit-bhu-notification-2026-apply-online-for-various-project-officer-posts/45198",
       "last_verified": "2026-11-12T03:58:55.128171",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "b8e67c4fb0378c2ec428a3e28043f6cc",
@@ -2915,7 +3230,12 @@
       "original_source_url": "https://allgovernmentjobs.in/j-k-bank-notification-2026-apply-online-for-323-probationary-officer-posts/45197",
       "last_verified": "2026-11-12T03:58:55.128198",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "5d9e79d4db5b46d6d4b5a9838348c2c2",
@@ -2958,7 +3278,12 @@
       "original_source_url": "https://allgovernmentjobs.in/csir-ncl-notification-2026-apply-online-for-various-junior-research-fellowship-posts/45195",
       "last_verified": "2026-11-12T03:58:55.128266",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "787ca187b2f64c6cf697ff0b4592451f",
@@ -3001,7 +3326,12 @@
       "original_source_url": "https://allgovernmentjobs.in/aiims-patna-recruitment-2026-apply-online-for-various-project-technical-support-iii-posts/45200",
       "last_verified": "2026-11-12T03:58:55.133057",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "6ebe280aca14ab77540106ce9ffcd0a1",
@@ -3044,7 +3374,12 @@
       "original_source_url": "https://allgovernmentjobs.in/nit-warangal-notification-2026-apply-for-junior-research-fellow-posts/45196",
       "last_verified": "2026-11-12T03:58:55.128225",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "d3e3f976d440e1201097b165651a1b6d",
@@ -3087,7 +3422,12 @@
       "original_source_url": "https://allgovernmentjobs.in/aniims-recruitment-2026-apply-online-for-medical-officer-posts/45201",
       "last_verified": "2026-11-12T03:58:55.133024",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "c6a48781a410a82307e6af7b6c6e8ee4",
@@ -3130,7 +3470,12 @@
       "original_source_url": "https://allgovernmentjobs.in/iit-guwahati-notification-2026-apply-online-for-field-engineer-posts/45224",
       "last_verified": "2026-11-13T03:29:52.487134",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "f7c37e2dfedf292a0f946dbe8154a663",
@@ -3174,7 +3519,12 @@
       "original_source_url": "https://allgovernmentjobs.in/dcpu-kancheepuram-notification-2026-apply-offline-for-20-support-persons-posts/45226",
       "last_verified": "2026-11-13T03:29:52.487105",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "263acaa3d577ab8fb08bc3b53e8d62ef",
@@ -3217,7 +3567,12 @@
       "original_source_url": "https://allgovernmentjobs.in/nit-calicut-notification-2026-apply-for-various-project-associate-i-posts/45222",
       "last_verified": "2026-11-13T03:29:52.487154",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "1a000bffaafbef71205ceee1e9aafa10",
@@ -3260,7 +3615,12 @@
       "original_source_url": "https://allgovernmentjobs.in/pgimer-notification-2026-apply-online-for-various-project-nurse-iii-posts/45220",
       "last_verified": "2026-11-13T03:29:52.487171",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "939e6f5fa6586f178ed4a93cd172c1d4",
@@ -3303,7 +3663,12 @@
       "original_source_url": "https://allgovernmentjobs.in/aiims-delhi-notification-2026-apply-online-for-05-project-research-scientist-and-project-technical-support-posts/45219",
       "last_verified": "2026-11-13T03:29:52.487190",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "dbe2f61487c72f48dbc4473c9e4294dd",
@@ -3346,7 +3711,12 @@
       "original_source_url": "https://allgovernmentjobs.in/pjtsau-notification-2026-walk-in-interview-for-various-field-assistant-i-posts/45217",
       "last_verified": "2026-11-13T03:29:52.487228",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "ae9ebde7c1985357ee8962ab1af9bec7",
@@ -3389,7 +3759,12 @@
       "original_source_url": "https://allgovernmentjobs.in/jncasr-notification-2026-apply-for-research-associate-posts/45218",
       "last_verified": "2026-11-13T03:29:52.487209",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "01ec705579b5bfdee21f1aa31b2b85d0",
@@ -3433,7 +3808,12 @@
       "original_source_url": "https://allgovernmentjobs.in/imu-recruitment-2026-apply-online-for-junior-research-fellow-posts/45225",
       "last_verified": "2026-11-13T03:29:52.490829",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "4441f2a61b3c9c7c81b4976fb229196e",
@@ -3476,7 +3856,12 @@
       "original_source_url": "https://allgovernmentjobs.in/nipgr-recruitment-2026-walk-in-interview-for-various-senior-research-fellow-posts/45221",
       "last_verified": "2026-11-13T03:29:52.490853",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "8ae8f208a6fb33a25f25070129c28d34",
@@ -3521,7 +3906,12 @@
       "original_source_url": "https://allgovernmentjobs.in/sail-notification-2026-walk-in-interview-for-03-dresser-cum-compounder-posts/45244",
       "last_verified": "2026-11-14T03:26:15.563533",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "00319c20f630774e16a96801f3979892",
@@ -3564,7 +3954,12 @@
       "original_source_url": "https://allgovernmentjobs.in/dhfws-rampurhat-notification-2026-apply-online-for-various-community-health-assistant-posts/45245",
       "last_verified": "2026-11-14T03:26:15.563506",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "38c4913f6ef324ae8bb3a90156d7004a",
@@ -3607,7 +4002,12 @@
       "original_source_url": "https://allgovernmentjobs.in/rvnl-notification-2026-apply-for-chief-project-manager-posts/45246",
       "last_verified": "2026-11-14T03:26:15.563487",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "a69426f14ea6f7af0198d9e878f30107",
@@ -3650,7 +4050,12 @@
       "original_source_url": "https://allgovernmentjobs.in/tmc-notification-2026-walk-in-interview-for-02-senior-resident-posts/45248",
       "last_verified": "2026-11-14T03:26:15.563439",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "c50dc8ad0bc87a8b7c1cbe56175e75d7",
@@ -3693,7 +4098,12 @@
       "original_source_url": "https://allgovernmentjobs.in/icar-crri-notification-2026-walk-in-interview-for-various-laboratory-assistant-field-assistant-posts/45247",
       "last_verified": "2026-11-14T03:26:15.563468",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "be3a3265f57a5bf05d4ec185cabe1ef7",
@@ -3736,7 +4146,12 @@
       "original_source_url": "https://allgovernmentjobs.in/niper-raebareli-notification-2026-apply-for-junior-research-assistant-posts/45243",
       "last_verified": "2026-11-14T03:26:15.563552",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "3150ea151b08027bde3a3c818765954e",
@@ -3779,7 +4194,12 @@
       "original_source_url": "https://allgovernmentjobs.in/mnnit-allahabad-notification-2026-apply-offline-for-various-junior-research-fellow-project-associate-i-posts/45241",
       "last_verified": "2026-11-14T03:26:15.563570",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "28ec953304642da8f30e019321ed494a",
@@ -3822,7 +4242,12 @@
       "original_source_url": "https://allgovernmentjobs.in/jssh-notification-2026-apply-offline-for-05-senior-resident-posts/45239",
       "last_verified": "2026-11-14T03:26:15.563605",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "7e4ba584ddc11c12cc182b941402c65e",
@@ -3865,7 +4290,12 @@
       "original_source_url": "https://allgovernmentjobs.in/aiims-nagpur-notification-2026-apply-online-for-project-technical-support-iii-posts/45240",
       "last_verified": "2026-11-14T03:26:15.563587",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "c89bdc2514a72e44df41e9c627f7e50f",
@@ -3908,7 +4338,12 @@
       "original_source_url": "https://allgovernmentjobs.in/iit-roorkee-recruitment-2026-apply-for-research-associate-posts/45242",
       "last_verified": "2026-11-14T03:26:15.567293",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "533ebd2371e196cac9aeefb7a8542dda",
@@ -3957,7 +4392,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/iit-kanpur-notification-2026-apply-online-for-10-field-worker-posts/45262"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "e7a34a1db9a07efd933cc7ca1f82c7e5",
@@ -4007,7 +4447,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/upsc-notification-2026-apply-online-for-13-dental-surgeon-ayurveda-physician-and-other-posts/45257"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "1b6e495262cc7f9fac15cd1ad440682d",
@@ -4056,7 +4501,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/aiims-delhi-notification-2026-apply-for-senior-project-assistant-posts/45260"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "e81377e169e5d2db2a8a075e41d88514",
@@ -4106,7 +4556,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/nhsrc-notification-2026-apply-online-for-various-senior-consultant-posts/45259"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "f39726a2117e5f0ecdd2b1870006da27",
@@ -4155,7 +4610,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/iit-patna-notification-2026-apply-for-junior-research-fellow-posts/45258"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "679db6de7fd98a4fb683bfd274a731d0",
@@ -4204,7 +4664,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/aiims-madurai-notification-2026-apply-online-for-36-junior-resident-posts/45256"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "eda93be34779f60b08990aafc3b6f274",
@@ -4253,7 +4718,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/svbph-recruitment-2026-walk-in-interview-for-06-senior-resident-posts/45261"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "40b7ea1f50143921e5c8b929abb9b4c6",
@@ -4302,7 +4772,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/maids-notification-2026-apply-offline-for-various-project-scientist-i-posts/45255"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "4aadaab7399ef6c6913d743dd2913ba9",
@@ -4351,7 +4826,12 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/exim-bank-recruitment-2026-apply-online-for-120-management-trainee-and-manager-posts/45263"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "86ffd4fc8ab49ddb0f305b6567bcedb9",
@@ -4400,7 +4880,496 @@
           "source": "allgovernmentjobs.in",
           "url": "https://allgovernmentjobs.in/pgimer-recruitment-2026-apply-offline-for-02-staff-nurse-posts/45254"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
+    },
+    {
+      "id": "b84c8c29f82e21a1ae0169f0bb692732",
+      "title": "IIT Hyderabad Notification 2026 - Apply Online for Various Project Associate Posts",
+      "url": "https://allgovernmentjobs.in/iit-hyderabad-notification-2026-apply-online-for-various-project-associate-posts/45277",
+      "source": "allgovernmentjobs.in",
+      "description": "The Indian Institute of Technology (IIT Hyderabad) has released the official notification for the recruitment of various Project Associate Jobs. Candidates who have qualified in B.E/ B.Tech, M.E/ M.Tech in Civil Engineering, or any degree, can use this chance and apply for these posts. Here we have included more information about the age limit, selection process, salary structure, education details, application fee, and how to apply for the IIT Hyderabad Notification 2026 . If you are looking...",
+      "pdf_link": null,
+      "important_dates": {
+        "found_date": "05-12-2026"
+      },
+      "category": "General",
+      "skills": [],
+      "scraped_at": "2026-11-16T06:49:20.108835",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://allgovernmentjobs.in/iit-hyderabad-notification-2026-apply-online-for-various-project-associate-posts/45277",
+      "last_verified": "2026-11-16T06:49:20.108835",
+      "status": "active",
+      "verification_status": "secondary_source_only"
+    },
+    {
+      "id": "fb5c64bef40018516287b82216f5ffbc",
+      "title": "IIT Dharwad Notification 2026 - Apply Online for Junior Research Fellow Posts",
+      "url": "https://allgovernmentjobs.in/iit-dharwad-notification-2026-apply-online-for-junior-research-fellow-posts/45280",
+      "source": "allgovernmentjobs.in",
+      "description": "Indian Institute of Technology Dharwad (IIT Dharwad) has declared the official notification for the recruitment of 01 Junior Research Fellow position. Candidates who have qualified in MBBS, B.Pharm, B.E/ B.Tech, M.Sc. can grab this chance and apply for the IIT Dharwad Recruitment 2026 . Here we have mentioned more details about the age limit, selection process, salary structure, education details, application fee, and how to apply for these posts. Interested and eligible candidates can apply ...",
+      "pdf_link": null,
+      "important_dates": {
+        "found_date": "01-12-2026"
+      },
+      "category": "General",
+      "skills": [],
+      "scraped_at": "2026-11-16T06:49:20.108790",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://allgovernmentjobs.in/iit-dharwad-notification-2026-apply-online-for-junior-research-fellow-posts/45280",
+      "last_verified": "2026-11-16T06:49:20.108790",
+      "status": "active",
+      "verification_status": "secondary_source_only"
+    },
+    {
+      "id": "965d4f54a95b604cd84e806940d2b30b",
+      "title": "PGCIL Notification 2026 - Apply Online for 33 Trainee Engineer Posts",
+      "url": "https://allgovernmentjobs.in/pgcil-notification-2026-apply-online-for-33-trainee-engineer-posts/45279",
+      "source": "allgovernmentjobs.in",
+      "description": "The Power Grid Corporation of India Limited (PGCIL) has officially released the notification to fill the vacancies of 33 Trainee Engineer Posts. Interested and eligibile candidates can use this opportunity to apply for these posts before the last date of application. Candidates who have completed their B.E./B. Tech in Electronics and Communication Engineering can apply for the PGCIL Notification 2026. The interested applicants can apply in online mode. Here we have mentioned the education det...",
+      "pdf_link": null,
+      "important_dates": {
+        "last_date": "27-11-2026",
+        "found_date": "13-11-2026"
+      },
+      "category": "Engineering",
+      "skills": [],
+      "scraped_at": "2026-11-16T06:49:20.108815",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://allgovernmentjobs.in/pgcil-notification-2026-apply-online-for-33-trainee-engineer-posts/45279",
+      "last_verified": "2026-11-16T06:49:20.108815",
+      "status": "active",
+      "verification_status": "secondary_source_only"
+    },
+    {
+      "id": "90cfd0f05f438b5eda3aff853d3deaf8",
+      "title": "MPMRCL Notification 2026 - Apply Online for 16 Deputy General Manager Posts",
+      "url": "https://allgovernmentjobs.in/mpmrcl-notification-2026-apply-online-for-16-deputy-general-manager-posts/45276",
+      "source": "allgovernmentjobs.in",
+      "description": "The Madhya Pradesh Metro Rail Corporation (MPMRCL) has officially released the notification to fill the vacancies of 16 Deputy General Manager, Senior Supervisor, and Maintainer Jobs. Interested and eligibile candidates can use this opportunity to apply for these posts before the last date of application. Candidates who have completed their ITI, 10th, Diploma, B.E./B. Tech in Electrical, Electronics, Mechanical Engineering can apply for the MPMRCL Notification 2026 . Interested applicants can...",
+      "pdf_link": null,
+      "important_dates": {
+        "last_date": "03-12-2026",
+        "found_date": "04-11-2026"
+      },
+      "category": "General",
+      "skills": [],
+      "scraped_at": "2026-11-16T06:49:20.108850",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://allgovernmentjobs.in/mpmrcl-notification-2026-apply-online-for-16-deputy-general-manager-posts/45276",
+      "last_verified": "2026-11-16T06:49:20.108850",
+      "status": "active",
+      "verification_status": "secondary_source_only"
+    },
+    {
+      "id": "f79e559ab9aa8524fbdc5e6c41d893d9",
+      "title": "DHFWS Rampurhat Notification 2026 - Apply Online for 05 Staff Nurse Posts",
+      "url": "https://allgovernmentjobs.in/dhfws-rampurhat-notification-2026-apply-online-for-05-staff-nurse-posts/45275",
+      "source": "allgovernmentjobs.in",
+      "description": "District Health & Family Welfare Samiti Rampurhat (DH&FWS Rampurhat) has issued an official notification for the recruitment of 05 Staff Nurse positions. Candidates who have qualified in B.Sc. Nursing or GNM can take advantage of this opportunity and apply for the DHFWS Rampurhat Notification 2026 . Here we have included the age limit, selection process, salary structure, education details, application fee, and how to apply for these posts. Interested and eligible candidates can apply online ...",
+      "pdf_link": null,
+      "important_dates": {
+        "found_date": "26-11-2026"
+      },
+      "category": "Medical",
+      "skills": [],
+      "scraped_at": "2026-11-16T06:49:20.108865",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://allgovernmentjobs.in/dhfws-rampurhat-notification-2026-apply-online-for-05-staff-nurse-posts/45275",
+      "last_verified": "2026-11-16T06:49:20.108865",
+      "status": "active",
+      "verification_status": "secondary_source_only"
+    },
+    {
+      "id": "79a05340ef5ffdc07d1ea6e094a99553",
+      "title": "NABCONS Notification 2026 - Apply Online for 09 Junior Technical Supervisor Posts",
+      "url": "https://allgovernmentjobs.in/nabcons-notification-2026-apply-online-for-09-junior-technical-supervisor-posts/45274",
+      "source": "allgovernmentjobs.in",
+      "description": "NABARD Consultancy Services (NABCONS) has announced the official notification for the recruitment of 09 Junior Technical Supervisor positions. Candidates who have qualified with a B.E/ B.Tech in Civil Engineering or Electrical Engineering can grab this chance and apply for the NABCONS Notification 2026 . Here we provide more details about the age limit, selection process, salary structure, education details, applciation fee, and how to apply for these posts. Interested and eligible candidates...",
+      "pdf_link": null,
+      "important_dates": {
+        "found_date": "19-11-2026"
+      },
+      "category": "Engineering",
+      "skills": [],
+      "scraped_at": "2026-11-16T06:49:20.108881",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://allgovernmentjobs.in/nabcons-notification-2026-apply-online-for-09-junior-technical-supervisor-posts/45274",
+      "last_verified": "2026-11-16T06:49:20.108881",
+      "status": "active",
+      "verification_status": "secondary_source_only"
+    },
+    {
+      "id": "2ba760ce0cca9514138281ac22dc36a8",
+      "title": "Burari Hospital Notification 2026 - Walk-in-Interview for 05 Senior Resident Posts",
+      "url": "https://allgovernmentjobs.in/burari-hospital-notification-2026-walk-in-interview-for-05-senior-resident-posts/45271",
+      "source": "allgovernmentjobs.in",
+      "description": "The Burari Hospital has declared the official notification for 2026. To fill up the 05 vacancies for Senior Resident Jobs. Those candidates who have qualified in MBBS, MD/ MS, Diploma, or DNB can grab this chance and apply for the Burari Hospital Notification 2026 . Here, we include the age limit, selection process, salary structure, education details, application fee, and how to apply for these posts. Interested and eligible aspirants can attend the walk-in at the address given below. If you...",
+      "pdf_link": null,
+      "important_dates": {
+        "found_date": "20-11-2026"
+      },
+      "category": "Medical",
+      "skills": [],
+      "scraped_at": "2026-11-16T06:49:20.108911",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://allgovernmentjobs.in/burari-hospital-notification-2026-walk-in-interview-for-05-senior-resident-posts/45271",
+      "last_verified": "2026-11-16T06:49:20.108911",
+      "status": "active",
+      "verification_status": "secondary_source_only"
+    },
+    {
+      "id": "cf88bf008d5f48e3f698a66bb07036a8",
+      "title": "GADAVASU Notification 2026 - Apply Offline for 02 Project Associate I Posts",
+      "url": "https://allgovernmentjobs.in/gadavasu-notification-2026-apply-offline-for-02-project-associate-i-posts/45273",
+      "source": "allgovernmentjobs.in",
+      "description": "The Guru Angad Dev Veterinary and Animal Sciences University (GADVASU) has officially released the notification to fill the vacancies of 02 Project Associate I Posts. Interested and eligibile candidates can use this opportunity to apply for these posts before the last date of application. Candidates who have completed their B.E./B. Tech, B.Sc., M.E./M. Tech, and M.Sc. can apply for the GADVASU Notification 2026. Interested applicants can apply in offline. Here we have mentioned the education ...",
+      "pdf_link": null,
+      "important_dates": {
+        "last_date": "26-11-2026",
+        "found_date": "13-11-2026"
+      },
+      "category": "General",
+      "skills": [],
+      "scraped_at": "2026-11-16T06:49:20.108897",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://allgovernmentjobs.in/gadavasu-notification-2026-apply-offline-for-02-project-associate-i-posts/45273",
+      "last_verified": "2026-11-16T06:49:20.108897",
+      "status": "active",
+      "verification_status": "secondary_source_only"
+    },
+    {
+      "id": "8a895d16231fd46bad2e1e487908c8d8",
+      "title": "AIIMS Delhi Recruitment 2026 - Apply Online for 02 Medical Education Consultant and Project Associate Posts",
+      "url": "https://allgovernmentjobs.in/aiims-delhi-recruitment-2026-apply-online-for-02-medical-education-consultant-and-project-associate-posts/45278",
+      "source": "allgovernmentjobs.in",
+      "description": "All India Institute of Medical Sciences, Delhi (AIIMS Delhi) has declared the official notification for the recruitment of 02 Medical Education Consultant and Project Associate Jobs. Candidates who have qualified in MBBS, BDS, MD/ MS,  MDS, Post Graduation, M.E/ M.Tech, M.Sc., MCA can use this chance and apply for the AIIMS Delhi Recruitment 2026 . Here we provide more details about the age limit, selection process, salary Structure, education details, application fee, and how to apply for th...",
+      "pdf_link": null,
+      "important_dates": {
+        "found_date": "30-11-2026"
+      },
+      "category": "Teaching",
+      "skills": [],
+      "scraped_at": "2026-11-16T06:49:20.111882",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://allgovernmentjobs.in/aiims-delhi-recruitment-2026-apply-online-for-02-medical-education-consultant-and-project-associate-posts/45278",
+      "last_verified": "2026-11-16T06:49:20.111882",
+      "status": "active",
+      "verification_status": "secondary_source_only"
+    },
+    {
+      "id": "0817a3867cffd104b6b59adfe7789711",
+      "title": "NIT Meghalaya 2026 - Apply Online for 03 Junior Assistant, Technician Posts",
+      "url": "https://allgovernmentjobs.in/nit-meghalaya-2026-apply-online-for-03-junior-assistant-technician-posts/45272",
+      "source": "allgovernmentjobs.in",
+      "description": "National Institute of Technology Meghalaya (NIT Meghalaya) has officially released the notification to fill the vacancies of 03 Junior Assistant, Technician, and Lab Attendant Jobs. Interested and eligibile candidates can use this opportunity to apply for these posts before the last date of application. Candidates who have completed their 10th, Diploma in Civil Engineering, 12th, or ITI can apply for the NIT Meghalaya Jobs 2026 . The interested applicants can apply in online mode. Here we hav...",
+      "pdf_link": null,
+      "important_dates": {
+        "last_date": "21-12-2026",
+        "found_date": "07-11-2026"
+      },
+      "category": "Administrative",
+      "skills": [],
+      "scraped_at": "2026-11-16T06:49:20.114986",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://allgovernmentjobs.in/nit-meghalaya-2026-apply-online-for-03-junior-assistant-technician-posts/45272",
+      "last_verified": "2026-11-16T06:49:20.114986",
+      "status": "active",
+      "verification_status": "secondary_source_only"
     },
     {
       "id": "15c044accfbb2469ab16d62f9d2592d3",
@@ -4444,7 +5413,12 @@
       "original_source_url": "https://allgovernmentjobs.in/iit-bhilai-recruitment-2026-apply-offline-for-project-assistant-posts/45180",
       "last_verified": "2026-11-11T02:54:37.540170",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "af7af3869013a8c257a7bdd61a6c3a9b",
@@ -4488,7 +5462,12 @@
       "original_source_url": "https://allgovernmentjobs.in/iit-bhiali-recruitment-2026-apply-for-junior-research-fellow-posts/45120",
       "last_verified": "2026-11-06T03:30:42.045907",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "e5514a4a7c4226b1ffec3fa7495b01d6",
@@ -4532,7 +5511,12 @@
       "original_source_url": "https://allgovernmentjobs.in/nhsrc-notification-2026-apply-online-for-various-consultant-posts/45118",
       "last_verified": "2026-11-06T03:30:42.041756",
       "status": "expired",
-      "verification_status": "expired"
+      "verification_status": "expired",
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "en_264d36e68bccce8acf9b42d6ba5c02be",
@@ -4584,7 +5568,12 @@
           "source": "employmentnews.gov.in",
           "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-264d36e68bccce8acf9b42d6ba5c02be"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "en_98a03bb95fe6fe8d36c42b7939990e70",
@@ -4636,7 +5625,12 @@
           "source": "employmentnews.gov.in",
           "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-98a03bb95fe6fe8d36c42b7939990e70"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "en_2e208af30415739e7324015cad693232",
@@ -4688,7 +5682,12 @@
           "source": "employmentnews.gov.in",
           "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-2e208af30415739e7324015cad693232"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "en_bbc831e52d65b2d44d2312dcd3132513",
@@ -4740,7 +5739,12 @@
           "source": "employmentnews.gov.in",
           "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-bbc831e52d65b2d44d2312dcd3132513"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "en_209b39efe0087a64e918c6ebea47ea66",
@@ -4792,7 +5796,12 @@
           "source": "employmentnews.gov.in",
           "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-209b39efe0087a64e918c6ebea47ea66"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "en_a4e66c10b7679cc10053aedecae7d919",
@@ -4844,7 +5853,12 @@
           "source": "employmentnews.gov.in",
           "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-a4e66c10b7679cc10053aedecae7d919"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "en_d09137ee1e50437d18cdc150bdaa15b1",
@@ -4896,7 +5910,12 @@
           "source": "employmentnews.gov.in",
           "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-d09137ee1e50437d18cdc150bdaa15b1"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "en_25ff5b613af1301d9f3aaa797c4b3f24",
@@ -4948,7 +5967,12 @@
           "source": "employmentnews.gov.in",
           "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-25ff5b613af1301d9f3aaa797c4b3f24"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "en_c83bdba350a53e4273d8aef1248a55ac",
@@ -5000,7 +6024,12 @@
           "source": "employmentnews.gov.in",
           "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-c83bdba350a53e4273d8aef1248a55ac"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "en_94d36acc5067aea5e1123e3064d1f915",
@@ -5052,7 +6081,12 @@
           "source": "employmentnews.gov.in",
           "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-94d36acc5067aea5e1123e3064d1f915"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "en_d47a229757c22f56386508abf2694856",
@@ -5104,7 +6138,12 @@
           "source": "employmentnews.gov.in",
           "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-d47a229757c22f56386508abf2694856"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     },
     {
       "id": "en_1b247f689b99487eadf48ea012547ce1",
@@ -5156,7 +6195,12 @@
           "source": "employmentnews.gov.in",
           "url": "https://employmentnews.gov.in/newemp/AllJobs.aspx?k=All#en-1b247f689b99487eadf48ea012547ce1"
         }
-      ]
+      ],
+      "job_title": null,
+      "work_mode": null,
+      "country": null,
+      "description_complete": null,
+      "date_posted_verified": null
     }
   ]
 }
