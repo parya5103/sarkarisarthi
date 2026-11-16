@@ -174,11 +174,11 @@ def compute_verification_status(job, today=None):
     if status == 'expired':
         return 'expired'
 
-    # An official link field that is present but not a valid http(s)
-    # URL means the record carries unusable data: flag for review.
+    # Fields labelled as official must point to a recognized official
+    # government domain. A syntactically valid third-party URL is not proof.
     for field in ('official_notification_url', 'official_application_url'):
         value = job.get(field)
-        if value and not validate_http_url(value):
+        if value and not is_official_url(value):
             return 'needs_review'
 
     # Stale record: no verified last date and not checked recently.
@@ -190,8 +190,8 @@ def compute_verification_status(job, today=None):
             return 'needs_review'
 
     # Official backing: a verified official link or an official source.
-    if validate_http_url(job.get('official_notification_url')) or \
-       validate_http_url(job.get('official_application_url')):
+    if is_official_url(job.get('official_notification_url')) or \
+       is_official_url(job.get('official_application_url')):
         return 'official_verified'
     if _source_is_official(job):
         return 'official_verified'
