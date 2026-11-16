@@ -10,11 +10,21 @@ from detail_pages import (
 def sample_job(job_id='en_sample1', **overrides):
     job = {
         'id': job_id,
-        'title': 'TGT Computer Science - Sainik School Nagrota',
+        'title': 'Sainik School Nagrota Recruitment 2026 - Apply Online',
+        'job_title': 'Trained Graduate Teacher - Computer Science',
         'organization': 'SAINIK SCHOOL NAGROTA',
+        'location': 'Nagrota',
+        'state': 'Himachal Pradesh',
+        'country': 'India',
+        'work_mode': 'onsite',
+        'description_complete': True,
+        'date_posted_verified': True,
+        'official_notification_url': 'https://example.gov.in/notice.pdf',
+        'advertisement_no': 'SSN-2026-01',
+        'employment_type': 'FULL_TIME',
         'url': 'https://example.gov.in/job/1',
         'source': 'employmentnews.gov.in',
-        'description': 'Official listing for a teaching post.',
+        'description': 'Sainik School Nagrota invites eligible candidates to apply for a teaching position. The notification describes the role, required qualifications, selection process and application instructions. Candidates should review the official notification and confirm all details before applying.',
         'important_dates': {'last_date': '21-11-2026', 'found_date': '02-11-2026'},
         'published_date': '02-11-2026',
         'category': 'Teaching',
@@ -22,6 +32,7 @@ def sample_job(job_id='en_sample1', **overrides):
         'scraped_at': '2026-11-03T10:00:00',
         'last_verified': '2026-11-03T10:00:00',
         'status': 'active',
+        'verification_status': 'official_verified',
     }
     job.update(overrides)
     return job
@@ -32,10 +43,61 @@ class TestJobPostingJsonld:
         job = sample_job()
         ld = job_posting_jsonld(job, detail_url(job['id']))
         assert ld['@type'] == 'JobPosting'
-        assert ld['title'] == job['title']
+        assert ld['title'] == job['job_title']
+        assert '<p>' in ld['description'] and '</p>' in ld['description']
+        assert ld['identifier']['value'] == 'SSN-2026-01'
+        assert ld['employmentType'] == 'FULL_TIME'
+        assert 'directApply' not in ld
         assert ld['validThrough'].startswith('2026-11-21T23:59')
         assert ld['hiringOrganization']['name'] == 'SAINIK SCHOOL NAGROTA'
         assert ld['datePosted'] == '2026-11-02'
+
+
+    def test_non_official_application_url_cannot_enable_job_posting(self):
+        job = sample_job(official_notification_url=None,
+                         official_application_url='https://exampleportal.in/apply')
+        assert job_posting_jsonld(job, detail_url(job['id'])) is None
+
+    def test_truncated_summary_suppresses_job_posting_rich_result(self):
+        job = sample_job(description='A detailed recruitment summary with role responsibilities, required qualifications, selection process and application instructions for candidates who meet the published criteria...')
+        assert job_posting_jsonld(job, detail_url(job['id'])) is None
+
+    def test_missing_required_job_posting_facts_suppress_rich_result(self):
+        for missing in ('verification_status', 'published_date', 'date_posted_verified', 'job_title', 'description_complete', 'organization', 'location', 'country', 'official_notification_url'):
+            job = sample_job(**{missing: None})
+            assert job_posting_jsonld(job, detail_url(job['id'])) is None
+
+    def test_physical_location_is_structured_without_invented_address_parts(self):
+        ld = job_posting_jsonld(sample_job(), detail_url('en_sample1'))
+        assert ld['jobLocation']['address']['addressLocality'] == 'Nagrota'
+        assert ld['jobLocation']['address']['addressRegion'] == 'Himachal Pradesh'
+        assert ld['jobLocation']['address']['addressCountry'] == 'India'
+        assert 'streetAddress' not in ld['jobLocation']['address']
+
+    def test_remote_job_uses_remote_location_requirements(self):
+        job = sample_job(work_mode='fully_remote', employment_type='FULL_TIME', description='This is a fully remote role. Sainik School Nagrota invites eligible candidates to apply for a teaching position. The notification describes the role, required qualifications, selection process and application instructions. Candidates should review the official notification and confirm all details before applying.')
+        job['location'] = None
+        ld = job_posting_jsonld(job, detail_url(job['id']))
+        assert ld['jobLocationType'] == 'TELECOMMUTE'
+        assert ld['applicantLocationRequirements']['name'] == 'India'
+        assert 'jobLocation' not in ld
+
+    def test_schema_uses_explicit_job_title_and_full_description(self):
+        job = sample_job(title='Long recruitment announcement title', job_title='Assistant Teacher')
+        ld = job_posting_jsonld(job, detail_url(job['id']))
+        assert ld['title'] == 'Assistant Teacher'
+        assert 'Long recruitment announcement title' not in ld['title']
+        assert ld['description'].startswith('<p>')
+
+    def test_unverified_or_unknown_employment_type_is_not_marked_up(self):
+        job = sample_job(employment_type='Permanent')
+        ld = job_posting_jsonld(job, detail_url(job['id']))
+        assert 'employmentType' not in ld
+        assert 'directApply' not in ld
+
+    def test_remote_job_requires_explicit_remote_description(self):
+        job = sample_job(work_mode='fully_remote', employment_type='FULL_TIME')
+        assert job_posting_jsonld(job, detail_url(job['id'])) is None
 
     def test_no_valid_through_without_last_date(self):
         job = sample_job(important_dates={'found_date': '02-11-2026'})
@@ -45,18 +107,27 @@ class TestJobPostingJsonld:
     def test_no_organization_without_verified_org(self):
         job = sample_job(organization=None)
         ld = job_posting_jsonld(job, detail_url(job['id']))
-        assert 'hiringOrganization' not in ld
+        assert ld is None
 
     def test_no_invented_salary_or_location(self):
         ld = job_posting_jsonld(sample_job(), detail_url('en_sample1'))
         assert 'baseSalary' not in ld
-        assert 'jobLocation' not in ld
+        assert 'streetAddress' not in ld['jobLocation']['address']
 
     def test_none_when_title_or_description_missing(self):
         assert job_posting_jsonld({'id': 'x'}, 'u') is None
 
 
 class TestRenderDetailPage:
+    def test_job_detail_search_title_is_concise_and_full_heading_is_preserved(self):
+        job = sample_job(title='DHFWS Rampurhat Notification 2026 - Apply Online for Various Community Health Assistant Posts')
+        page = render_detail_page(job, [])
+        title = page.split('<title>', 1)[1].split('</title>', 1)[0]
+        assert len(title) <= 60
+        assert 'Trained Graduate Teacher - Computer Science' in page
+        assert '<meta property="og:title"' in page
+        assert '<meta name="twitter:title"' in page
+
     def test_contains_canonical_and_breadcrumb(self):
         job = sample_job()
         page = render_detail_page(job, [])
@@ -71,7 +142,7 @@ class TestRenderDetailPage:
         assert '&lt;script&gt;' in page
 
     def test_jsonld_script_injection_escaped(self):
-        job = sample_job(title='X Job', description='Y </script><script>alert(1)</script>')
+        job = sample_job(title='X Job', description='Y </script><script>alert(1)</script> This notification describes the role, required qualifications, selection process and application instructions for eligible candidates.')
         page = render_detail_page(job, [])
         assert '</script><script>' not in page
         assert 'u003c' in page
@@ -121,6 +192,25 @@ class TestClosedJobHandling:
         assert ld is not None
         assert ld['@type'] == 'JobPosting'
 
+    def test_closed_job_pages_are_noindex_and_keep_reference_content(self):
+        for status in ('expired', 'cancelled'):
+            page = render_detail_page(sample_job(status=status), [])
+            assert '<meta name="robots" content="noindex,follow">' in page
+            assert 'Sarkari Sarthi' in page
+            assert 'SarkariSarthi 2.0' not in page
+
+    def test_unverified_job_pages_are_noindex_until_officially_backed(self):
+        for verification_status in ('secondary_source_only', 'official_link_pending', 'needs_review'):
+            page = render_detail_page(
+                sample_job(verification_status=verification_status), []
+            )
+            assert '<meta name="robots" content="noindex,follow">' in page
+
+    def test_active_job_pages_remain_indexable_by_default(self):
+        page = render_detail_page(sample_job(status='active'), [])
+        assert 'name="robots" content="noindex' not in page
+        assert '<title>' in page and ' | Sarkari Sarthi</title>' in page
+
     def test_expired_banner_on_detail_page(self):
         page = render_detail_page(sample_job(status='expired'), [])
         assert 'no longer open for' in page
@@ -129,6 +219,18 @@ class TestClosedJobHandling:
     def test_cancelled_banner_on_detail_page(self):
         page = render_detail_page(sample_job(status='cancelled'), [])
         assert 'marked cancelled' in page
+
+    def test_sitemap_excludes_unverified_job_pages(self, tmp_path):
+        verified = sample_job('en_verified1')
+        unverified = sample_job(
+            'en_unverified1',
+            verification_status='secondary_source_only',
+        )
+        write_detail_pages([verified, unverified], out_root=str(tmp_path))
+        sitemap = (tmp_path / SITEMAP_FILE).read_text(encoding='utf-8')
+        assert detail_url('en_verified1') in sitemap
+        assert detail_url('en_unverified1') not in sitemap
+        assert (tmp_path / 'job' / 'en_unverified1' / 'index.html').exists()
 
     def test_sitemap_excludes_closed_jobs(self, tmp_path):
         active = sample_job('en_open1')
@@ -206,5 +308,15 @@ class TestVerificationChip:
         assert 'job-verification' not in page
 
     def test_missing_status_gets_no_chip(self):
-        page = render_detail_page(sample_job(), [])
+        page = render_detail_page(sample_job(verification_status=None), [])
         assert 'job-verification' not in page
+
+
+class TestHomepageSeoMetadata:
+    def test_homepage_has_product_name_and_descriptive_search_snippet(self):
+        with open(os.path.join(os.path.dirname(__file__), '..', 'index.html'), encoding='utf-8') as handle:
+            page = handle.read()
+        assert '<title>Sarkari Sarthi: Latest Government Jobs &amp; Results in India</title>' in page
+        assert 'name="description"' in page
+        assert 'Check eligibility, important dates and source links before applying.' in page
+        assert '"name": "Sarkari Sarthi"' in page
