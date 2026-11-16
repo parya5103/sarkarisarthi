@@ -133,6 +133,11 @@ class TestVerificationStatus:
         job['official_notification_url'] = 'https://ssc.gov.in/notice.pdf'
         assert compute_verification_status(job, TODAY) == 'official_verified'
 
+    def test_non_official_http_url_does_not_verify_job(self):
+        job = private_job()
+        job['official_notification_url'] = 'https://exampleportal.in/not-official.pdf'
+        assert compute_verification_status(job, TODAY) == 'needs_review'
+
     def test_official_source_means_verified(self):
         # Employment News style: data from employmentnews.gov.in itself.
         assert compute_verification_status(base_job(), TODAY) == 'official_verified'
@@ -176,7 +181,7 @@ class TestNormalizeJob:
     def test_schema_fields_added_without_data_loss(self):
         job = base_job()
         out = normalize_job(job)
-        for field in ('organization', 'department', 'location', 'vacancies',
+        for field in ('organization', 'department', 'location', 'country', 'vacancies',
                       'advertisement_no', 'qualification', 'age_limit',
                       'official_notification_url', 'official_application_url',
                       'published_date', 'last_verified', 'status',
@@ -194,6 +199,7 @@ class TestNormalizeJob:
         assert out['organization'] is None
         assert out['qualification'] is None
         assert out['state'] is None
+        assert out['country'] is None
         assert out['salary'] is None
         assert out['important_dates'].get('last_date') is None
         assert NOT_SPECIFIED_TEXT == 'Not specified in official notification'
@@ -482,3 +488,13 @@ class TestStorageStatusRefresh:
         storage.backup_manifest(now=date(2026, 11, 3))
         backups = list((job_dir / 'backup').glob('manifest_backup_*.json'))
         assert len(backups) == 1
+
+
+
+class TestStructuredDataEligibilityFields:
+    def test_missing_rich_result_verification_flags_remain_unknown(self):
+        normalized = normalize_job(base_job())
+        assert normalized['job_title'] is None
+        assert normalized['work_mode'] is None
+        assert normalized['description_complete'] is None
+        assert normalized['date_posted_verified'] is None

@@ -29,7 +29,7 @@ import logging
 import os
 from datetime import datetime
 
-from job_schema import parse_date
+from job_schema import is_official_url, parse_date
 from storage import is_valid_job_id
 
 logger = logging.getLogger(__name__)
@@ -63,44 +63,130 @@ def _esc(value):
     return html.escape(str(value), quote=True)
 
 
+def _seo_title(job):
+    """Create a concise search title while keeping the full notification title on-page."""
+    raw = job.get('job_title') or job.get('title') or 'Government Job'
+    base = ' '.join(str(raw).split())
+    if len(base) > 42:
+        base = base[:42].rsplit(' ', 1)[0] or base[:42]
+    return base + ' | Sarkari Sarthi'
+
+
 def _iso_date(value):
     parsed = parse_date(value)
     return parsed.strftime('%Y-%m-%d') if parsed else None
 
 
 def job_posting_jsonld(job, page_url):
-    """JobPosting structured data, verified fields only.
+    """Build Google JobPosting JSON-LD only from complete, explicitly verified facts.
 
-    None for closed (expired/cancelled) vacancies: they are no longer
-    open for application and must not produce rich results.
+    A scraped headline or excerpt is not necessarily the employer's job title
+    or full description. The separate verification flags are required so
+    partial aggregator data never becomes misleading Google Jobs markup.
     """
     status = str(job.get('status') or '').lower()
     if status in CLOSED_STATUSES:
         return None
+
+    dates = job.get('important_dates') or {}
+    last_iso = _iso_date(dates.get('last_date') or job.get('last_date'))
+    published_iso = _iso_date(job.get('published_date'))
+    organization = str(job.get('organization') or '').strip()
+    job_title = str(job.get('job_title') or '').strip()
+    description = str(job.get('description') or '').strip()
+    location = str(job.get('location') or '').strip()
+    country = str(job.get('country') or '').strip()
+    work_mode = str(job.get('work_mode') or '').strip().lower()
+    verification_status = str(job.get('verification_status') or '').lower()
+    remote = work_mode == 'fully_remote'
+
+    # Required facts must be explicit and verified from the employer's
+    # notification: original posting date, job-only title, complete
+    # description, hiring organisation, country and apply/notification path.
+    if (verification_status != 'official_verified'
+            or not published_iso or job.get('date_posted_verified') is not True
+            or not job_title or job.get('description_complete') is not True
+            or not organization or not country
+            or not (is_official_url(job.get('official_application_url'))
+                    or is_official_url(job.get('official_notification_url')))):
+        return None
+    if not remote and (not location or location.lower() in {
+        'all india', 'india', 'pan india', 'nationwide'
+    }):
+        return None
+    if len(description) < 100 or description.lower() == job_title.lower():
+        return None
+    if description.rstrip().endswith(('...', '…')):
+        return None
+    if remote and not any(phrase in description.lower() for phrase in (
+        'fully remote', '100% remote', 'work from home', 'work-from-home', 'remote work'
+    )):
+        return None
+
+    description_html = ''.join(
+        '<p>' + html.escape(part.strip()) + '</p>'
+        for part in description.splitlines() if part.strip()
+    )
+    if not description_html:
+        return None
+
     data = {
         '@context': 'https://schema.org',
         '@type': 'JobPosting',
-        'title': job.get('title') or '',
-        'description': job.get('description') or '',
+        'title': job_title,
+        'description': description_html,
+        'datePosted': published_iso,
         'url': page_url,
-        'identifier': {'@type': 'PropertyValue', 'value': job.get('id')},
+        'hiringOrganization': {
+            '@type': 'Organization',
+            'name': organization,
+        },
     }
-    if not data['title'] or not data['description']:
-        return None
-    dates = job.get('important_dates') or {}
-    last_iso = _iso_date(dates.get('last_date') or job.get('last_date'))
+
+    advertisement_no = str(job.get('advertisement_no') or '').strip()
+    if advertisement_no:
+        data['identifier'] = {
+            '@type': 'PropertyValue',
+            'name': organization,
+            'value': advertisement_no,
+        }
+
+    if remote:
+        data['jobLocationType'] = 'TELECOMMUTE'
+        data['applicantLocationRequirements'] = {
+            '@type': 'Country',
+            'name': country,
+        }
+        if location:
+            address = {
+                '@type': 'PostalAddress',
+                'addressLocality': location,
+                'addressCountry': country,
+            }
+            if job.get('state'):
+                address['addressRegion'] = job['state']
+            data['jobLocation'] = {'@type': 'Place', 'address': address}
+    else:
+        address = {
+            '@type': 'PostalAddress',
+            'addressLocality': location,
+            'addressCountry': country,
+        }
+        if job.get('state'):
+            address['addressRegion'] = job['state']
+        data['jobLocation'] = {'@type': 'Place', 'address': address}
+
     if last_iso:
         data['validThrough'] = last_iso + 'T23:59:59'
-    published_iso = _iso_date(job.get('published_date'))
-    if published_iso:
-        data['datePosted'] = published_iso
-    if job.get('organization'):
-        data['hiringOrganization'] = {
-            '@type': 'Organization',
-            'name': job['organization'],
-        }
-    if job.get('official_application_url'):
-        data['directApply'] = True
+
+    allowed_employment_types = {
+        'FULL_TIME', 'PART_TIME', 'CONTRACTOR', 'TEMPORARY',
+        'INTERN', 'VOLUNTEER', 'PER_DIEM', 'OTHER',
+    }
+    employment_type = str(job.get('employment_type') or '').strip().upper()
+    employment_type = employment_type.replace('-', '_').replace(' ', '_')
+    if employment_type in allowed_employment_types:
+        data['employmentType'] = employment_type
     return data
 
 
@@ -115,8 +201,12 @@ def render_detail_page(job, related):
     page_url = detail_url(job_id)
     dates = job.get('important_dates') or {}
     title = _esc(job.get('title') or 'Government Job Notification')
+    seo_title = _esc(_seo_title(job))
     org = job.get('organization')
     status = str(job.get('status') or 'active').lower()
+    verification_status = str(job.get('verification_status') or '').lower()
+    indexable = status not in CLOSED_STATUSES and verification_status == 'official_verified'
+    robots_meta = '' if indexable else '<meta name="robots" content="noindex,follow">'
 
     meta_source = (job.get('description') or job.get('title') or 'Government job notification.')
     meta_desc = _esc(meta_source[:157] + '...' if len(meta_source) > 160 else meta_source)
@@ -157,6 +247,8 @@ def render_detail_page(job, related):
     if job.get('department'):
         rows.append(_info_row('Department', job['department']))
     rows.append(_info_row('Category', job.get('category') or 'General'))
+    if job.get('job_title'):
+        rows.append(_info_row('Job Title', job['job_title']))
     if job.get('vacancies'):
         rows.append(_info_row('Vacancies', job['vacancies']))
     if job.get('qualification'):
@@ -214,8 +306,15 @@ def render_detail_page(job, related):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>''' + title + ''' - SarkariSarthi</title>
+<title>''' + seo_title + '''</title>
 <meta name="description" content="''' + meta_desc + '''">
+<meta property="og:title" content="''' + seo_title + '''">
+<meta property="og:description" content="''' + meta_desc + '''">
+<meta property="og:type" content="article">
+<meta property="og:url" content="''' + page_url + '''">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="''' + seo_title + '''">
+<meta name="twitter:description" content="''' + meta_desc + '''">''' + robots_meta + '''
 <link rel="canonical" href="''' + page_url + '''">
 <link rel="stylesheet" href="/sarkari-sarthi/style.css">
 <link rel="stylesheet" href="/sarkari-sarthi/assets/css/ads.css">
@@ -226,8 +325,8 @@ def render_detail_page(job, related):
 <header class="header">
 <nav class="navbar"><div class="nav-container">
 <div class="nav-logo"><a href="/sarkari-sarthi/" style="text-decoration:none;color:inherit;">
-<img src="/sarkari-sarthi/ai-powered-icon.png" alt="SarkariSarthi logo" class="logo-icon">
-<span class="logo-text">SarkariSarthi 2.0</span></a></div>
+<img src="/sarkari-sarthi/ai-powered-icon.png" alt="Sarkari Sarthi logo" class="logo-icon">
+<span class="logo-text">Sarkari Sarthi</span></a></div>
 </div></nav>
 </header>
 <main class="container detail-page">
@@ -318,6 +417,7 @@ def write_detail_pages(jobs, out_root='.'):
             if rel['id'] != job['id']
             and rel.get('category') == job.get('category')
             and str(rel.get('status') or 'active').lower() not in CLOSED_STATUSES
+            and str(rel.get('verification_status') or '').lower() == 'official_verified'
         ][:MAX_RELATED]
         try:
             page = render_detail_page(job, related)
@@ -352,7 +452,8 @@ def _write_sitemap(jobs, out_root='.'):
     for job in jobs:
         # Expired and cancelled vacancies are not open jobs: exclude
         # them from the active-job sitemap.
-        if str(job.get('status') or 'active').lower() in CLOSED_STATUSES:
+        if (str(job.get('status') or 'active').lower() in CLOSED_STATUSES
+                or str(job.get('verification_status') or '').lower() != 'official_verified'):
             continue
         verified = job.get('last_verified') or ''
         lines.append(url_entry(detail_url(job['id']), verified))
