@@ -29,7 +29,7 @@ import logging
 import os
 from datetime import datetime
 
-from job_schema import parse_date
+from job_schema import is_official_url, parse_date
 from storage import is_valid_job_id
 
 logger = logging.getLogger(__name__)
@@ -107,7 +107,8 @@ def job_posting_jsonld(job, page_url):
             or not published_iso or job.get('date_posted_verified') is not True
             or not job_title or job.get('description_complete') is not True
             or not organization or not country
-            or not (job.get('official_application_url') or job.get('official_notification_url'))):
+            or not (is_official_url(job.get('official_application_url'))
+                    or is_official_url(job.get('official_notification_url')))):
         return None
     if not remote and (not location or location.lower() in {
         'all india', 'india', 'pan india', 'nationwide'
