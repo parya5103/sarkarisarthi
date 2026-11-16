@@ -133,6 +133,11 @@ class TestVerificationStatus:
         job['official_notification_url'] = 'https://ssc.gov.in/notice.pdf'
         assert compute_verification_status(job, TODAY) == 'official_verified'
 
+    def test_non_official_http_url_does_not_verify_job(self):
+        job = private_job()
+        job['official_notification_url'] = 'https://exampleportal.in/not-official.pdf'
+        assert compute_verification_status(job, TODAY) == 'secondary_source_only'
+
     def test_official_source_means_verified(self):
         # Employment News style: data from employmentnews.gov.in itself.
         assert compute_verification_status(base_job(), TODAY) == 'official_verified'
