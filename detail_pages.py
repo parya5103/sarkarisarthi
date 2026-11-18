@@ -20,8 +20,8 @@ vacancies would mislead search engines, and they are excluded from
 the sitemap as well.
 
 The root sitemap.xml lists the homepage and every generated detail
-page of a non-expired, non-cancelled job with an honest lastmod (the
-job's last_verified timestamp).
+page of a non-expired, non-cancelled job with a validated lastmod from
+modified_at/updated_at, falling back to the last source-verification timestamp.
 """
 import html
 import json
