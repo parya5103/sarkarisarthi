@@ -356,7 +356,9 @@ function filterExpiredJobs(jobs) {
         // present; the date check below remains a safety net for old
         // records that never passed through normalize_job.
         const status = String(job.status || '').toLowerCase();
-        if (status === 'cancelled' || status === 'expired') return false;
+        const verificationStatus = String(job.verification_status || '').toLowerCase();
+        if (['cancelled', 'expired', 'closed'].includes(status)
+            || ['cancelled', 'expired'].includes(verificationStatus)) return false;
         const lastDateStr = job.important_dates && job.important_dates.last_date;
         const lastDate = parseJobDate(lastDateStr);
         // Keep jobs without a parseable last date: absence of a date is
