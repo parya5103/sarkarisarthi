@@ -2,11 +2,11 @@ const fs = require('fs');
 const vm = require('vm');
 
 const source = fs.readFileSync(require.resolve('../script.js'), 'utf8');
-const dateMatch = source.match(/function parseJobDate\\(dateStr\\) \\{[\\s\\S]*?\\n\\}/);
+const dateMatch = source.match(/function parseJobDate\(dateStr\) \{[\s\S]*?\n\}/);
 const match = source.match(/function filterExpiredJobs\(jobs\) \{[\s\S]*?\n\}/);
 if (!dateMatch || !match) throw new Error('job date helpers not found');
 const context = {};
-vm.runInNewContext(match[0] + '\nglobalThis.filterExpiredJobs = filterExpiredJobs;', context);
+vm.runInNewContext(dateMatch[0] + '\n' + match[0] + '\nglobalThis.filterExpiredJobs = filterExpiredJobs;', context);
 
 describe('filterExpiredJobs', () => {
   test('excludes expired and cancelled lifecycle states', () => {
