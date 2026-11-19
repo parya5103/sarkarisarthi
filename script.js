@@ -481,7 +481,7 @@ function applyFilters() {
         if (savedOnly) parts.push('Saved on this device');
         summaryEl.textContent = parts.length > 0
             ? `Showing ${filteredJobs.length} matching notification${filteredJobs.length === 1 ? '' : 's'} (${parts.join(' · ')})`
-            : `Showing ${filteredJobs.length} verified active recruitment notification${filteredJobs.length === 1 ? '' : 's'} across India`;
+            : `Showing ${filteredJobs.length} recruitment listing${filteredJobs.length === 1 ? '' : 's'}. Check each source label and the official notification before applying.`;
     }
 
     handleSort();

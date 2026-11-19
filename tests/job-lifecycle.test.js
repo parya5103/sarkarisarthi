@@ -20,6 +20,13 @@ describe('filterExpiredJobs', () => {
     expect(result).toHaveLength(0);
   });
 
+  test('keeps needs-review listings visible while retaining the warning state', () => {
+    const result = context.filterExpiredJobs([
+      { id: 'needs-review', status: 'active', verification_status: 'needs_review' }
+    ]);
+    expect(result.map(job => job.id)).toEqual(['needs-review']);
+  });
+
   test('keeps active jobs with no known deadline and future deadlines', () => {
     const result = context.filterExpiredJobs([
       { id: 'unknown-deadline', status: 'active' },

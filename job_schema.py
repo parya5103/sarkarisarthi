@@ -181,9 +181,23 @@ def compute_verification_status(job, today=None):
         if value and not is_official_url(value):
             return 'needs_review'
 
-    # Stale record: no verified last date and not checked recently.
+    # A secondary portal headline without a verified deadline is not
+    # enough to label a vacancy as trustworthy/current. Keep the listing
+    # visible with a review warning, but never present it as verified.
     dates = job.get('important_dates') or {}
-    if not parse_date(dates.get('last_date') or job.get('last_date')):
+    last_date = parse_date(dates.get('last_date') or job.get('last_date'))
+    has_direct_official_link = (
+        is_official_url(job.get('official_notification_url'))
+        or is_official_url(job.get('official_application_url'))
+    )
+    if (not last_date
+            and not _source_is_official(job)
+            and not has_direct_official_link
+            and not _any_official_link(job)):
+        return 'needs_review'
+
+    # Stale official records with no verified deadline also require review.
+    if not last_date:
         checked = parse_date(job.get('last_verified')) or parse_date(job.get('scraped_at'))
         today = today or date.today()
         if checked and (today - checked).days > STALE_AFTER_DAYS:

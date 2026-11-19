@@ -14,6 +14,7 @@ from datetime import date, timedelta
 import pytest
 
 import storage
+from detail_pages import render_detail_page
 from job_schema import (
     NOT_SPECIFIED_TEXT, parse_date, compute_status, normalize_job,
     advertisement_key, is_duplicate_job, title_date_key, merge_job,
@@ -142,8 +143,8 @@ class TestVerificationStatus:
         # Employment News style: data from employmentnews.gov.in itself.
         assert compute_verification_status(base_job(), TODAY) == 'official_verified'
 
-    def test_private_only_is_secondary_source(self):
-        assert compute_verification_status(private_job(), TODAY) == 'secondary_source_only'
+    def test_private_only_without_deadline_needs_review(self):
+        assert compute_verification_status(private_job(), TODAY) == 'needs_review'
 
     def test_gov_link_in_links_is_link_pending(self):
         job = private_job()
@@ -162,9 +163,15 @@ class TestVerificationStatus:
         # No verified last date and not re-checked for > 30 days.
         assert compute_verification_status(job, TODAY) == 'needs_review'
 
-    def test_fresh_unknown_last_date_is_not_flagged(self):
+    def test_fresh_secondary_source_without_deadline_needs_review(self):
         job = private_job()
         job['scraped_at'] = '2026-11-01T00:00:00'
+        job['last_verified'] = '2026-11-01T00:00:00'
+        assert compute_verification_status(job, TODAY) == 'needs_review'
+
+    def test_secondary_source_with_deadline_remains_secondary_only(self):
+        job = private_job()
+        job['important_dates'] = {'last_date': '30-11-2026'}
         job['last_verified'] = '2026-11-01T00:00:00'
         assert compute_verification_status(job, TODAY) == 'secondary_source_only'
 
@@ -498,3 +505,17 @@ class TestStructuredDataEligibilityFields:
         assert normalized['work_mode'] is None
         assert normalized['description_complete'] is None
         assert normalized['date_posted_verified'] is None
+
+
+def test_needs_review_detail_page_has_noindex_and_clear_warning():
+    job = private_job()
+    job.update({
+        'id': 'needs-review-123',
+        'title': 'Recruitment listing without confirmed application deadline',
+        'verification_status': 'needs_review',
+        'status': 'active',
+    })
+    page = render_detail_page(job, [])
+    assert '<meta name="robots" content="noindex,follow">' in page
+    assert 'could not be confirmed against an official recruitment notice' in page
+    assert 'before applying' in page
