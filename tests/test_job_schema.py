@@ -162,9 +162,15 @@ class TestVerificationStatus:
         # No verified last date and not re-checked for > 30 days.
         assert compute_verification_status(job, TODAY) == 'needs_review'
 
-    def test_fresh_unknown_last_date_is_not_flagged(self):
+    def test_fresh_secondary_source_without_deadline_needs_review(self):
         job = private_job()
         job['scraped_at'] = '2026-11-01T00:00:00'
+        job['last_verified'] = '2026-11-01T00:00:00'
+        assert compute_verification_status(job, TODAY) == 'needs_review'
+
+    def test_secondary_source_with_deadline_remains_secondary_only(self):
+        job = private_job()
+        job['important_dates'] = {'last_date': '30-11-2026'}
         job['last_verified'] = '2026-11-01T00:00:00'
         assert compute_verification_status(job, TODAY) == 'secondary_source_only'
 
