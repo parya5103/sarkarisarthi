@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-19T04:20:35.578317",
+  "last_updated": "2026-11-19T04:28:56.490287",
   "total_jobs": 148,
   "active_jobs": 130,
   "expired_jobs": 18,
@@ -6104,9 +6104,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/ccmb-notification-2026-apply-online-for-02-project-staff-posts/45375",
-      "last_verified": "2026-11-19T04:20:40.039465",
+      "last_verified": "2026-11-19T04:28:56.490287",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/ccmb-notification-2026-apply-online-for-02-project-staff-posts/45375"
+        }
+      ]
     },
     {
       "id": "2a2e0743e48689a9b51e8dd6a3d56e92",
@@ -6153,9 +6159,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/ncsm-notification-2026-apply-offline-for-technician-posts/45374",
-      "last_verified": "2026-11-19T04:20:40.039504",
+      "last_verified": "2026-11-19T04:28:56.490287",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/ncsm-notification-2026-apply-offline-for-technician-posts/45374"
+        }
+      ]
     },
     {
       "id": "fb69260938cacb5c8070af9c6919c506",
@@ -6202,9 +6214,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/rites-notification-2026-apply-online-for-06-senior-technical-assistant-posts/45373",
-      "last_verified": "2026-11-19T04:20:40.039533",
+      "last_verified": "2026-11-19T04:28:56.490287",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/rites-notification-2026-apply-online-for-06-senior-technical-assistant-posts/45373"
+        }
+      ]
     },
     {
       "id": "20d2188c5959d4e2aca5e261a2549d78",
@@ -6252,9 +6270,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/dlsa-ananthapuramu-notification-2026-apply-offline-for-various-driver-posts/45369",
-      "last_verified": "2026-11-19T04:20:40.039592",
+      "last_verified": "2026-11-19T04:28:56.490287",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/dlsa-ananthapuramu-notification-2026-apply-offline-for-various-driver-posts/45369"
+        }
+      ]
     },
     {
       "id": "f2ad21f3ccd3bab6ac07843b6ac49380",
@@ -6302,9 +6326,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/actrec-notification-2026-walk-in-interview-for-02-clinical-nurse-and-assistant-data-manager-posts/45370",
-      "last_verified": "2026-11-19T04:20:40.039559",
+      "last_verified": "2026-11-19T04:28:56.490287",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/actrec-notification-2026-walk-in-interview-for-02-clinical-nurse-and-assistant-data-manager-posts/45370"
+        }
+      ]
     },
     {
       "id": "914840104066ac1930a7d5c1f2d999b9",
@@ -6350,9 +6380,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/iit-guwahari-recruitment-2026-apply-online-for-02-project-technician-and-associate-project-engineer-posts/45372",
-      "last_verified": "2026-11-19T04:20:40.044273",
+      "last_verified": "2026-11-19T04:28:56.490287",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/iit-guwahari-recruitment-2026-apply-online-for-02-project-technician-and-associate-project-engineer-posts/45372"
+        }
+      ]
     },
     {
       "id": "2b0523baab063c96f4b8257a6f05122a",
@@ -6398,9 +6434,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/aiims-bhopal-recruitment-2026-walk-in-interview-for-lab-technician-posts/45368",
-      "last_verified": "2026-11-19T04:20:40.044322",
+      "last_verified": "2026-11-19T04:28:56.490287",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/aiims-bhopal-recruitment-2026-walk-in-interview-for-lab-technician-posts/45368"
+        }
+      ]
     },
     {
       "id": "7457ab6870ce67de52a11ed1018489f7",
@@ -6447,9 +6489,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/iit-madras-jobs-2026-apply-online-for-senior-project-consultant-posts/45367",
-      "last_verified": "2026-11-19T04:20:40.049105",
+      "last_verified": "2026-11-19T04:28:56.490287",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/iit-madras-jobs-2026-apply-online-for-senior-project-consultant-posts/45367"
+        }
+      ]
     },
     {
       "id": "495f84546a8c5a90ac24535a2f0e03cc",
@@ -6497,9 +6545,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/sai-recruitment-2026-apply-offline-for-03-medical-officer-posts/45366",
-      "last_verified": "2026-11-19T04:20:40.044349",
+      "last_verified": "2026-11-19T04:28:56.490287",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/sai-recruitment-2026-apply-offline-for-03-medical-officer-posts/45366"
+        }
+      ]
     },
     {
       "id": "15c044accfbb2469ab16d62f9d2592d3",
