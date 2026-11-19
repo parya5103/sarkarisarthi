@@ -1075,8 +1075,16 @@ function updateJobCounts() {
     });
 
     const totalActiveEl = document.getElementById('totalActiveJobsCount');
-    if (totalActiveEl && jobsData.length > 0) {
-        totalActiveEl.textContent = `${jobsData.length}+`;
+    if (totalActiveEl) {
+        totalActiveEl.textContent = String(jobsData.length);
+    }
+
+    const needsReviewEl = document.getElementById('needsReviewJobsCount');
+    if (needsReviewEl) {
+        const needsReviewCount = jobsData.filter(job =>
+            String(job.verification_status || '').toLowerCase() === 'needs_review'
+        ).length;
+        needsReviewEl.textContent = String(needsReviewCount);
     }
 }
 
