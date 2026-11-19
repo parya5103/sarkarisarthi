@@ -20,8 +20,8 @@ vacancies would mislead search engines, and they are excluded from
 the sitemap as well.
 
 The root sitemap.xml lists the homepage and every generated detail
-page of a non-expired, non-cancelled job with an honest lastmod (the
-job's last_verified timestamp).
+page of a non-expired, non-cancelled job with a validated lastmod from
+modified_at/updated_at, falling back to the last source-verification timestamp.
 """
 import html
 import json
@@ -455,8 +455,14 @@ def _write_sitemap(jobs, out_root='.'):
         if (str(job.get('status') or 'active').lower() in CLOSED_STATUSES
                 or str(job.get('verification_status') or '').lower() != 'official_verified'):
             continue
-        verified = job.get('last_verified') or ''
-        lines.append(url_entry(detail_url(job['id']), verified))
+        # Prefer an explicit content modification timestamp; otherwise use
+        # last_verified, which the merge pipeline advances only when verified
+        # facts or source metadata actually change. Never use build time.
+        modified = (job.get('modified_at') or job.get('updated_at')
+                    or job.get('last_verified') or '')
+        parsed_modified = parse_date(str(modified)) if modified else None
+        lastmod = parsed_modified.isoformat() if parsed_modified else ''
+        lines.append(url_entry(detail_url(job['id']), lastmod))
     lines.append('</urlset>')
     sitemap_path = os.path.join(out_root, SITEMAP_FILE)
     with open(sitemap_path, 'w', encoding='utf-8') as f:

@@ -261,6 +261,20 @@ class TestWriteDetailPages:
         assert detail_url('en_a2') in sitemap
         assert '<urlset' in sitemap and '</urlset>' in sitemap
 
+    def test_sitemap_lastmod_prefers_meaningful_modification_date(self, tmp_path):
+        job = sample_job('en_modified1', last_verified='2026-11-05T10:00:00')
+        job['modified_at'] = '2026-11-18T09:30:00'
+        write_detail_pages([job], out_root=str(tmp_path))
+        sitemap = (tmp_path / SITEMAP_FILE).read_text(encoding='utf-8')
+        assert '<lastmod>2026-11-18</lastmod>' in sitemap
+
+    def test_sitemap_omits_invalid_lastmod_instead_of_using_build_time(self, tmp_path):
+        job = sample_job('en_invaliddate', last_verified='not-a-date')
+        write_detail_pages([job], out_root=str(tmp_path))
+        sitemap = (tmp_path / SITEMAP_FILE).read_text(encoding='utf-8')
+        assert detail_url('en_invaliddate') in sitemap
+        assert '<lastmod>' not in sitemap
+
     def test_orphan_dirs_removed(self, tmp_path):
         stale = tmp_path / 'job' / 'en_gone'
         stale.mkdir(parents=True)
