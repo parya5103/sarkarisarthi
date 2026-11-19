@@ -2249,3 +2249,5 @@ a:focus-visible {
         display: none;
     }
 }
+
+.job-status-banner.status-review { background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.5); color: var(--text-primary); }
