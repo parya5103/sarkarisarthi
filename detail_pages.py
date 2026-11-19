@@ -232,6 +232,11 @@ def render_detail_page(job, related):
         status_banner = ('<div class="job-status-banner status-expired">The last application date for this '
                          'vacancy has passed. It is kept for reference only and is no longer open for '
                          'application.</div>')
+    elif verification_status == 'needs_review':
+        status_banner = ('<div class="job-status-banner status-review">This listing could not be confirmed '
+                         'against an official recruitment notice, or its application deadline is missing. '
+                         'Check the employer's official website for the latest vacancy status, eligibility '
+                         'and dates before applying.</div>')
 
     # Phase 3: verification trust chip (honest source-of-information
     # label). Only for known statuses; no invented labels.
