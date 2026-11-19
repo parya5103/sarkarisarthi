@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-11-19T07:20:31.547291",
-  "total_jobs": 156,
-  "active_jobs": 138,
+  "last_updated": "2026-11-19T07:24:16.847411",
+  "total_jobs": 157,
+  "active_jobs": 139,
   "expired_jobs": 18,
   "jobs": [
     {
@@ -6602,9 +6602,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/niftem-notification-2026-apply-offline-for-junior-research-fellow-posts/45385",
-      "last_verified": "2026-11-19T07:20:35.583724",
+      "last_verified": "2026-11-19T07:24:16.847411",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/niftem-notification-2026-apply-offline-for-junior-research-fellow-posts/45385"
+        }
+      ]
     },
     {
       "id": "2cadda9f73d7438cf3571550c4941414",
@@ -6651,9 +6657,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/hal-notification-2026-apply-offline-for-various-visiting-consultant-posts/45386",
-      "last_verified": "2026-11-19T07:20:35.583697",
+      "last_verified": "2026-11-19T07:24:16.847411",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/hal-notification-2026-apply-offline-for-various-visiting-consultant-posts/45386"
+        }
+      ]
     },
     {
       "id": "97f6df5b40cc37f93a22dd565b3d2423",
@@ -6701,9 +6713,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/dhs-namakkal-recruitment-2026-apply-offline-for-28-ayush-pharmacist-nursing-therapist-therapeutic-assistant-medical-officer-and-other-posts/45384",
-      "last_verified": "2026-11-19T07:20:35.586757",
+      "last_verified": "2026-11-19T07:24:16.847411",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/dhs-namakkal-recruitment-2026-apply-offline-for-28-ayush-pharmacist-nursing-therapist-therapeutic-assistant-medical-officer-and-other-posts/45384"
+        }
+      ]
     },
     {
       "id": "6ac896821d2803e5e088d6944746bf1c",
@@ -6750,9 +6768,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/bmc-notification-2026-walk-in-interview-for-02-registrar-posts/45382",
-      "last_verified": "2026-11-19T07:20:35.583741",
+      "last_verified": "2026-11-19T07:24:16.847411",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/bmc-notification-2026-walk-in-interview-for-02-registrar-posts/45382"
+        }
+      ]
     },
     {
       "id": "49cdf056b7d314432c0965f598e7b2f1",
@@ -6851,9 +6875,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/drdo-pxe-recruitment-2026-apply-offline-for-06-junior-research-fellow-and-research-associate-posts/45381",
-      "last_verified": "2026-11-19T07:20:35.586794",
+      "last_verified": "2026-11-19T07:24:16.847411",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/drdo-pxe-recruitment-2026-apply-offline-for-06-junior-research-fellow-and-research-associate-posts/45381"
+        }
+      ]
     },
     {
       "id": "b71bacee96e1a5f31a54dd48cd596d51",
@@ -6902,9 +6932,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/niper-ahmedabad-jobs-2026-apply-online-for-06-system-engineer-public-relation-officer-and-other-posts/45378",
-      "last_verified": "2026-11-19T07:20:35.589792",
+      "last_verified": "2026-11-19T07:24:16.847411",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/niper-ahmedabad-jobs-2026-apply-online-for-06-system-engineer-public-relation-officer-and-other-posts/45378"
+        }
+      ]
     },
     {
       "id": "5eaeadcbc877fa517c8458930fca0198",
@@ -6950,7 +6986,63 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/iit-madras-recruitment-2026-apply-online-for-various-project-engineer-posts/45383",
-      "last_verified": "2026-11-19T07:20:35.586778",
+      "last_verified": "2026-11-19T07:24:16.847411",
+      "status": "active",
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/iit-madras-recruitment-2026-apply-online-for-various-project-engineer-posts/45383"
+        }
+      ]
+    },
+    {
+      "id": "b785bc527cd9e9869e00b43ee8b4b3f4",
+      "title": "PGIMER Recruitment 2026 - Apply Offline for Various Junior Research Fellow Posts",
+      "url": "https://allgovernmentjobs.in/pgimer-recruitment-2026-apply-offline-for-various-junior-research-fellow-posts/45387",
+      "source": "allgovernmentjobs.in",
+      "description": "Postgraduate Institute of Medical Education and Research (PGIMER) has released an official notification for 2026. To fill vacancies for various Junior Research Fellow Positions. Those candidates who have qualified in postgraduation can grab this opportunity and apply for the PGIMER Recruitment 2026 . Here, we have included the age limit, selection process, salary structure, education details, application fee, and how to apply for these posts. If you are looking for more, here is a list of Gov...",
+      "pdf_link": null,
+      "important_dates": {
+        "found_date": "30-11-2026"
+      },
+      "category": "General",
+      "skills": [
+        "Hindi"
+      ],
+      "scraped_at": "2026-11-19T07:24:21.712253",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://allgovernmentjobs.in/pgimer-recruitment-2026-apply-offline-for-various-junior-research-fellow-posts/45387",
+      "last_verified": "2026-11-19T07:24:21.712253",
       "status": "active",
       "verification_status": "needs_review"
     },
