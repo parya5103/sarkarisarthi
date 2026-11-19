@@ -14,6 +14,7 @@ from datetime import date, timedelta
 import pytest
 
 import storage
+from detail_pages import render_detail_page
 from job_schema import (
     NOT_SPECIFIED_TEXT, parse_date, compute_status, normalize_job,
     advertisement_key, is_duplicate_job, title_date_key, merge_job,
@@ -504,3 +505,17 @@ class TestStructuredDataEligibilityFields:
         assert normalized['work_mode'] is None
         assert normalized['description_complete'] is None
         assert normalized['date_posted_verified'] is None
+
+
+def test_needs_review_detail_page_has_noindex_and_clear_warning():
+    job = private_job()
+    job.update({
+        'id': 'needs-review-123',
+        'title': 'Recruitment listing without confirmed application deadline',
+        'verification_status': 'needs_review',
+        'status': 'active',
+    })
+    page = render_detail_page(job, [])
+    assert '<meta name="robots" content="noindex,follow">' in page
+    assert 'could not be confirmed against an official recruitment notice' in page
+    assert 'before applying' in page
