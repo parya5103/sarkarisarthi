@@ -143,8 +143,8 @@ class TestVerificationStatus:
         # Employment News style: data from employmentnews.gov.in itself.
         assert compute_verification_status(base_job(), TODAY) == 'official_verified'
 
-    def test_private_only_is_secondary_source(self):
-        assert compute_verification_status(private_job(), TODAY) == 'secondary_source_only'
+    def test_private_only_without_deadline_needs_review(self):
+        assert compute_verification_status(private_job(), TODAY) == 'needs_review'
 
     def test_gov_link_in_links_is_link_pending(self):
         job = private_job()
