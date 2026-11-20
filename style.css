@@ -2016,7 +2016,6 @@ a:focus-visible {
         inset: var(--header-height) 0 0;
         z-index: 998;
         width: 100%;
-        height: calc(100dvh - var(--header-height));
         padding: 0;
         border: 0;
         background: rgba(2, 6, 23, 0.52);
