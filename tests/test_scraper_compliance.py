@@ -186,3 +186,15 @@ class TestExpandedVerifiedSecondarySources:
     def test_ambiguous_content_signal_source_is_not_active(self):
         all_portals = scraper.JOB_PORTALS['government'] + scraper.JOB_PORTALS['private']
         assert 'https://www.jobsarkari.com/' not in all_portals
+
+
+    def test_unreviewed_secondary_domains_are_not_scheduled(self):
+        all_portals = scraper.JOB_PORTALS['government'] + scraper.JOB_PORTALS['private']
+        blocked_or_unreviewed = (
+            'sarkarinaukri.com', 'mysarkarinaukri.com', 'bharatsarkarijob.com',
+            'sarkariexam.com', 'jobriya.com', 'sarkari-naukri.info',
+            'freshersworld.com', 'jobsarkari.com', 'naukrigulf.com',
+            'latestgovtjobs.in', 'indiagovtjobs.in',
+        )
+        for domain in blocked_or_unreviewed:
+            assert not any(domain in url for url in all_portals)
