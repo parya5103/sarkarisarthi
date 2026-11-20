@@ -100,6 +100,21 @@ function getVerificationInfo(status) {
     return VERIFICATION_LABELS[String(status).toLowerCase()] || null;
 }
 
+// Public search only includes records with an explicit source-quality state.
+// "needs_review" and unknown states remain in the manifest for the review
+// workflow, but are not presented as open vacancies to visitors.
+const SEARCH_ELIGIBLE_VERIFICATION_STATUSES = new Set([
+    'official_verified',
+    'official_link_pending',
+    'secondary_source_only'
+]);
+
+function isSearchEligibleJob(job) {
+    if (!job || typeof job !== 'object') return false;
+    const status = String(job.verification_status || '').toLowerCase();
+    return SEARCH_ELIGIBLE_VERIFICATION_STATUSES.has(status);
+}
+
 // ---- Bookmarks (Phase 3) --------------------------------------------
 // Saved jobs live only in this browser (localStorage). No account,
 // no tracking, nothing leaves the device.
@@ -384,7 +399,7 @@ function populateCategoryFilter() {
     if (!categoryFilter) return;
     const selected = categoryFilter.value;
     const counts = {};
-    jobsData.forEach(job => {
+    jobsData.filter(isSearchEligibleJob).forEach(job => {
         if (job.category) counts[job.category] = (counts[job.category] || 0) + 1;
     });
     while (categoryFilter.options.length > 1) {
@@ -459,7 +474,7 @@ function applyFilters() {
     const searchTerm = jobSearch ? jobSearch.value.toLowerCase().trim() : '';
     const selectedCategory = categoryFilter ? categoryFilter.value : '';
 
-    let base = jobsData;
+    let base = jobsData.filter(isSearchEligibleJob);
     if (searchTerm !== '') {
         base = base.filter(job => job._searchString.includes(searchTerm));
     }
@@ -1064,8 +1079,9 @@ function showLoading(show) {
  */
 function updateJobCounts() {
     const categoryCounts = {};
+    const searchableJobs = jobsData.filter(isSearchEligibleJob);
 
-    jobsData.forEach(job => {
+    searchableJobs.forEach(job => {
         categoryCounts[job.category] = (categoryCounts[job.category] || 0) + 1;
     });
 
@@ -1083,7 +1099,7 @@ function updateJobCounts() {
 
     const totalActiveEl = document.getElementById('totalActiveJobsCount');
     if (totalActiveEl) {
-        totalActiveEl.textContent = String(jobsData.length);
+        totalActiveEl.textContent = String(searchableJobs.length);
     }
 
     const needsReviewEl = document.getElementById('needsReviewJobsCount');
