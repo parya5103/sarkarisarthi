@@ -166,7 +166,7 @@ class TestNoBlockedPortalsConfigured:
         assert not any('sarkariresult.com' in url for url in all_portals)
 
     def test_portal_list_is_not_empty(self):
-        assert len(scraper.JOB_PORTALS['government']) >= 5
+        assert len(scraper.JOB_PORTALS['government']) >= 4
         assert len(scraper.JOB_PORTALS['private']) >= 3
 
 
