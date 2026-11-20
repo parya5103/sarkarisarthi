@@ -164,6 +164,7 @@ const footerTelegramBtn = document.getElementById('footerTelegramBtn');
 const whatsappBtn = document.getElementById('whatsappBtn');
 const footerWhatsappBtn = document.getElementById('footerWhatsappBtn');
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const menuBackdrop = document.getElementById('menuBackdrop');
 const jobModal = document.getElementById('jobModal');
 const modalClose = document.getElementById('modalClose');
 const modalClose2 = document.getElementById('modalClose2');
@@ -248,12 +249,18 @@ function setupEventListeners() {
         });
     }
 
+    if (menuBackdrop) {
+        menuBackdrop.addEventListener('click', function() {
+            toggleMobileMenu(false);
+        });
+    }
+
     // Close mobile menu when a navigation link is clicked
     document.querySelectorAll('.nav-menu .nav-link').forEach(link => {
         link.addEventListener('click', function() {
             const navMenu = document.querySelector('.nav-menu');
             if (navMenu && navMenu.classList.contains('active')) {
-                toggleMobileMenu();
+                toggleMobileMenu(false);
             }
         });
     });
@@ -1188,14 +1195,30 @@ function openWhatsappChannel() {
 /**
  * Toggle mobile menu
  */
-function toggleMobileMenu() {
+function toggleMobileMenu(forceOpen) {
     const navMenu = document.querySelector('.nav-menu');
-    if (navMenu) {
-        const isOpen = navMenu.classList.toggle('active');
-        if (mobileMenuToggle) {
-            mobileMenuToggle.classList.toggle('active', isOpen);
-            mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
-        }
+    if (!navMenu) return;
+
+    const isOpen = typeof forceOpen === 'boolean'
+        ? forceOpen
+        : !navMenu.classList.contains('active');
+
+    navMenu.classList.toggle('active', isOpen);
+    if (mobileMenuToggle) {
+        mobileMenuToggle.classList.toggle('active', isOpen);
+        mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+    }
+    if (menuBackdrop) {
+        menuBackdrop.hidden = !isOpen;
+        menuBackdrop.setAttribute('aria-hidden', String(!isOpen));
+    }
+    document.body.classList.toggle('menu-open', isOpen);
+
+    if (isOpen) {
+        const firstLink = navMenu.querySelector('.nav-link');
+        if (firstLink) firstLink.focus();
+    } else if (mobileMenuToggle) {
+        mobileMenuToggle.focus();
     }
 }
 
@@ -1211,7 +1234,7 @@ function handleKeyboardNavigation(e) {
     // Close mobile menu with Escape key
     const navMenu = document.querySelector('.nav-menu');
     if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
-        toggleMobileMenu();
+        toggleMobileMenu(false);
     }
 
     // Search with Ctrl+K or Cmd+K
