@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-20T12:45:31.610063",
+  "last_updated": "2026-11-20T18:46:04.375962",
   "total_jobs": 176,
   "active_jobs": 157,
   "expired_jobs": 19,
@@ -7983,9 +7983,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/iit-bhu-notification-2026-apply-online-for-various-junior-research-assistant-posts/45438",
-      "last_verified": "2026-11-20T12:45:36.490291",
+      "last_verified": "2026-11-20T18:46:04.375962",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/iit-bhu-notification-2026-apply-online-for-various-junior-research-assistant-posts/45438"
+        }
+      ]
     },
     {
       "id": "7861cd8acbbf9cb4ce60959813a5ee94",
