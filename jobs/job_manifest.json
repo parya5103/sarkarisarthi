@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-11-20T12:13:20.877430",
-  "total_jobs": 175,
-  "active_jobs": 156,
+  "last_updated": "2026-11-20T12:45:31.610063",
+  "total_jobs": 176,
+  "active_jobs": 157,
   "expired_jobs": 19,
   "jobs": [
     {
@@ -7929,9 +7929,63 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/iit-dhanbad-jobs-2026-apply-online-for-junior-research-fellow-posts/45437",
-      "last_verified": "2026-11-20T12:13:25.862116",
+      "last_verified": "2026-11-20T12:45:31.610063",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/iit-dhanbad-jobs-2026-apply-online-for-junior-research-fellow-posts/45437"
+        }
+      ]
+    },
+    {
+      "id": "d278bf4d623a2097247f8e3da69708a8",
+      "title": "IIT BHU Notification 2026 - Apply Online for Various Junior Research Assistant Posts",
+      "url": "https://allgovernmentjobs.in/iit-bhu-notification-2026-apply-online-for-various-junior-research-assistant-posts/45438",
+      "source": "allgovernmentjobs.in",
+      "description": "The Indian Institute of Technology Banaras Hindu University (IIT BHU) has declared the latest job notification for 2026. To fill the vacancies for Junior Research Fellow Jobs. Candidates who have qualified for B.E/ B.Tech, M.Pharm, or M.Sc. can take this opportunity and apply for the IIT BHU Notification 2026 . Here we have included the age limit, selection process, salary structure, education details, application fee, and how to apply for these posts. Interested and eligible candidates can a...",
+      "pdf_link": null,
+      "important_dates": {
+        "found_date": "08-12-2026"
+      },
+      "category": "Administrative",
+      "skills": [],
+      "scraped_at": "2026-11-20T12:45:36.490291",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://allgovernmentjobs.in/iit-bhu-notification-2026-apply-online-for-various-junior-research-assistant-posts/45438",
+      "last_verified": "2026-11-20T12:45:36.490291",
+      "status": "active",
+      "verification_status": "needs_review"
     },
     {
       "id": "7861cd8acbbf9cb4ce60959813a5ee94",
