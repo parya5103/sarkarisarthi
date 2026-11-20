@@ -31,27 +31,20 @@ logger = logging.getLogger(__name__)
 #   official_sources.py, so it is NOT in the generic list below.
 JOB_PORTALS = {
     'government': [
+        # Secondary discovery portals with documented robots permission.
         'https://www.freejobalert.com',
         'https://www.freshersnow.com',
-        'https://www.sarkarinaukri.com',
-        'https://www.mysarkarinaukri.com',
-        'https://bharatsarkarijob.com',
         'https://allgovernmentjobs.in',
-        'https://www.sarkariexam.com',
-        'https://www.rojgarresult.com',
-        'https://www.jobriya.com',
-        'https://www.sarkari-naukri.info',
-        'https://www.freshersworld.com/government-jobs'
+        'https://www.rojgarresult.com'
     ],
+    # Secondary portals are discovery leads only. Robots rules were
+    # rechecked on 2026-11-21; job facts still require official backing
+    # before a record can become official_verified or public-search eligible.
     'private': [
         "https://www.sarkarinaukridaily.in/",
         "https://www.fresherslive.com/govt-jobs",
-        "https://www.jobsarkari.com/",
-        "https://www.naukrigulf.com/government-jobs",
-        "https://www.latestgovtjobs.in/",
-        "https://www.indiagovtjobs.in/",
         "https://sarkariprep.in/",
-        "https://linkingsky.com/ "
+        "https://linkingsky.com/"
     ]
 }
 
@@ -254,7 +247,7 @@ def scrape_all_job_portals(metrics=None):
     for i, url in enumerate(gov_portals, 1):
         portals_to_scrape.append((url, i, len(gov_portals), "Government"))
 
-    priv_portals = JOB_PORTALS['private'][:3]
+    priv_portals = JOB_PORTALS['private']
     for i, url in enumerate(priv_portals, 1):
         portals_to_scrape.append((url, i, len(priv_portals), "Private"))
 
