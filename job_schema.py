@@ -38,6 +38,7 @@ Rules from the project master plan:
 """
 
 from datetime import date, datetime, timedelta
+from zoneinfo import ZoneInfo
 from urllib.parse import urlparse
 
 NOT_SPECIFIED_TEXT = 'Not specified in official notification'
@@ -61,6 +62,23 @@ OPTIONAL_TEXT_FIELDS = (
 
 # Fields a merged-in duplicate candidate may fill when missing.
 MERGEABLE_FIELDS = OPTIONAL_TEXT_FIELDS + OPTIONAL_BOOL_FIELDS + ('description',)
+
+
+def india_today(now=None):
+    """Return the calendar date in India, independent of runner timezone.
+
+    GitHub Actions runners commonly use UTC. Government application
+    deadlines are published in Indian local time, so an evening UTC run
+    must use the next calendar day once it is past midnight in Asia/Kolkata.
+    A supplied aware datetime is converted; a naive datetime is treated as
+    an India-local wall-clock value for deterministic tests/callers.
+    """
+    india = ZoneInfo('Asia/Kolkata')
+    if now is None:
+        return datetime.now(india).date()
+    if now.tzinfo is None:
+        return now.replace(tzinfo=india).date()
+    return now.astimezone(india).date()
 
 
 def parse_date(value):
@@ -94,7 +112,7 @@ def compute_status(job, today=None):
     upcoming:  parsed application_start_date is strictly after today.
     active:    otherwise (including jobs with no parseable dates).
     """
-    today = today or date.today()
+    today = today or india_today()
     if str(job.get('status') or '').lower() == 'cancelled':
         return 'cancelled'
     dates = job.get('important_dates') or {}
