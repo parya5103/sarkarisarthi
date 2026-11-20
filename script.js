@@ -1211,6 +1211,13 @@ function toggleMobileMenu(forceOpen) {
     if (menuBackdrop) {
         menuBackdrop.hidden = !isOpen;
         menuBackdrop.setAttribute('aria-hidden', String(!isOpen));
+        if (isOpen) {
+            // Keep the overlay's clickable area below the drawer so it never
+            // competes with navigation links for pointer events.
+            menuBackdrop.style.top = navMenu.getBoundingClientRect().bottom + 'px';
+        } else {
+            menuBackdrop.style.removeProperty('top');
+        }
     }
     document.body.classList.toggle('menu-open', isOpen);
 
