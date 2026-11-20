@@ -77,8 +77,11 @@ honest product User-Agent, no CAPTCHA/login/anti-bot bypass.
 ## Upgrade phases
 
 - Phase 0 audit + Phase 1 core data quality: DONE (PR #194 merged).
-- Phase 2 source expansion: freshersnow.com added to JOB_PORTALS;
-  NCS/UPSC/mprojgar remain pending robots verification.
+- Phase 2 source expansion: FreshersNow, SarkariNaukriDaily,
+  SarkariPrep and LinkingSky are in the robots-reviewed discovery set;
+  SarkariPrep and LinkingSky are newly scheduled. Kiran News Agency is
+  discovery-only pending a usable robots policy; NCS/UPSC/mprojgar remain
+  pending automated-access verification.
 - Phase 3 frontend quality: trust chips (verification_status) on cards,
   modal and detail pages; honest "latest" sort by last_verified (the
   old sort used the md5 job id - meaningless); bookmarks in localStorage
