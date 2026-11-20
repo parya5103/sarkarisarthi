@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-11-20T11:31:27.804726",
-  "total_jobs": 173,
-  "active_jobs": 154,
+  "last_updated": "2026-11-20T11:40:47.001157",
+  "total_jobs": 174,
+  "active_jobs": 155,
   "expired_jobs": 19,
   "jobs": [
     {
@@ -7387,9 +7387,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/iit-gandhinagar-notification-2026-apply-online-for-02-post-doctoral-fellow-posts/45434",
-      "last_verified": "2026-11-20T11:31:33.092507",
+      "last_verified": "2026-11-20T11:40:47.001157",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/iit-gandhinagar-notification-2026-apply-online-for-02-post-doctoral-fellow-posts/45434"
+        }
+      ]
     },
     {
       "id": "7dcaa654e9314770dcd573dcdb66ff70",
@@ -7435,9 +7441,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/angrau-notification-2026-walk-in-interview-for-various-teaching-associate-posts/45429",
-      "last_verified": "2026-11-20T11:31:33.092561",
+      "last_verified": "2026-11-20T11:40:47.001157",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/angrau-notification-2026-walk-in-interview-for-various-teaching-associate-posts/45429"
+        }
+      ]
     },
     {
       "id": "0ab586ec21adbe20c490c5c893927a0c",
@@ -7483,9 +7495,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/icmr-notification-2026-apply-online-for-various-scientist-d-posts/45435",
-      "last_verified": "2026-11-20T11:31:33.092481",
+      "last_verified": "2026-11-20T11:40:47.001157",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/icmr-notification-2026-apply-online-for-various-scientist-d-posts/45435"
+        }
+      ]
     },
     {
       "id": "4677b8750bf9e52680632e8543cc93c0",
@@ -7531,9 +7549,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/csir-cdri-notification-2026-walk-in-interview-for-16-project-associate-i-project-technical-support-and-other-posts/45431",
-      "last_verified": "2026-11-20T11:31:33.092544",
+      "last_verified": "2026-11-20T11:40:47.001157",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/csir-cdri-notification-2026-walk-in-interview-for-16-project-associate-i-project-technical-support-and-other-posts/45431"
+        }
+      ]
     },
     {
       "id": "6bc73a28340171cb140a9eb6f53d116d",
@@ -7580,9 +7604,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/nfsu-notification-2026-apply-offline-for-site-civil-engineer-posts/45433",
-      "last_verified": "2026-11-20T11:31:33.092524",
+      "last_verified": "2026-11-20T11:40:47.001157",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/nfsu-notification-2026-apply-offline-for-site-civil-engineer-posts/45433"
+        }
+      ]
     },
     {
       "id": "c3cfb1d9602aaebee3cb8edd7432c66b",
@@ -7631,9 +7661,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/svsu-notification-2026-apply-offline-for-10-assistant-plumber-and-other-posts/45427",
-      "last_verified": "2026-11-20T11:31:33.092577",
+      "last_verified": "2026-11-20T11:40:47.001157",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/svsu-notification-2026-apply-offline-for-10-assistant-plumber-and-other-posts/45427"
+        }
+      ]
     },
     {
       "id": "1a6ff232293551db1e273120b9073596",
@@ -7679,9 +7715,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/nit-trichy-recruitment-2026-apply-online-for-junior-research-fellow-project-associate-i-posts/45428",
-      "last_verified": "2026-11-20T11:31:33.095581",
+      "last_verified": "2026-11-20T11:40:47.001157",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/nit-trichy-recruitment-2026-apply-online-for-junior-research-fellow-project-associate-i-posts/45428"
+        }
+      ]
     },
     {
       "id": "b2f8f8e33384c403f5201557e6ffbb01",
@@ -7778,9 +7820,63 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/prasar-bharati-jobs-2026-apply-online-for-senior-correspondent-posts/45432",
-      "last_verified": "2026-11-20T11:31:33.098649",
+      "last_verified": "2026-11-20T11:40:47.001157",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/prasar-bharati-jobs-2026-apply-online-for-senior-correspondent-posts/45432"
+        }
+      ]
+    },
+    {
+      "id": "85e22481d4adca545e6d510931de4fd1",
+      "title": "PJTSAU Notification 2026 - Walk-in-Interview for Various Graduate Teaching Assistant Posts",
+      "url": "https://allgovernmentjobs.in/pjtsau-notification-2026-walk-in-interview-for-various-graduate-teaching-assistant-posts/45436",
+      "source": "allgovernmentjobs.in",
+      "description": "Professor Jayashankar Telangana State Agricultural University (PJTSAU) has declared the official notification for 2026. To fill up the vacancies for Graduate Teaching Assistant Jobs. Those who have completed their B.Sc. Agriculture can grab this chance and apply for the PJTSAU Notification 2026 . Here we include the age limit, selection process, salary structure, education details, application fee, and how to apply for these posts. Interested and eligible candidates can attend the walk-in at ...",
+      "pdf_link": null,
+      "important_dates": {
+        "found_date": "01-12-2026"
+      },
+      "category": "Teaching",
+      "skills": [],
+      "scraped_at": "2026-11-20T11:40:51.245600",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://allgovernmentjobs.in/pjtsau-notification-2026-walk-in-interview-for-various-graduate-teaching-assistant-posts/45436",
+      "last_verified": "2026-11-20T11:40:51.245600",
+      "status": "active",
+      "verification_status": "needs_review"
     },
     {
       "id": "7861cd8acbbf9cb4ce60959813a5ee94",
