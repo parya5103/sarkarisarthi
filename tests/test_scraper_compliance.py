@@ -168,3 +168,21 @@ class TestNoBlockedPortalsConfigured:
     def test_portal_list_is_not_empty(self):
         assert len(scraper.JOB_PORTALS['government']) >= 5
         assert len(scraper.JOB_PORTALS['private']) >= 3
+
+
+class TestExpandedVerifiedSecondarySources:
+    def test_robots_verified_secondary_sources_are_scheduled(self, monkeypatch):
+        captured = []
+        monkeypatch.setattr(
+            scraper, '_scrape_single_portal',
+            lambda url, *args, **kwargs: captured.append(url) or [],
+        )
+
+        scraper.scrape_all_job_portals()
+
+        assert 'https://sarkariprep.in/' in captured
+        assert 'https://linkingsky.com/' in captured
+
+    def test_ambiguous_content_signal_source_is_not_active(self):
+        all_portals = scraper.JOB_PORTALS['government'] + scraper.JOB_PORTALS['private']
+        assert 'https://www.jobsarkari.com/' not in all_portals
