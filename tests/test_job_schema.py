@@ -9,7 +9,7 @@ and the storage-level status backfill during refresh_job_statuses.
 
 Run with: python -m pytest tests/test_job_schema.py -v
 """
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 
 import pytest
 
@@ -18,7 +18,7 @@ from detail_pages import render_detail_page
 from job_schema import (
     NOT_SPECIFIED_TEXT, parse_date, compute_status, normalize_job,
     advertisement_key, is_duplicate_job, title_date_key, merge_job,
-    compute_verification_status, validate_http_url, is_official_url,
+    compute_verification_status, validate_http_url, is_official_url, india_today,
 )
 
 TODAY = date(2026, 11, 3)
@@ -519,3 +519,10 @@ def test_needs_review_detail_page_has_noindex_and_clear_warning():
     assert '<meta name="robots" content="noindex,follow">' in page
     assert 'could not be confirmed against an official recruitment notice' in page
     assert 'before applying' in page
+
+
+class TestIndiaLocalDate:
+    def test_utc_evening_uses_next_calendar_day_in_india(self):
+        # 19:00 UTC on 20 Nov is already 00:30 on 21 Nov in India.
+        utc_now = datetime(2026, 11, 20, 19, 0, tzinfo=timezone.utc)
+        assert india_today(utc_now) == date(2026, 11, 21)
