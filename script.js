@@ -1104,9 +1104,7 @@ function updateJobCounts() {
 
     const needsReviewEl = document.getElementById('needsReviewJobsCount');
     if (needsReviewEl) {
-        const needsReviewCount = jobsData.filter(job =>
-            String(job.verification_status || '').toLowerCase() === 'needs_review'
-        ).length;
+        const needsReviewCount = jobsData.filter(job => !isSearchEligibleJob(job)).length;
         needsReviewEl.textContent = String(needsReviewCount);
     }
 }
