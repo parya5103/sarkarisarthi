@@ -332,5 +332,5 @@ class TestHomepageSeoMetadata:
             page = handle.read()
         assert '<title>Sarkari Sarthi: Latest Government Jobs &amp; Results in India</title>' in page
         assert 'name="description"' in page
-        assert 'Check eligibility, important dates and source links before applying.' in page
+        assert 'Verify each notice with the official recruiting authority.' in page
         assert '"name": "Sarkari Sarthi"' in page

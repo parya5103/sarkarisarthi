@@ -141,3 +141,20 @@ describe('getRecordTimestamp', () => {
         expect(getRecordTimestamp({ last_verified: 'not-a-date' })).toBe(0);
     });
 });
+
+
+describe('isSearchEligibleJob', () => {
+    test('shows only explicitly classified, source-attributed jobs', () => {
+        expect(isSearchEligibleJob({ verification_status: 'official_verified' })).toBe(true);
+        expect(isSearchEligibleJob({ verification_status: 'official_link_pending' })).toBe(true);
+        expect(isSearchEligibleJob({ verification_status: 'secondary_source_only' })).toBe(true);
+    });
+
+    test('hides needs-review, expired, cancelled, missing and unknown verification states', () => {
+        for (const status of ['needs_review', 'expired', 'cancelled', '', 'unknown']) {
+            expect(isSearchEligibleJob({ verification_status: status })).toBe(false);
+        }
+        expect(isSearchEligibleJob({})).toBe(false);
+        expect(isSearchEligibleJob(null)).toBe(false);
+    });
+});
