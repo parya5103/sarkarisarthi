@@ -1,8 +1,8 @@
 {
   "last_updated": "2026-11-20T18:46:04.375962",
   "total_jobs": 176,
-  "active_jobs": 157,
-  "expired_jobs": 19,
+  "active_jobs": 155,
+  "expired_jobs": 21,
   "jobs": [
     {
       "id": "en_e720d528a5699f9ac7d3cf27f799ce9c",
@@ -647,8 +647,8 @@
       "published_date": null,
       "original_source_url": "https://allgovernmentjobs.in/nit-silchar-notification-2026-apply-for-various-project-associate-posts/45089",
       "last_verified": "2026-11-05T03:36:28.964368",
-      "status": "active",
-      "verification_status": "secondary_source_only",
+      "status": "expired",
+      "verification_status": "expired",
       "source_refs": [
         {
           "source": "allgovernmentjobs.in",
@@ -6554,8 +6554,8 @@
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/niftem-notification-2026-apply-offline-for-junior-research-fellow-posts/45385",
       "last_verified": "2026-11-19T07:24:16.847411",
-      "status": "active",
-      "verification_status": "secondary_source_only",
+      "status": "expired",
+      "verification_status": "expired",
       "source_refs": [
         {
           "source": "allgovernmentjobs.in",
