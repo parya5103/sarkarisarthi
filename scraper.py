@@ -31,17 +31,11 @@ logger = logging.getLogger(__name__)
 #   official_sources.py, so it is NOT in the generic list below.
 JOB_PORTALS = {
     'government': [
+        # Secondary discovery portals with documented robots permission.
         'https://www.freejobalert.com',
         'https://www.freshersnow.com',
-        'https://www.sarkarinaukri.com',
-        'https://www.mysarkarinaukri.com',
-        'https://bharatsarkarijob.com',
         'https://allgovernmentjobs.in',
-        'https://www.sarkariexam.com',
-        'https://www.rojgarresult.com',
-        'https://www.jobriya.com',
-        'https://www.sarkari-naukri.info',
-        'https://www.freshersworld.com/government-jobs'
+        'https://www.rojgarresult.com'
     ],
     # Secondary portals are discovery leads only. Robots rules were
     # rechecked on 2026-11-21; job facts still require official backing
