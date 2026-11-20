@@ -525,4 +525,7 @@ class TestIndiaLocalDate:
     def test_utc_evening_uses_next_calendar_day_in_india(self):
         # 19:00 UTC on 20 Nov is already 00:30 on 21 Nov in India.
         utc_now = datetime(2026, 11, 20, 19, 0, tzinfo=timezone.utc)
-        assert india_today(utc_now) == date(2026, 11, 21)
+        india_date = india_today(utc_now)
+        assert india_date == date(2026, 11, 21)
+        overdue = {'important_dates': {'last_date': '20-11-2026'}}
+        assert compute_status(overdue, india_date) == 'expired'
