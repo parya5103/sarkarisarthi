@@ -275,6 +275,14 @@ img {
     color: var(--primary-color);
 }
 
+.menu-backdrop {
+    display: none;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
 .nav-menu {
     display: flex;
     align-items: center;
@@ -2000,6 +2008,19 @@ a:focus-visible {
     .mobile-controls,
     .mobile-menu-toggle {
         display: flex;
+    }
+
+    .menu-backdrop:not([hidden]) {
+        display: block;
+        position: fixed;
+        inset: var(--header-height) 0 0;
+        z-index: 998;
+        width: 100%;
+        height: calc(100dvh - var(--header-height));
+        padding: 0;
+        border: 0;
+        background: rgba(2, 6, 23, 0.52);
+        cursor: pointer;
     }
 
     .nav-menu {
