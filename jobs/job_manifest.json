@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-11-20T19:51:35.189327",
-  "total_jobs": 193,
-  "active_jobs": 172,
+  "last_updated": "2026-11-21T04:07:33.999064",
+  "total_jobs": 197,
+  "active_jobs": 176,
   "expired_jobs": 21,
   "jobs": [
     {
@@ -7925,9 +7925,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/10/bob-recruitment.html",
-      "last_verified": "2026-11-20T19:51:42.796571",
+      "last_verified": "2026-11-21T04:07:33.999064",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/10/bob-recruitment.html"
+        }
+      ]
     },
     {
       "id": "fe6747e69cf362ae657cbd3f665ec0b7",
@@ -8021,9 +8027,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/10/uco-bank-apprentice-recruitment.html",
-      "last_verified": "2026-11-20T19:51:42.796595",
+      "last_verified": "2026-11-21T04:07:33.999064",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/10/uco-bank-apprentice-recruitment.html"
+        }
+      ]
     },
     {
       "id": "f16f3a06bba2931babb3a2d895cb9a10",
@@ -8074,9 +8086,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/10/sci-junior-court-assistant-recruitment.html",
-      "last_verified": "2026-11-20T19:51:42.796547",
+      "last_verified": "2026-11-21T04:07:33.999064",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/10/sci-junior-court-assistant-recruitment.html"
+        }
+      ]
     },
     {
       "id": "021124b575d43069b0d110f4fb3ca9e8",
@@ -8124,9 +8142,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/10/railway-station-master-recruitment.html",
-      "last_verified": "2026-11-20T19:51:42.796635",
+      "last_verified": "2026-11-21T04:07:33.999064",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/10/railway-station-master-recruitment.html"
+        }
+      ]
     },
     {
       "id": "9a756b9f6d6ca20c6bbbcee4e0c588fb",
@@ -8177,9 +8201,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/10/up-tgt-recruitment.html",
-      "last_verified": "2026-11-20T19:51:42.796615",
+      "last_verified": "2026-11-21T04:07:33.999064",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/10/up-tgt-recruitment.html"
+        }
+      ]
     },
     {
       "id": "c036ac13a5f1d773702e8bd666ddae41",
@@ -8225,9 +8255,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/09/bastar-fighter-vacancy.html",
-      "last_verified": "2026-11-20T19:51:42.795454",
+      "last_verified": "2026-11-21T04:07:33.999064",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/09/bastar-fighter-vacancy.html"
+        }
+      ]
     },
     {
       "id": "686f88e78579b85224a34b403888f133",
@@ -8325,9 +8361,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/11/dsssb-mts-recruitment.html",
-      "last_verified": "2026-11-20T19:51:42.796671",
+      "last_verified": "2026-11-21T04:07:33.999064",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/11/dsssb-mts-recruitment.html"
+        }
+      ]
     },
     {
       "id": "033518fee0b67373fab2bf1afddcba5e",
@@ -8373,9 +8415,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/11/haryana-anganwadi-recruitment.html",
-      "last_verified": "2026-11-20T19:51:42.796688",
+      "last_verified": "2026-11-21T04:07:33.999064",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/11/haryana-anganwadi-recruitment.html"
+        }
+      ]
     },
     {
       "id": "1a4f83ffeac5ba131e63b15cb20473cc",
@@ -8423,9 +8471,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/11/ssc-stenographer-grade-c-recruitment.html",
-      "last_verified": "2026-11-20T19:51:42.796706",
+      "last_verified": "2026-11-21T04:07:33.999064",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/11/ssc-stenographer-grade-c-recruitment.html"
+        }
+      ]
     },
     {
       "id": "dd6c13a72053ab10b73f43521e6c6758",
@@ -8471,9 +8525,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/10/bsf-sub-inspector-recruitment.html",
-      "last_verified": "2026-11-20T19:51:42.796729",
+      "last_verified": "2026-11-21T04:07:33.999064",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/10/bsf-sub-inspector-recruitment.html"
+        }
+      ]
     },
     {
       "id": "c9afc0383116077347ea893ae1a7c6d9",
@@ -8521,9 +8581,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/10/krdp-recruitment.html",
-      "last_verified": "2026-11-20T19:51:42.796765",
+      "last_verified": "2026-11-21T04:07:33.999064",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/10/krdp-recruitment.html"
+        }
+      ]
     },
     {
       "id": "28c9d9995909dd3787b0aa460e40ff04",
@@ -8569,9 +8635,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/10/up-headmaster-recruitment.html",
-      "last_verified": "2026-11-20T19:51:42.796819",
+      "last_verified": "2026-11-21T04:07:33.999064",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/10/up-headmaster-recruitment.html"
+        }
+      ]
     },
     {
       "id": "68eb615faad49945c927382cc5e06ec0",
@@ -8718,7 +8790,214 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/08/mp-police-constable-recruitment.html",
-      "last_verified": "2026-11-20T19:51:42.796746",
+      "last_verified": "2026-11-21T04:07:33.999064",
+      "status": "active",
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/08/mp-police-constable-recruitment.html"
+        }
+      ]
+    },
+    {
+      "id": "daf31914025f38af7f7b8a2591542e95",
+      "title": "Police Bharti 2026 (1694 Post) Last Date - 25 Dec 2026",
+      "url": "https://www.sarkariprep.in/2026/07/police-jobs.html",
+      "source": "sarkariprep.in",
+      "description": "2 Home Govt Jobs Current Affairs Yojana Admit Card Answer Key Result Home › jobs › Police Jobs 2026: All India Police Vacancy Notifications WhatsApp Join Now Telegram Join Now Police Jobs 2026: All India Police Vacancy Notifications Sarkariprep | 2026-11-20T10:06:00+05:30 Police Jobs 2026 All State Police Job Notifications are updated daily on this page for 10th, 12th, graduate pass male and female candidates of India who are searching for Constable, Driver Driver and Sub Inspector Jobs under...",
+      "pdf_link": null,
+      "important_dates": {
+        "found_date": "26-11-20"
+      },
+      "category": "Police",
+      "skills": [],
+      "scraped_at": "2026-11-21T04:07:37.510165",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://www.sarkariprep.in/2026/07/police-jobs.html",
+      "last_verified": "2026-11-21T04:07:37.510165",
+      "status": "active",
+      "verification_status": "needs_review"
+    },
+    {
+      "id": "c23d69df5cc10a48e48cb00379436501",
+      "title": "Indian Bank (1500 Post) Last Date - 25 Nov 2026",
+      "url": "https://www.sarkariprep.in/2026/11/indian-bank-recruitment.html",
+      "source": "sarkariprep.in",
+      "description": "2 Home Govt Jobs Current Affairs Yojana Admit Card Answer Key Result Home › jobs › Indian Bank Recruitment 2026: Public Sector Jobs 1500 Post, Online Form WhatsApp Join Now Telegram Join Now Indian Bank Recruitment 2026: Public Sector Jobs 1500 Post, Online Form Sarkariprep | 2026-11-15T10:42:00+05:30 Indian Bank Recruitment 2026 : Indian Bank is recruiting for 1500 Graduate Apprentice positions; online applications can be submitted until November 25, 2026. Indian Bank Recruitment 2026 Indian...",
+      "pdf_link": null,
+      "important_dates": {
+        "found_date": "26-11-15"
+      },
+      "category": "Banking",
+      "skills": [
+        "Word",
+        "Computer Knowledge",
+        "Reasoning",
+        "English",
+        "Aptitude"
+      ],
+      "scraped_at": "2026-11-21T04:07:37.514674",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://www.sarkariprep.in/2026/11/indian-bank-recruitment.html",
+      "last_verified": "2026-11-21T04:07:37.514674",
+      "status": "active",
+      "verification_status": "needs_review"
+    },
+    {
+      "id": "b1085b63807aca1f4a895b89c9cc7e5d",
+      "title": "UPSSSC Inter Level (1784 Post) Last Date - 01 Dec 2026",
+      "url": "https://www.sarkariprep.in/2026/10/upsssc-inter-level-recruitment.html",
+      "source": "sarkariprep.in",
+      "description": "2 Home Govt Jobs Current Affairs Yojana Admit Card Answer Key Result Home › jobs › UPSSSC Inter Level Recruitment 2026: Apply online for 1,784 Posts WhatsApp Join Now Telegram Join Now UPSSSC Inter Level Recruitment 2026: Apply online for 1,784 Posts Sarkariprep | 2026-11-14T20:04:00+05:30 UPSSSC Inter Level Recruitment 2026 : The Uttar Pradesh Subordinate Services Selection Commission (UPSSSC), Lucknow, has issued a notification for the recruitment of 1784 vacant posts for candidates who hav...",
+      "pdf_link": null,
+      "important_dates": {
+        "found_date": "26-11-14"
+      },
+      "category": "General",
+      "skills": [
+        "General Knowledge",
+        "Hindi"
+      ],
+      "scraped_at": "2026-11-21T04:07:37.514489",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://www.sarkariprep.in/2026/10/upsssc-inter-level-recruitment.html",
+      "last_verified": "2026-11-21T04:07:37.514489",
+      "status": "active",
+      "verification_status": "needs_review"
+    },
+    {
+      "id": "3cb928394c89337ef94110db80aeb331",
+      "title": "Rajasthan Junior Engineer Vacancy 2026 (1909 Post) Last Date - 17 Dec 2026",
+      "url": "https://www.sarkariprep.in/2026/11/rajasthan-junior-engineer-vacancy.html",
+      "source": "sarkariprep.in",
+      "description": "2 Home Govt Jobs Current Affairs Yojana Admit Card Answer Key Result Home › jobs › Rajasthan Junior Engineer Vacancy 2026: RSSB JE 1909 Posts; Apply Online Form WhatsApp Join Now Telegram Join Now Rajasthan Junior Engineer Vacancy 2026: RSSB JE 1909 Posts; Apply Online Form Sarkariprep | 2026-11-19T09:44:00+05:30 Rajasthan Junior Engineer Vacancy 2026 : The Rajasthan Staff Selection Board (RSSB) has issued a notification for the recruitment of 1035 Junior Engineer posts. Online applications f...",
+      "pdf_link": null,
+      "important_dates": {
+        "found_date": "26-11-19"
+      },
+      "category": "Engineering",
+      "skills": [],
+      "scraped_at": "2026-11-21T04:07:37.512935",
+      "links": [],
+      "organization": null,
+      "department": null,
+      "recruitment_board": null,
+      "job_title": null,
+      "work_mode": null,
+      "location": null,
+      "country": null,
+      "state": null,
+      "district": null,
+      "vacancies": null,
+      "advertisement_no": null,
+      "qualification": null,
+      "minimum_qualification": null,
+      "age_limit": null,
+      "age_min": null,
+      "age_max": null,
+      "age_relaxation": null,
+      "salary": null,
+      "pay_scale": null,
+      "application_fee": null,
+      "selection_process": null,
+      "employment_type": null,
+      "official_notification_url": null,
+      "official_application_url": null,
+      "official_website": null,
+      "description_summary": null,
+      "published_date": null,
+      "description_complete": null,
+      "date_posted_verified": null,
+      "original_source_url": "https://www.sarkariprep.in/2026/11/rajasthan-junior-engineer-vacancy.html",
+      "last_verified": "2026-11-21T04:07:37.512935",
       "status": "active",
       "verification_status": "needs_review"
     },
