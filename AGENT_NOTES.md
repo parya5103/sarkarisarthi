@@ -74,6 +74,18 @@ honest product User-Agent, no CAPTCHA/login/anti-bot bypass.
 - PENDING robots verification (fetch tooling unreachable, do NOT
   automate until verified): ncs.gov.in, upsc.gov.in, mprojgar.gov.in.
 
+## Secondary source review (2026-11-21)
+
+- SahiSarkariJobs public job pages: robots.txt allows general crawling;
+  live listing page inspected and includes dated notices with links to
+  employer notifications. Scheduled as discovery-only; official employer
+  evidence remains mandatory before public-search eligibility.
+- SarkariNaukriDaily: robots.txt did not block, but live page fetch failed
+  TLS certificate validation; excluded from automated fetching until fixed.
+- SarkariPrep and LinkingSky remain in the discovery set. Their records
+  are still secondary-only until independently checked against official
+  notices.
+
 ## Upgrade phases
 
 - Phase 0 audit + Phase 1 core data quality: DONE (PR #194 merged).
