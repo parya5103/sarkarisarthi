@@ -55,7 +55,7 @@ class TestMessageFormatting:
 
 
 class TestPublicTelegramJobEligibility:
-    def test_only_active_official_verified_jobs_are_notified(monkeypatch):
+    def test_only_active_official_verified_jobs_are_notified(self, monkeypatch):
         jobs = [
             {'id': 'official', 'status': 'active', 'verification_status': 'official_verified',
              'url': 'https://ssc.gov.in/apply', 'scraped_at': '2026-11-21T10:00:00'},
