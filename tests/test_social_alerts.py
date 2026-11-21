@@ -66,3 +66,30 @@ def test_whatsapp_channel_urls_are_the_exact_user_supplied_links():
     html = Path(__file__).resolve().parents[1].joinpath("index.html").read_text(encoding="utf-8")
     assert 'https://whatsapp.com/channel/0029VbE1ulAAjPXQZiUbbu1Z' in html
     assert 'https://whatsapp.com/channel/0029Vb5zVwjICVfnQ95zT10F' in html
+
+
+def test_whatsapp_direct_alerts_only_include_active_official_jobs(monkeypatch):
+    import whatsapp_notifier as notifier
+    jobs = [
+        {"id": "official", "status": "active", "verification_status": "official_verified",
+         "url": "https://ssc.gov.in/apply", "scraped_at": "2026-11-21T10:00:00"},
+        {"id": "secondary", "status": "active", "verification_status": "secondary_source_only",
+         "url": "https://example.com/job", "scraped_at": "2026-11-21T10:00:00"},
+        {"id": "expired", "status": "expired", "verification_status": "official_verified",
+         "url": "https://ssc.gov.in/old", "scraped_at": "2026-11-21T10:00:00"},
+    ]
+    monkeypatch.setattr(notifier, "load_manifest", lambda: {"jobs": jobs})
+    monkeypatch.setattr(notifier, "select_recent_jobs", lambda records: records)
+    assert [job["id"] for job in notifier.get_notifiable_jobs()] == ["official"]
+
+
+def test_workflow_keeps_public_telegram_free_of_github_diagnostics():
+    from pathlib import Path
+    workflow = Path(__file__).resolve().parents[1].joinpath(
+        ".github/workflows/daily-job-fetch-deploy.yml"
+    ).read_text(encoding="utf-8")
+    assert "Send Telegram notification for new jobs" in workflow
+    assert "Send deployment notification" not in workflow
+    assert "Send failure notification" not in workflow
+    assert "Send health check failure notification" not in workflow
+    assert "Send WhatsApp direct-message notification for verified new jobs" in workflow
