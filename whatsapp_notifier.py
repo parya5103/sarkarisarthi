@@ -76,6 +76,18 @@ async def send_whatsapp_message(message):
             logger.error(f"Response: {response.text}")
         return False
 
+def get_notifiable_jobs():
+    """Only send direct WhatsApp alerts for active, official verified jobs."""
+    manifest = load_manifest()
+    recent = select_recent_jobs(manifest.get('jobs', []))
+    return [
+        job for job in recent
+        if str(job.get('status') or '').lower() == 'active'
+        and str(job.get('verification_status') or '').lower() == 'official_verified'
+        and str(job.get('url') or '').startswith('https://')
+    ]
+
+
 async def notify_new_jobs():
     logger.info("📢 Starting WhatsApp notification for new jobs...")
 
@@ -83,10 +95,8 @@ async def notify_new_jobs():
         logger.info("ℹ️ WhatsApp credentials not configured. Skipping WhatsApp alerts.")
         return
 
-    manifest = load_manifest()
-    # Only jobs first recorded recently (see select_recent_jobs):
-    # the full manifest must never be blasted on every run.
-    jobs_to_notify = select_recent_jobs(manifest.get('jobs', []))
+    # Public-facing direct WhatsApp alerts are restricted to verified vacancies.
+    jobs_to_notify = get_notifiable_jobs()
 
     if not jobs_to_notify:
         logger.info("ℹ️ No new jobs found to notify on WhatsApp.")
