@@ -195,7 +195,7 @@ class TestExpandedVerifiedSecondarySources:
             'sarkarinaukri.com', 'mysarkarinaukri.com', 'bharatsarkarijob.com',
             'sarkariexam.com', 'jobriya.com', 'sarkari-naukri.info',
             'freshersworld.com', 'jobsarkari.com', 'naukrigulf.com',
-            'latestgovtjobs.in', 'indiagovtjobs.in',
+            'latestgovtjobs.in', 'indiagovtjobs.in', 'sarkarinaukridaily.in',
         )
         for domain in blocked_or_unreviewed:
             assert not any(domain in url for url in all_portals)
