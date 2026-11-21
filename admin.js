@@ -169,7 +169,8 @@ async function fetchJobsFromRepo() {
         const bytes = Uint8Array.from(binString, (m) => m.charCodeAt(0));
         const contentStr = new TextDecoder().decode(bytes);
         const manifest = JSON.parse(contentStr);
-        currentManifest = manifest;
+        // Keep an immutable pre-edit snapshot for rollback backups.
+        currentManifest = JSON.parse(JSON.stringify(manifest));
         currentJobs = Array.isArray(manifest.jobs) ? manifest.jobs : [];
 
         document.getElementById('jobCount').textContent = manifest.total_jobs || currentJobs.length;
@@ -505,7 +506,7 @@ async function updateManifestOnGithub(commitMessage) {
 
         const updatedFile = await manifestResponse.json();
         manifestSha = updatedFile.content.sha;
-        currentManifest = manifestData;
+        currentManifest = JSON.parse(JSON.stringify(manifestData));
         document.getElementById('jobCount').textContent = currentJobs.length;
         renderJobsTable();
         alert('Successfully updated jobs on GitHub. A pre-change backup was also saved.');
