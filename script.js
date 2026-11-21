@@ -1202,8 +1202,11 @@ function openTelegramChannel() {
  * Open WhatsApp channel
  */
 function openWhatsappChannel() {
-    // Replace with actual WhatsApp invite link
-    window.open('https://chat.whatsapp.com/your-invite-link', '_blank', 'noopener,noreferrer');
+    // No official WhatsApp group invite is configured. Share the real
+    // portal URL instead of sending visitors to a fake placeholder group.
+    const shareText = `Sarkari Sarthi — Government and public-sector job listings: ${window.location.href}`;
+    const shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+    window.open(shareUrl, '_blank', 'noopener,noreferrer');
 }
 
 /**
