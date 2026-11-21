@@ -75,7 +75,10 @@ honest product User-Agent, no CAPTCHA/login/anti-bot bypass.
   automate until verified): ncs.gov.in, upsc.gov.in, mprojgar.gov.in.
 
 ## Secondary source review (2026-11-21)
-\n- Secondary-source-only records are discovery leads, not public vacancies. They remain in the manifest/admin review pool and must not enter public search, category counts, or indexable job pages until a valid official employer notification/application URL is captured and verified.\n- `official_link_pending` is allowed in search only when an official government-domain reference has been found; `secondary_source_only` is not.\n
+
+- Secondary-source-only records are discovery leads, not public vacancies. They remain in the manifest/admin review pool and must not enter public search, category counts, or indexable job pages until a valid official employer notification/application URL is captured and verified.
+- `official_link_pending` is allowed in search only when an official government-domain reference has been found; `secondary_source_only` is not.
+
 - SahiSarkariJobs public job pages: robots.txt allows general crawling;
   live listing page inspected and includes dated notices with links to
   employer notifications. Scheduled as discovery-only; official employer
