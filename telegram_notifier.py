@@ -58,12 +58,23 @@ async def send_telegram_message(chat_id, message):
     except TelegramError as e:
         logger.error(f"❌ Failed to send message to {chat_id}: {e}")
 
+def get_notifiable_jobs():
+    """Public job alerts are limited to active, officially verified vacancies."""
+    manifest = load_manifest()
+    recent = select_recent_jobs(manifest.get('jobs', []))
+    return [
+        job for job in recent
+        if str(job.get('status') or '').lower() == 'active'
+        and str(job.get('verification_status') or '').lower() == 'official_verified'
+        and str(job.get('url') or '').startswith('https://')
+    ]
+
+
 async def notify_new_jobs():
     logger.info("📢 Starting Telegram notification for new jobs...")
-    manifest = load_manifest()
-    # Only jobs first recorded recently (see select_recent_jobs):
-    # the full manifest must never be blasted on every run.
-    jobs_to_notify = select_recent_jobs(manifest.get('jobs', []))
+    # Only recent, active vacancies with an official verification state
+    # are suitable for public-channel job alerts.
+    jobs_to_notify = get_notifiable_jobs()
 
     if not jobs_to_notify:
         logger.info("ℹ️ No new jobs found to notify.")
