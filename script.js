@@ -105,8 +105,7 @@ function getVerificationInfo(status) {
 // workflow, but are not presented as open vacancies to visitors.
 const SEARCH_ELIGIBLE_VERIFICATION_STATUSES = new Set([
     'official_verified',
-    'official_link_pending',
-    'secondary_source_only'
+    'official_link_pending'
 ]);
 
 function isSearchEligibleJob(job) {
