@@ -165,6 +165,17 @@ jobs:
         TELEGRAM_GROUP_CHAT_ID: ${{ secrets.TELEGRAM_GROUP_CHAT_ID }}
         PYTHONUNBUFFERED: 1
 
+    # Optional direct WhatsApp Business API alerts to the configured
+    # recipient number. This does NOT publish to WhatsApp Channels.
+    - name: Send WhatsApp direct-message notification for verified new jobs
+      if: steps.check_jobs.outputs.new_jobs == 'true' && success()
+      run: python whatsapp_notifier.py
+      env:
+        WHATSAPP_TOKEN: ${{ secrets.WHATSAPP_TOKEN }}
+        WHATSAPP_PHONE_ID: ${{ secrets.WHATSAPP_PHONE_ID }}
+        WHATSAPP_RECIPIENT_ID: ${{ secrets.WHATSAPP_RECIPIENT_ID }}
+        PYTHONUNBUFFERED: 1
+
     # Public Telegram chat is reserved for verified job alerts only.
     # GitHub deployment/failure diagnostics remain in Actions logs, not the
     # public subscriber channel.
