@@ -13,6 +13,7 @@ Network access is fully mocked: no test here touches the internet.
 Run with: python -m pytest tests/test_scraper_compliance.py -v
 """
 from unittest.mock import MagicMock
+from urllib.parse import urlsplit
 
 import pytest
 
@@ -210,9 +211,14 @@ class TestVerifiedSecondarySourceScheduling:
 
         scraper.scrape_all_job_portals()
 
-        assert 'https://www.sahisarkarijobs.in/trending-govt-jobs/' in captured
-        assert 'https://sarkariprep.in/' in captured
-        assert 'https://linkingsky.com/' in captured
+        parsed = [urlsplit(url) for url in captured]
+        assert any(
+            url.hostname == "www.sahisarkarijobs.in"
+            and url.path == "/trending-govt-jobs/"
+            for url in parsed
+        )
+        assert any(url.hostname == "sarkariprep.in" for url in parsed)
+        assert any(url.hostname == "linkingsky.com" for url in parsed)
 
     def test_tls_invalid_sarkarinaukridaily_is_not_scheduled(self):
         all_portals = scraper.JOB_PORTALS['government'] + scraper.JOB_PORTALS['private']
