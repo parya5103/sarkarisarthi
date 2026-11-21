@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
     <title>SarkariSarthi 2.0 - Admin Dashboard</title>
     <link rel="icon" type="image/png" href="notification-icon.png">
     <link rel="stylesheet" href="style.css">
@@ -32,7 +33,7 @@
         }
 
         .admin-container {
-            display: none;
+            display: block;
             padding: 2rem;
             max-width: 1200px;
             margin: 0 auto;
@@ -176,19 +177,6 @@
 </head>
 <body class="dark-mode">
 
-    <!-- Login Overlay -->
-    <div id="loginOverlay" class="admin-overlay">
-        <div class="admin-login-box">
-            <h2>Admin Access</h2>
-            <p style="color: #94a3b8; margin-bottom: 1.5rem; font-size: 0.9rem;">Restricted area</p>
-            <div class="form-group">
-                <input type="password" id="adminPassword" placeholder="Enter Admin Password">
-            </div>
-            <button class="primary-btn" onclick="checkPassword()" style="width: 100%">Enter</button>
-            <p id="loginError" style="color: #ef4444; margin-top: 1rem; display: none;">Incorrect password</p>
-        </div>
-    </div>
-
     <!-- Main Admin Container -->
     <div id="adminContainer" class="admin-container">
         <div class="admin-header">
@@ -200,16 +188,16 @@
             <!-- GitHub Settings Card -->
             <div class="admin-card">
                 <h3>GitHub API Settings</h3>
-                <p style="color: #94a3b8; font-size: 0.8rem; margin-bottom: 1rem;">Required to edit files & trigger workflows directly.</p>
+                <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;">GitHub permissions authorize changes. This static page has no server-side password login. Use a fine-grained token restricted to this repository, with Contents read/write and Actions read/write. The token stays in memory only and is cleared on reload or logout. Never share it.</p>
                 <div class="form-group">
                     <label for="ghToken">Personal Access Token (PAT)</label>
-                    <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxx">
+                    <input type="password" id="ghToken" placeholder="github_pat_..." autocomplete="off" autocapitalize="off" spellcheck="false">
                 </div>
                 <div class="form-group">
                     <label for="ghRepo">Repository (owner/repo)</label>
-                    <input type="text" id="ghRepo" placeholder="username/SarkariSarthi_2.0">
+                    <input type="text" id="ghRepo" value="parya5103/sarkarisarthi" readonly aria-readonly="true">
                 </div>
-                <button class="primary-btn" onclick="saveSettings()">Save Settings</button>
+                <button class="primary-btn" onclick="saveSettings()">Connect GitHub</button>
                 <span id="settingsStatus" style="margin-left: 1rem; font-size: 0.9rem; color: #10b981;"></span>
             </div>
 

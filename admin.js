@@ -1,80 +1,110 @@
-// Simple admin authentication (not highly secure, just a deterrence)
-const ADMIN_PASSWORD_HASH = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
+// Static GitHub Pages cannot provide server-side authentication.
+// GitHub's own token and repository permissions authorize all writes.
+const ADMIN_REPOSITORY = 'parya5103/sarkarisarthi';
 
-async function hashPassword(password) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(password);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-// Global state
-let ghToken = sessionStorage.getItem('ghToken') || '';
-let ghRepo = sessionStorage.getItem('ghRepo') || '';
+let ghToken = '';
+let ghRepo = ADMIN_REPOSITORY;
 let currentJobs = [];
+let currentManifest = null;
 let manifestSha = '';
 
-// Initialize
+function isAllowedAdminRepository(repository) {
+    return typeof repository === 'string'
+        && repository.trim().toLowerCase() === ADMIN_REPOSITORY;
+}
+
+function githubHeaders(json = false) {
+    const headers = {
+        'Authorization': `Bearer ${ghToken}`,
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+    };
+    if (json) headers['Content-Type'] = 'application/json';
+    return headers;
+}
+
+async function validateGitHubAccess(token, repository) {
+    if (!token || !isAllowedAdminRepository(repository)) {
+        throw new Error('Use a GitHub token for the configured Sarkari Sarthi repository.');
+    }
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+    };
+    const userResponse = await fetch('https://api.github.com/user', { headers });
+    if (!userResponse.ok) throw new Error('GitHub token is invalid or expired.');
+    const repoResponse = await fetch(`https://api.github.com/repos/${ADMIN_REPOSITORY}`, { headers });
+    if (!repoResponse.ok) throw new Error('Token cannot access the Sarkari Sarthi repository.');
+    const repoData = await repoResponse.json();
+    if (repoData.permissions?.push !== true && repoData.permissions?.admin !== true) {
+        throw new Error('Token needs repository Contents: Read and write permission.');
+    }
+    return true;
+}
+
+// Initialize without pretending a client-side password is real authentication.
 document.addEventListener('DOMContentLoaded', () => {
-    // Security: Clean up old credentials from localStorage
+    // Remove credentials saved by older dashboard versions.
+    sessionStorage.removeItem('ghToken');
+    sessionStorage.removeItem('ghRepo');
+    sessionStorage.removeItem('adminLoggedIn');
     localStorage.removeItem('ghToken');
     localStorage.removeItem('ghRepo');
 
-    // Check if already logged in this session
-    if (sessionStorage.getItem('adminLoggedIn') === 'true') {
-        showDashboard();
-    }
-
-    // Load saved settings
-    if (ghToken) document.getElementById('ghToken').value = ghToken;
-    if (ghRepo) document.getElementById('ghRepo').value = ghRepo;
-
-    // Fetch jobs if credentials exist
-    if (ghToken && ghRepo) {
-        fetchJobsFromRepo();
-    }
+    const repoInput = document.getElementById('ghRepo');
+    if (repoInput) repoInput.value = ADMIN_REPOSITORY;
+    showDashboard();
 });
 
-async function checkPassword() {
-    const input = document.getElementById('adminPassword').value;
-    const hashedInput = await hashPassword(input);
-    if (hashedInput === ADMIN_PASSWORD_HASH) {
-        sessionStorage.setItem('adminLoggedIn', 'true');
-        showDashboard();
-    } else {
-        document.getElementById('loginError').style.display = 'block';
-    }
-}
-
 function showDashboard() {
-    document.getElementById('loginOverlay').style.display = 'none';
     document.getElementById('adminContainer').style.display = 'block';
 }
 
 function logout() {
-    sessionStorage.removeItem('adminLoggedIn');
-    document.getElementById('loginOverlay').style.display = 'flex';
-    document.getElementById('adminContainer').style.display = 'none';
-    document.getElementById('adminPassword').value = '';
-    document.getElementById('loginError').style.display = 'none';
+    ghToken = '';
+    ghRepo = ADMIN_REPOSITORY;
+    currentJobs = [];
+    currentManifest = null;
+    manifestSha = '';
+    const tokenInput = document.getElementById('ghToken');
+    if (tokenInput) tokenInput.value = '';
+    const repoInput = document.getElementById('ghRepo');
+    if (repoInput) repoInput.value = ADMIN_REPOSITORY;
+    const status = document.getElementById('settingsStatus');
+    if (status) status.textContent = 'GitHub token cleared from memory. Reconnect to edit.';
+    const count = document.getElementById('jobCount');
+    if (count) count.textContent = '—';
+    renderJobsTable();
 }
 
-function saveSettings() {
-    ghToken = document.getElementById('ghToken').value.trim();
-    ghRepo = document.getElementById('ghRepo').value.trim();
+async function saveSettings() {
+    const tokenInput = document.getElementById('ghToken');
+    const status = document.getElementById('settingsStatus');
+    const candidateToken = tokenInput.value.trim();
+    const candidateRepo = document.getElementById('ghRepo').value.trim();
 
-    if (ghToken && ghRepo) {
-        sessionStorage.setItem('ghToken', ghToken);
-        sessionStorage.setItem('ghRepo', ghRepo);
+    if (!candidateToken) {
+        status.textContent = 'Enter a GitHub fine-grained token.';
+        return;
+    }
+    if (!isAllowedAdminRepository(candidateRepo)) {
+        status.textContent = 'Only parya5103/sarkarisarthi is allowed.';
+        return;
+    }
 
-        const status = document.getElementById('settingsStatus');
-        status.textContent = 'Settings saved!';
-        setTimeout(() => status.textContent = '', 3000);
-
-        fetchJobsFromRepo();
-    } else {
-        alert('Please provide both Token and Repository details.');
+    status.textContent = 'Validating GitHub permissions…';
+    try {
+        await validateGitHubAccess(candidateToken, candidateRepo);
+        ghToken = candidateToken;
+        ghRepo = ADMIN_REPOSITORY;
+        tokenInput.value = '';
+        status.textContent = 'Connected. Token is held in memory only.';
+        await fetchJobsFromRepo();
+    } catch (error) {
+        ghToken = '';
+        tokenInput.value = '';
+        status.textContent = error.message;
     }
 }
 
@@ -90,8 +120,9 @@ async function triggerScraper() {
         const response = await fetch(`https://api.github.com/repos/${ghRepo}/actions/workflows/daily-job-fetch-deploy.yml/dispatches`, {
             method: 'POST',
             headers: {
-                'Authorization': `token ${ghToken}`,
-                'Accept': 'application/vnd.github.v3+json',
+                'Authorization': `Bearer ${ghToken}`,
+                'Accept': 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2022-11-28',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
@@ -121,7 +152,8 @@ async function fetchJobsFromRepo() {
         const response = await fetch(`https://api.github.com/repos/${ghRepo}/contents/jobs/job_manifest.json`, {
             headers: {
                 'Authorization': `token ${ghToken}`,
-                'Accept': 'application/vnd.github.v3+json'
+                'Accept': 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2022-11-28'
             }
         });
 
@@ -137,7 +169,9 @@ async function fetchJobsFromRepo() {
         const bytes = Uint8Array.from(binString, (m) => m.charCodeAt(0));
         const contentStr = new TextDecoder().decode(bytes);
         const manifest = JSON.parse(contentStr);
-        currentJobs = manifest.jobs || [];
+        // Keep an immutable pre-edit snapshot for rollback backups.
+        currentManifest = JSON.parse(JSON.stringify(manifest));
+        currentJobs = Array.isArray(manifest.jobs) ? manifest.jobs : [];
 
         document.getElementById('jobCount').textContent = manifest.total_jobs || currentJobs.length;
         renderJobsTable();
@@ -373,11 +407,26 @@ async function saveJobData() {
         if (existing.description && newJobData.summary) {
             merged.description = newJobData.summary;
         }
-        merged.last_verified = new Date().toISOString();
+        // Editing fields is not an independent source re-verification.
+        // Keep the prior last_verified timestamp and downgrade the record
+        // to review until its employer evidence is checked again.
+        merged.verification_status = 'needs_review';
         currentJobs[existingIndex] = merged;
     } else {
-        newJobData.last_verified = new Date().toISOString();
-        currentJobs.unshift(newJobData); // Add to top
+        newJobData.source = 'manual_admin';
+        newJobData.source_refs = [];
+        newJobData.verification_status = 'needs_review';
+        newJobData.last_verified = null;
+        newJobData.published_date = null;
+        newJobData.date_posted_verified = false;
+        newJobData.description_complete = false;
+        newJobData.description = newJobData.summary || '';
+        newJobData.important_dates = {
+            found_date: newJobData.found_date,
+            application_start_date: newJobData.application_start_date,
+            last_date: newJobData.last_date
+        };
+        currentJobs.unshift(newJobData); // New manual records remain hidden until reviewed
     }
 
     closeModal();
@@ -385,53 +434,82 @@ async function saveJobData() {
 }
 
 async function updateManifestOnGithub(commitMessage) {
-    if (!ghToken || !ghRepo || !manifestSha) {
-        alert('Missing GitHub credentials or manifest data. Please refresh.');
+    if (!ghToken || !isAllowedAdminRepository(ghRepo) || !manifestSha || !currentManifest) {
+        alert('Missing GitHub access or manifest data. Reconnect and refresh before editing.');
         return;
     }
 
-    const manifestData = {
-        last_updated: new Date().toISOString(),
-        total_jobs: currentJobs.length,
-        active_jobs: currentJobs.length,
-        expired_jobs: 0,
-        jobs: currentJobs
-    };
-
-    // Convert string to base64 encoding (supporting Unicode)
-    const contentStr = JSON.stringify(manifestData, null, 2);
-    const bytes = new TextEncoder().encode(contentStr);
-    const binString = Array.from(bytes, (byte) => String.fromCharCode(byte)).join("");
-    const contentBase64 = window.btoa(binString);
-
     try {
-        // Update manifest
-        const manifestResponse = await fetch(`https://api.github.com/repos/${ghRepo}/contents/jobs/job_manifest.json`, {
+        // Refuse to overwrite a manifest changed by the nightly pipeline or
+        // another admin session since this dashboard loaded it.
+        const latestResponse = await fetch(`https://api.github.com/repos/${ADMIN_REPOSITORY}/contents/jobs/job_manifest.json`, {
+            headers: githubHeaders()
+        });
+        if (!latestResponse.ok) throw new Error('Could not re-check the latest manifest.');
+        const latestFile = await latestResponse.json();
+        if (latestFile.sha !== manifestSha) {
+            throw new Error('The manifest changed elsewhere. Reload the dashboard before saving to avoid overwriting newer jobs.');
+        }
+
+        const counts = currentJobs.reduce((acc, job) => {
+            const state = String(job.status || '').toLowerCase();
+            if (state === 'expired') acc.expired_jobs += 1;
+            else if (state === 'active' || state === 'upcoming') acc.active_jobs += 1;
+            return acc;
+        }, { active_jobs: 0, expired_jobs: 0 });
+
+        const manifestData = {
+            ...currentManifest,
+            last_updated: new Date().toISOString(),
+            total_jobs: currentJobs.length,
+            active_jobs: counts.active_jobs,
+            expired_jobs: counts.expired_jobs,
+            jobs: currentJobs
+        };
+
+        const encodeBase64 = (value) => {
+            const bytes = new TextEncoder().encode(value);
+            const binary = Array.from(bytes, byte => String.fromCharCode(byte)).join('');
+            return window.btoa(binary);
+        };
+
+        // A backup must be committed successfully before the live manifest.
+        const stamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
+        const backupPath = `jobs/backup/manifest_backup_admin_${stamp}.json`;
+        const backupResponse = await fetch(`https://api.github.com/repos/${ADMIN_REPOSITORY}/contents/${backupPath}`, {
             method: 'PUT',
-            headers: {
-                'Authorization': `token ${ghToken}`,
-                'Accept': 'application/vnd.github.v3+json',
-                'Content-Type': 'application/json',
-            },
+            headers: githubHeaders(true),
+            body: JSON.stringify({
+                message: `Backup manifest before admin change: ${commitMessage}`,
+                content: encodeBase64(JSON.stringify(currentManifest, null, 2)),
+                branch: 'main'
+            })
+        });
+        if (!backupResponse.ok) {
+            throw new Error('Manifest backup failed; no changes were applied.');
+        }
+
+        const manifestResponse = await fetch(`https://api.github.com/repos/${ADMIN_REPOSITORY}/contents/jobs/job_manifest.json`, {
+            method: 'PUT',
+            headers: githubHeaders(true),
             body: JSON.stringify({
                 message: commitMessage,
-                content: contentBase64,
+                content: encodeBase64(JSON.stringify(manifestData, null, 2)),
                 sha: manifestSha,
                 branch: 'main'
             })
         });
 
         if (!manifestResponse.ok) {
-            throw new Error(`Failed to update manifest: ${manifestResponse.statusText}`);
+            throw new Error(`Failed to update manifest: ${manifestResponse.statusText}. The backup was retained.`);
         }
 
-        const newManifestData = await manifestResponse.json();
-        manifestSha = newManifestData.content.sha; // Update SHA for subsequent edits
-
+        const updatedFile = await manifestResponse.json();
+        manifestSha = updatedFile.content.sha;
+        currentManifest = JSON.parse(JSON.stringify(manifestData));
         document.getElementById('jobCount').textContent = currentJobs.length;
         renderJobsTable();
-        alert('Successfully updated jobs on GitHub!');
-
+        alert('Successfully updated jobs on GitHub. A pre-change backup was also saved.');
     } catch (error) {
         console.error('Error updating GitHub:', error);
         alert(`Error updating data: ${error.message}`);
