@@ -61,11 +61,15 @@ def test_job_alerts_only_include_active_officially_verified_jobs(monkeypatch):
     assert [job["id"] for job in selected] == ["official"]
 
 
-def test_whatsapp_channel_urls_are_the_exact_user_supplied_links():
+def test_sarkari_portal_shows_only_its_own_whatsapp_channel_and_telegram_link():
     from pathlib import Path
-    html = Path(__file__).resolve().parents[1].joinpath("index.html").read_text(encoding="utf-8")
-    assert 'https://whatsapp.com/channel/0029VbE1ulAAjPXQZiUbbu1Z' in html
-    assert 'https://whatsapp.com/channel/0029Vb5zVwjICVfnQ95zT10F' in html
+    root = Path(__file__).resolve().parents[1]
+    html = root.joinpath("index.html").read_text(encoding="utf-8")
+    script = root.joinpath("script.js").read_text(encoding="utf-8")
+    assert html.count('https://whatsapp.com/channel/0029VbE1ulAAjPXQZiUbbu1Z') == 2
+    assert 'https://whatsapp.com/channel/0029Vb5zVwjICVfnQ95zT10F' not in html
+    assert 'https://t.me/sarkarisarthi' in script
+    assert 'id="telegramBtn"' in html and 'id="footerTelegramBtn"' in html
 
 
 def test_whatsapp_direct_alerts_only_include_active_official_jobs(monkeypatch):
