@@ -24,6 +24,18 @@ describe('admin dashboard security regression guards', () => {
         expect(adminHtml).toMatch(/noindex, nofollow/i);
     });
 
+    test('backs up the previous manifest and refuses stale concurrent writes', () => {
+        expect(adminJs).toContain('manifest_backup_admin_');
+        expect(adminJs).toContain('if (latestFile.sha !== manifestSha)');
+        expect(adminJs).toContain('currentManifest = JSON.parse(JSON.stringify(manifest))');
+    });
+
+    test('does not treat a manual edit as source re-verification', () => {
+        expect(adminJs).toContain("merged.verification_status = 'needs_review'");
+        expect(adminJs).not.toMatch(/merged\.last_verified\s*=\s*new Date/);
+        expect(adminJs).toContain("newJobData.verification_status = 'needs_review'");
+    });
+
     test('clears the in-memory token when the dashboard logs out', () => {
         const logoutBody = adminJs.match(/function logout\(\)\s*\{([\s\S]*?)\n\}/);
         expect(logoutBody).not.toBeNull();
