@@ -147,7 +147,11 @@ describe('isSearchEligibleJob', () => {
     test('shows only explicitly classified, source-attributed jobs', () => {
         expect(isSearchEligibleJob({ verification_status: 'official_verified' })).toBe(true);
         expect(isSearchEligibleJob({ verification_status: 'official_link_pending' })).toBe(true);
-        expect(isSearchEligibleJob({ verification_status: 'secondary_source_only' })).toBe(true);
+        expect(isSearchEligibleJob({ verification_status: 'secondary_source_only' })).toBe(false);
+    });
+
+    test('keeps secondary-only discovery leads hidden until employer evidence is linked', () => {
+        expect(isSearchEligibleJob({ verification_status: 'secondary_source_only' })).toBe(false);
     });
 
     test('hides needs-review, expired, cancelled, missing and unknown verification states', () => {
