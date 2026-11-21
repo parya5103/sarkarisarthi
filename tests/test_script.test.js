@@ -147,7 +147,11 @@ describe('isSearchEligibleJob', () => {
     test('shows only explicitly classified, source-attributed jobs', () => {
         expect(isSearchEligibleJob({ verification_status: 'official_verified' })).toBe(true);
         expect(isSearchEligibleJob({ verification_status: 'official_link_pending' })).toBe(true);
-        expect(isSearchEligibleJob({ verification_status: 'secondary_source_only' })).toBe(true);
+        expect(isSearchEligibleJob({ verification_status: 'secondary_source_only' })).toBe(false);
+    });
+
+    test('keeps secondary-only discovery leads hidden until employer evidence is linked', () => {
+        expect(isSearchEligibleJob({ verification_status: 'secondary_source_only' })).toBe(false);
     });
 
     test('hides needs-review, expired, cancelled, missing and unknown verification states', () => {
@@ -160,11 +164,27 @@ describe('isSearchEligibleJob', () => {
 });
 
 
+describe('WhatsApp share action', () => {
+    test('opens a real WhatsApp share URL for the current portal instead of a placeholder invite', () => {
+        const openSpy = jest.spyOn(window, 'open').mockImplementation(() => null);
+        openWhatsappChannel();
+
+        expect(openSpy).toHaveBeenCalledTimes(1);
+        const [target, targetWindow, features] = openSpy.mock.calls[0];
+        const shareUrl = new URL(target);
+        expect(shareUrl.origin).toBe('https://wa.me');
+        expect(shareUrl.searchParams.get('text')).toContain(window.location.href);
+        expect(targetWindow).toBe('_blank');
+        expect(features).toBe('noopener,noreferrer');
+        openSpy.mockRestore();
+    });
+});
+
+
 describe('WhatsApp channel action', () => {
     test('opens the first exact WhatsApp Channel URL supplied by the portal owner', () => {
         const openSpy = jest.spyOn(window, 'open').mockImplementation(() => null);
         openWhatsappChannel();
-
         expect(openSpy).toHaveBeenCalledWith(
             'https://whatsapp.com/channel/0029VbE1ulAAjPXQZiUbbu1Z',
             '_blank',
