@@ -244,13 +244,7 @@ function setupEventListeners() {
         footerTelegramBtn.addEventListener('click', openTelegramChannel);
     }
 
-    // WhatsApp buttons
-    if (whatsappBtn) {
-        whatsappBtn.addEventListener('click', openWhatsappChannel);
-    }
-    if (footerWhatsappBtn) {
-        footerWhatsappBtn.addEventListener('click', openWhatsappChannel);
-    }
+    // WhatsApp channel controls are ordinary safe anchor links in the HTML.
 
     // Mobile menu toggle
     if (mobileMenuToggle) {
@@ -1201,11 +1195,11 @@ function openTelegramChannel() {
  * Open WhatsApp channel
  */
 function openWhatsappChannel() {
-    // No official WhatsApp group invite is configured. Share the real
-    // portal URL instead of sending visitors to a fake placeholder group.
-    const shareText = `Sarkari Sarthi — Government and public-sector job listings: ${window.location.href}`;
-    const shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
-    window.open(shareUrl, '_blank', 'noopener,noreferrer');
+    window.open(
+        'https://whatsapp.com/channel/0029VbE1ulAAjPXQZiUbbu1Z',
+        '_blank',
+        'noopener,noreferrer'
+    );
 }
 
 /**

@@ -52,3 +52,22 @@ class TestMessageFormatting:
             'source': 'employmentnews.gov.in',
         })
         assert 'Staff Selection Commission' in msg
+
+
+class TestPublicTelegramJobEligibility:
+    def test_only_active_official_verified_jobs_are_notified(self, monkeypatch):
+        jobs = [
+            {'id': 'official', 'status': 'active', 'verification_status': 'official_verified',
+             'url': 'https://ssc.gov.in/apply', 'scraped_at': '2026-11-21T10:00:00'},
+            {'id': 'secondary', 'status': 'active', 'verification_status': 'secondary_source_only',
+             'url': 'https://example.com/job', 'scraped_at': '2026-11-21T10:00:00'},
+            {'id': 'review', 'status': 'active', 'verification_status': 'needs_review',
+             'url': 'https://example.com/review', 'scraped_at': '2026-11-21T10:00:00'},
+            {'id': 'expired', 'status': 'expired', 'verification_status': 'official_verified',
+             'url': 'https://ssc.gov.in/old', 'scraped_at': '2026-11-21T10:00:00'},
+            {'id': 'unsafe', 'status': 'active', 'verification_status': 'official_verified',
+             'url': 'http://ssc.gov.in/apply', 'scraped_at': '2026-11-21T10:00:00'},
+        ]
+        monkeypatch.setattr(telegram_notifier, 'load_manifest', lambda: {'jobs': jobs})
+        monkeypatch.setattr(telegram_notifier, 'select_recent_jobs', lambda records: records)
+        assert [job['id'] for job in telegram_notifier.get_notifiable_jobs()] == ['official']
