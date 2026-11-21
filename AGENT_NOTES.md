@@ -76,6 +76,9 @@ honest product User-Agent, no CAPTCHA/login/anti-bot bypass.
 
 ## Secondary source review (2026-11-21)
 
+- Secondary-source-only records are discovery leads, not public vacancies. They remain in the manifest/admin review pool and must not enter public search, category counts, or indexable job pages until a valid official employer notification/application URL is captured and verified.
+- `official_link_pending` is allowed in search only when an official government-domain reference has been found; `secondary_source_only` is not.
+
 - SahiSarkariJobs public job pages: robots.txt allows general crawling;
   live listing page inspected and includes dated notices with links to
   employer notifications. Scheduled as discovery-only; official employer
@@ -125,16 +128,8 @@ honest product User-Agent, no CAPTCHA/login/anti-bot bypass.
 
 ## Social notifications (2026-11-21)
 
-- Public Telegram chat is for content alerts only: job notifications are limited to
-  active `official_verified` records; secondary-only and needs-review jobs are
-  not broadcast as verified vacancies.
-- PikaNews Telegram headlines are polled every 30 minutes by
-  `.github/workflows/pikanews-telegram-alerts.yml`. Only fresh articles with a
-  verified publication timestamp and HTTPS source URL are sent. The first run
-  seeds a cache baseline without blasting old stories; cache state deduplicates
-  subsequent runs.
-- GitHub deployment, failure and health-check diagnostics are kept in Actions
-  logs and are not sent to the public Telegram subscriber chat.
-- WhatsApp Channel links supplied by the owner are shown on the portal. The
-  official WhatsApp Cloud API does not publish to Channels; do not use unofficial
-  WhatsApp Web automation or claim that automatic Channel posting is enabled.
+- Public Telegram chat is for content alerts only: job notifications are limited to active `official_verified` records; secondary-only and needs-review jobs are not broadcast as verified vacancies.
+- PikaNews Telegram headlines are polled every 30 minutes by `.github/workflows/pikanews-telegram-alerts.yml`. Only fresh articles with a verified publication timestamp and HTTPS source URL are sent. The first run seeds a cache baseline without blasting old stories; cache state deduplicates subsequent runs.
+- GitHub deployment, failure and health-check diagnostics are kept in Actions logs and are not sent to the public Telegram subscriber chat.
+- The supplied WhatsApp Channel links are displayed on the portal. Optional Meta Cloud API messages remain direct-to-recipient only and are not WhatsApp Channel posts.
+- WhatsApp Channel publishing is not supported by the official WhatsApp Cloud API; do not use unofficial WhatsApp Web automation or claim that automatic Channel posting is enabled.
