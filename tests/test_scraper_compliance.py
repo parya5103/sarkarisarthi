@@ -198,3 +198,22 @@ class TestExpandedVerifiedSecondarySources:
         )
         for domain in blocked_or_unreviewed:
             assert not any(domain in url for url in all_portals)
+
+
+class TestVerifiedSecondarySourceScheduling:
+    def test_sahisarkarijobs_is_scheduled_as_discovery_only(self, monkeypatch):
+        captured = []
+        monkeypatch.setattr(
+            scraper, '_scrape_single_portal',
+            lambda url, *args, **kwargs: captured.append(url) or [],
+        )
+
+        scraper.scrape_all_job_portals()
+
+        assert 'https://www.sahisarkarijobs.in/trending-govt-jobs/' in captured
+        assert 'https://sarkariprep.in/' in captured
+        assert 'https://linkingsky.com/' in captured
+
+    def test_tls_invalid_sarkarinaukridaily_is_not_scheduled(self):
+        all_portals = scraper.JOB_PORTALS['government'] + scraper.JOB_PORTALS['private']
+        assert not any('sarkarinaukridaily.in' in url for url in all_portals)
