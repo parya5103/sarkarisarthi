@@ -124,3 +124,12 @@ honest product User-Agent, no CAPTCHA/login/anti-bot bypass.
 - Monitor logs/source_report.md after nightly runs for zero-job or
   blocked sources.
 - Keep this file updated with every phase.
+
+
+## Social notifications (2026-11-21)
+
+- Public Telegram chat is for content alerts only: job notifications are limited to active `official_verified` records; secondary-only and needs-review jobs are not broadcast as verified vacancies.
+- PikaNews Telegram headlines are polled every 30 minutes by `.github/workflows/pikanews-telegram-alerts.yml`. Only fresh articles with a verified publication timestamp and HTTPS source URL are sent. The first run seeds a cache baseline without blasting old stories; cache state deduplicates subsequent runs.
+- GitHub deployment, failure and health-check diagnostics are kept in Actions logs and are not sent to the public Telegram subscriber chat.
+- The supplied WhatsApp Channel links are displayed on the portal. Optional Meta Cloud API messages remain direct-to-recipient only and are not WhatsApp Channel posts.
+- WhatsApp Channel publishing is not supported by the official WhatsApp Cloud API; do not use unofficial WhatsApp Web automation or claim that automatic Channel posting is enabled.
