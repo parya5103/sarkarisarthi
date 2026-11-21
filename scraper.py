@@ -44,7 +44,10 @@ JOB_PORTALS = {
         "https://www.sarkarinaukridaily.in/",
         "https://www.fresherslive.com/govt-jobs",
         "https://sarkariprep.in/",
-        "https://linkingsky.com/"
+        "https://linkingsky.com/",
+        # Secondary discovery source; robots.txt permits public job pages.
+        # Every record remains unverified until official employer backing is found.
+        "https://www.sahisarkarijobs.in/trending-govt-jobs/"
     ]
 }
 
