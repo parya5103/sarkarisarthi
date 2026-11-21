@@ -182,6 +182,7 @@ class TestExpandedVerifiedSecondarySources:
 
         assert 'https://sarkariprep.in/' in captured
         assert 'https://linkingsky.com/' in captured
+        assert 'https://www.sahisarkarijobs.in/trending-govt-jobs/' in captured
 
     def test_ambiguous_content_signal_source_is_not_active(self):
         all_portals = scraper.JOB_PORTALS['government'] + scraper.JOB_PORTALS['private']
