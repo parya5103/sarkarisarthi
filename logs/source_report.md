@@ -1,6 +1,6 @@
 # Sarkari Sarthi daily source report
 
-Run started: 2026-11-21T11:16:46
+Run started: 2026-11-21T11:19:28
 
 ## Run totals
 
@@ -16,15 +16,15 @@ Run started: 2026-11-21T11:16:46
 
 | Source | Status | Duration | Found | New | Dup | Merged | Errors | Notes |
 |---|---|---|---|---|---|---|---|---|
-| allgovernmentjobs.in | ok | 4.88 | 5 |  |  |  |  |  |
+| allgovernmentjobs.in | ok | 4.6 | 5 |  |  |  |  |  |
 | employmentnews.gov.in | ok |  | 14 |  |  |  |  | official adapter; robots-checked, honest user-agent |
-| linkingsky.com | no-jobs | 4.69 | 0 |  |  |  |  | listing fetched but no vacancy links parsed |
-| sarkariprep.in | ok | 2.79 | 17 |  |  |  |  |  |
-| www.freejobalert.com | no-jobs | 3.84 | 0 |  |  |  |  | listing fetched but no vacancy links parsed |
-| www.fresherslive.com | fetch-failed | 9.65 | 0 |  |  |  |  | listing page unreachable or blocked |
-| www.freshersnow.com | no-jobs | 36.51 | 0 |  |  |  |  | listing fetched but no vacancy links parsed |
-| www.rojgarresult.com | no-jobs | 41.63 | 0 |  |  |  |  | listing fetched but no vacancy links parsed |
-| www.sahisarkarijobs.in | no-jobs | 4.18 | 0 |  |  |  |  | listing fetched but no vacancy links parsed |
+| linkingsky.com | no-jobs | 4.51 | 0 |  |  |  |  | listing fetched but no vacancy links parsed |
+| sarkariprep.in | ok | 10.45 | 17 |  |  |  |  |  |
+| www.freejobalert.com | no-jobs | 3.02 | 0 |  |  |  |  | listing fetched but no vacancy links parsed |
+| www.fresherslive.com | fetch-failed | 9.94 | 0 |  |  |  |  | listing page unreachable or blocked |
+| www.freshersnow.com | no-jobs | 3.55 | 0 |  |  |  |  | listing fetched but no vacancy links parsed |
+| www.rojgarresult.com | no-jobs | 3.97 | 0 |  |  |  |  | listing fetched but no vacancy links parsed |
+| www.sahisarkarijobs.in | no-jobs | 4.53 | 0 |  |  |  |  | listing fetched but no vacancy links parsed |
 
 ## Needs attention
 
