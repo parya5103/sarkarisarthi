@@ -245,13 +245,7 @@ function setupEventListeners() {
         footerTelegramBtn.addEventListener('click', openTelegramChannel);
     }
 
-    // WhatsApp buttons
-    if (whatsappBtn) {
-        whatsappBtn.addEventListener('click', openWhatsappChannel);
-    }
-    if (footerWhatsappBtn) {
-        footerWhatsappBtn.addEventListener('click', openWhatsappChannel);
-    }
+    // WhatsApp channel controls are ordinary safe anchor links in the HTML.
 
     // Mobile menu toggle
     if (mobileMenuToggle) {
