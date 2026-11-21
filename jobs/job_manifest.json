@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-21T10:54:54.561649",
+  "last_updated": "2026-11-21T11:01:31.958597",
   "total_jobs": 202,
   "active_jobs": 181,
   "expired_jobs": 21,
@@ -8844,9 +8844,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/07/police-jobs.html",
-      "last_verified": "2026-11-21T04:07:37.510165",
+      "last_verified": "2026-11-21T11:01:31.958597",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/07/police-jobs.html"
+        }
+      ]
     },
     {
       "id": "c23d69df5cc10a48e48cb00379436501",
@@ -8898,9 +8904,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/11/indian-bank-recruitment.html",
-      "last_verified": "2026-11-21T04:07:37.514674",
+      "last_verified": "2026-11-21T11:01:31.958597",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/11/indian-bank-recruitment.html"
+        }
+      ]
     },
     {
       "id": "b1085b63807aca1f4a895b89c9cc7e5d",
@@ -8949,9 +8961,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/10/upsssc-inter-level-recruitment.html",
-      "last_verified": "2026-11-21T04:07:37.514489",
+      "last_verified": "2026-11-21T11:01:31.958597",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/10/upsssc-inter-level-recruitment.html"
+        }
+      ]
     },
     {
       "id": "3cb928394c89337ef94110db80aeb331",
@@ -8997,9 +9015,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://www.sarkariprep.in/2026/11/rajasthan-junior-engineer-vacancy.html",
-      "last_verified": "2026-11-21T04:07:37.512935",
+      "last_verified": "2026-11-21T11:01:31.958597",
       "status": "active",
-      "verification_status": "needs_review"
+      "verification_status": "needs_review",
+      "source_refs": [
+        {
+          "source": "sarkariprep.in",
+          "url": "https://www.sarkariprep.in/2026/11/rajasthan-junior-engineer-vacancy.html"
+        }
+      ]
     },
     {
       "id": "6eeccd2a9d3e008fa9bf51b664772fb5",
@@ -9046,9 +9070,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/dduh-notification-2026-walk-in-interview-for-28-senior-resident-posts/45449",
-      "last_verified": "2026-11-21T10:54:59.686199",
+      "last_verified": "2026-11-21T11:01:31.958597",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/dduh-notification-2026-walk-in-interview-for-28-senior-resident-posts/45449"
+        }
+      ]
     },
     {
       "id": "d80b2411cfa471cf3313aaec6de47bd3",
@@ -9095,9 +9125,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/aiims-bhopal-jobs-2026-apply-online-for-project-technical-support-iii-posts/45450",
-      "last_verified": "2026-11-21T10:54:59.692313",
+      "last_verified": "2026-11-21T11:01:31.958597",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/aiims-bhopal-jobs-2026-apply-online-for-project-technical-support-iii-posts/45450"
+        }
+      ]
     },
     {
       "id": "2c99f986db204979023ce95d9c0551b9",
@@ -9144,9 +9180,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/iit-jammu-jobs-2026-apply-online-for-research-associate-posts/45447",
-      "last_verified": "2026-11-21T10:54:59.692334",
+      "last_verified": "2026-11-21T11:01:31.958597",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/iit-jammu-jobs-2026-apply-online-for-research-associate-posts/45447"
+        }
+      ]
     },
     {
       "id": "4d2d64eed77975a66f5fae376c6f4493",
@@ -9193,9 +9235,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/nipgr-notification-2026-walk-in-interview-for-research-associate-i-posts/45445",
-      "last_verified": "2026-11-21T10:54:59.686223",
+      "last_verified": "2026-11-21T11:01:31.958597",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/nipgr-notification-2026-walk-in-interview-for-research-associate-i-posts/45445"
+        }
+      ]
     },
     {
       "id": "9b3dc38278bbb57672193824de1e7e86",
@@ -9242,9 +9290,15 @@
       "description_complete": null,
       "date_posted_verified": null,
       "original_source_url": "https://allgovernmentjobs.in/appsc-recruitment-2026-apply-online-for-08-assistant-director-posts/45446",
-      "last_verified": "2026-11-21T10:54:59.689256",
+      "last_verified": "2026-11-21T11:01:31.958597",
       "status": "active",
-      "verification_status": "secondary_source_only"
+      "verification_status": "secondary_source_only",
+      "source_refs": [
+        {
+          "source": "allgovernmentjobs.in",
+          "url": "https://allgovernmentjobs.in/appsc-recruitment-2026-apply-online-for-08-assistant-director-posts/45446"
+        }
+      ]
     },
     {
       "id": "67d62f345f669f25b73142d1de3e07ff",
