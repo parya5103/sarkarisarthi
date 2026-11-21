@@ -105,8 +105,7 @@ function getVerificationInfo(status) {
 // workflow, but are not presented as open vacancies to visitors.
 const SEARCH_ELIGIBLE_VERIFICATION_STATUSES = new Set([
     'official_verified',
-    'official_link_pending',
-    'secondary_source_only'
+    'official_link_pending'
 ]);
 
 function isSearchEligibleJob(job) {
@@ -1196,8 +1195,6 @@ function openTelegramChannel() {
  * Open WhatsApp channel
  */
 function openWhatsappChannel() {
-    // Open the first official WhatsApp Channel; the second channel is
-    // linked directly in the page UI as a separate anchor.
     window.open(
         'https://whatsapp.com/channel/0029VbE1ulAAjPXQZiUbbu1Z',
         '_blank',
