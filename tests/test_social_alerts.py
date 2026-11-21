@@ -47,7 +47,7 @@ def test_job_alerts_only_include_active_officially_verified_jobs(monkeypatch):
     import telegram_notifier as notifier
     jobs = [
         {"id": "official", "status": "active", "verification_status": "official_verified",
-         "scraped_at": "2026-11-21T10:00:00"},
+         "scraped_at": "2026-11-21T10:00:00", "url": "https://ssc.gov.in/apply"},
         {"id": "secondary", "status": "active", "verification_status": "secondary_source_only",
          "scraped_at": "2026-11-21T10:00:00"},
         {"id": "review", "status": "active", "verification_status": "needs_review",
