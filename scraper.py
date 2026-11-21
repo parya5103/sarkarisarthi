@@ -41,10 +41,12 @@ JOB_PORTALS = {
     # rechecked on 2026-11-21; job facts still require official backing
     # before a record can become official_verified or public-search eligible.
     'private': [
-        "https://www.sarkarinaukridaily.in/",
         "https://www.fresherslive.com/govt-jobs",
         "https://sarkariprep.in/",
-        "https://linkingsky.com/"
+        "https://linkingsky.com/",
+        # Discovery only: robots permits public job pages; employer details
+        # must still be verified against the official notification.
+        "https://www.sahisarkarijobs.in/trending-govt-jobs/"
     ]
 }
 

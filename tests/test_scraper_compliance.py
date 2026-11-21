@@ -13,6 +13,7 @@ Network access is fully mocked: no test here touches the internet.
 Run with: python -m pytest tests/test_scraper_compliance.py -v
 """
 from unittest.mock import MagicMock
+from urllib.parse import urlsplit
 
 import pytest
 
@@ -198,3 +199,27 @@ class TestExpandedVerifiedSecondarySources:
         )
         for domain in blocked_or_unreviewed:
             assert not any(domain in url for url in all_portals)
+
+
+class TestVerifiedSecondarySourceScheduling:
+    def test_sahisarkarijobs_is_scheduled_as_discovery_only(self, monkeypatch):
+        captured = []
+        monkeypatch.setattr(
+            scraper, '_scrape_single_portal',
+            lambda url, *args, **kwargs: captured.append(url) or [],
+        )
+
+        scraper.scrape_all_job_portals()
+
+        parsed = [urlsplit(url) for url in captured]
+        assert any(
+            url.hostname == "www.sahisarkarijobs.in"
+            and url.path == "/trending-govt-jobs/"
+            for url in parsed
+        )
+        assert any(url.hostname == "sarkariprep.in" for url in parsed)
+        assert any(url.hostname == "linkingsky.com" for url in parsed)
+
+    def test_tls_invalid_sarkarinaukridaily_is_not_scheduled(self):
+        all_portals = scraper.JOB_PORTALS['government'] + scraper.JOB_PORTALS['private']
+        assert not any('sarkarinaukridaily.in' in url for url in all_portals)
